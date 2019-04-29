@@ -17,14 +17,14 @@
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="!authService.isAuthentificated">
           <a class="nav-link" routerLink="sign_in">Sign In</a>
       </li>
-      <li class="nav-item">
-          <a class="nav-link" routerLink="sign_up">Sign Up</a>
+      <li class="nav-item" *ngIf="!authService.isAuthentificated">
+          <a class="nav-link" routerLink="sign_up" *ngIf="!authService.isAuthentificated">Sign Up</a>
       </li>
-      <li class="nav-item">
-          <a class="nav-link" href="#">Sign Out</a>
+      <li class="nav-item" *ngIf="authService.isAuthentificated">
+          <a class="nav-link" (click)="authService.logout()" >Sign Out</a>
       </li>
     </ul>
   </div>
