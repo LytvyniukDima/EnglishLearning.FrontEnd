@@ -21,7 +21,14 @@ export class AuthInterceptor implements HttpInterceptor {
             map((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
                     console.log('event--->>>', event);
-                    // this.errorDialogService.openDialog(event);
+                    let newToken = event.headers.get('Authorization');
+                    console.log(`new token ${newToken}`)
+                    if (newToken) {
+                        newToken = newToken.split(' ')[1];
+                        if (newToken) {
+                            localStorage.setItem('token', newToken);
+                        }
+                    }
                 }
                 return event;
             }),

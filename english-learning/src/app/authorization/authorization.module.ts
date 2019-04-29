@@ -6,6 +6,8 @@ import { AuthService } from './serives/auth.service';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthorizationRoutingModule } from './authorization-routing.module';
+import { AuthInterceptor } from './serives/auth.interceptor';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,10 +17,16 @@ import { AuthorizationRoutingModule } from './authorization-routing.module';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    AuthorizationRoutingModule
+    AuthorizationRoutingModule,
+    HttpClientModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ]
 })
 export class AuthorizationModule { }

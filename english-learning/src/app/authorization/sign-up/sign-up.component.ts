@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { SignUpModel } from '../models/SignUpModel';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../serives/auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-sign-up',
@@ -12,7 +15,7 @@ export class SignUpComponent implements OnInit {
   confirmPassword = "";
   differentPasswords = false;
 
-  constructor(private fb: FormBuilder) { 
+  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) { 
     this.validationForm = this.fb.group({
       firstName: ['',[ Validators.required, Validators.maxLength(40), Validators.pattern('^[a-zA-Z]+$')]],
       lastName: ['', [ Validators.required, Validators.maxLength(40), Validators.pattern('^[a-zA-Z]+$')]],
@@ -36,13 +39,24 @@ export class SignUpComponent implements OnInit {
     }
 
     let signUpModel = this.createSignUpModel();
+
+    this.authService.signUp(signUpModel).subscribe(data => { },
+      (err: HttpErrorResponse) => {
+        if (err.error instanceof Error) {
+          console.log('An error occurred:', err.error.message);
+        } else {
+          console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
+        }
+      })
+    
+    this.router.navigate(['']);
   }
 
   createSignUpModel(): SignUpModel {
     let signUpModel = new SignUpModel();
 
-    signUpModel.firstName = this.validationForm.controls['firstName'].value;
-    signUpModel.lastName = this.validationForm.controls['lastName'].value;
+    signUpModel.name = this.validationForm.controls['firstName'].value;
+    signUpModel.surname = this.validationForm.controls['lastName'].value;
     signUpModel.email = this.validationForm.controls['email'].value;
     signUpModel.password = this.validationForm.controls['password'].value;
 

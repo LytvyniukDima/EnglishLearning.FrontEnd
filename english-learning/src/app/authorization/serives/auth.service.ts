@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from './../../../environments/environment';
 import { SignInModel } from '../models/SignInModel';
+import { SignUpModel } from '../models/SignUpModel';
+
+declare let require: any;
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +23,12 @@ export class AuthService {
     this.authorizationPath = this.apiBaseUrl.concat('/api/identity/authorization');
   }
 
-  signIn(credentials: SignInModel) {
+  signUp(credentials: SignUpModel) {
     return this.http.post<any>(this.registrationPath, credentials);
+  }
+
+  signIn(credentials: SignInModel) {
+    return this.http.post<string>(this.authorizationPath, credentials, { responseType: 'text' as 'json' });
   }
 
   logout() {
