@@ -3,4 +3,5 @@ export class SignUpModel {
     lastName: string;
     password: string;
     email: string;
+    roleId = 2;
 }
