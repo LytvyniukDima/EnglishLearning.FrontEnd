@@ -7,6 +7,7 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AuthorizationModule } from './authorization/authorization.module';
+import { TasksModule } from './tasks/tasks.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AuthorizationModule } from './authorization/authorization.module';
     BrowserModule,
     NgbModule,
     AppRoutingModule,
-    AuthorizationModule
+    AuthorizationModule,
+    TasksModule
   ],
   providers: [
     
