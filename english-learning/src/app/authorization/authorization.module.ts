@@ -5,6 +5,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { AuthService } from './serives/auth.service';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { AuthorizationRoutingModule } from './authorization-routing.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AuthorizationRoutingModule
   ],
   providers: [
     AuthService
