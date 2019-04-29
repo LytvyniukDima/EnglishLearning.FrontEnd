@@ -9,7 +9,6 @@ import { FormGroup,  FormBuilder,  Validators, FormControl } from '@angular/form
 })
 export class SignUpComponent implements OnInit {
   validationForm: FormGroup;
-  public user = new SignUpModel();
   confirmPassword = "";
   differentPasswords = false;
 
@@ -24,7 +23,6 @@ export class SignUpComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.user = new SignUpModel();
   }
 
   onSignUp(): void {
@@ -36,5 +34,18 @@ export class SignUpComponent implements OnInit {
       this.differentPasswords = true;
       return;
     }
+
+    let signUpModel = this.createSignUpModel();
+  }
+
+  createSignUpModel(): SignUpModel {
+    let signUpModel = new SignUpModel();
+
+    signUpModel.firstName = this.validationForm.controls['firstName'].value;
+    signUpModel.lastName = this.validationForm.controls['lastName'].value;
+    signUpModel.email = this.validationForm.controls['email'].value;
+    signUpModel.password = this.validationForm.controls['password'].value;
+
+    return signUpModel;
   }
 }
