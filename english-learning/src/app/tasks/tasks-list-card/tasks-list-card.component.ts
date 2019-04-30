@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { EnglishTaskInfoModel } from '../models/EnglishTaskInfoModel';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tasks-list-card',
@@ -10,7 +11,7 @@ export class TasksListCardComponent implements OnInit {
   @Input() taskInfo: EnglishTaskInfoModel;
   public englishLevelColor: string;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     switch(this.taskInfo.englishLevel)
@@ -40,5 +41,9 @@ export class TasksListCardComponent implements OnInit {
         break;
       }
     }
+  }
+
+  routing() {
+    this.router.navigate([`/tasks/task/${this.taskInfo.id}`]);
   }
 }
