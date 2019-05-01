@@ -1,3 +1,9 @@
-<p>
-  task works!
-</p>
+<div *ngIf="task.taskType === 'Simple Brackets'">
+  <app-task-brackets></app-task-brackets>
+</div>
+<div *ngIf="task.taskType === 'Division By Slash'">
+  <app-task-slash></app-task-slash>
+</div>
+<div *ngIf="task.taskType === 'Correct Option'">
+  <app-task-correct-option></app-task-correct-option>
+</div>
