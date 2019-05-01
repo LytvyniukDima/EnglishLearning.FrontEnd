@@ -1,3 +1,5 @@
-<p>
-  task-slash works!
-</p>
+<div class="container">
+  <div *ngFor="let taskModel of models">
+    <app-task-slash-item [taskModel]="taskModel"></app-task-slash-item>
+  </div>
+</div>

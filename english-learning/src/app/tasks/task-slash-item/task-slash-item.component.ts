@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { EnglishTaskSlashItem } from '../models/EnglishTaskSlashItem';
+import { EnglishTaskSlashModel } from '../models/EnglishTaskSlashModel';
 
 @Component({
   selector: 'app-task-slash-item',
@@ -6,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./task-slash-item.component.css']
 })
 export class TaskSlashItemComponent implements OnInit {
-
+  @Input() taskModel: EnglishTaskSlashModel;
+  
   constructor() { }
 
   ngOnInit() {

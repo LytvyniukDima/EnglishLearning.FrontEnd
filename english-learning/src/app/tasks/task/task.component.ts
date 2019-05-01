@@ -13,12 +13,12 @@ export class TaskComponent implements OnInit {
 
   ngOnInit() {
     this.task.id = 'asdfasd';
-    this.task.taskType = 'Simple Brackets';
+    this.task.taskType = 'Division By Slash';
     this.task.grammarPart = 'Present Simple';
     this.task.englishLevel = 'Intermediate';
     this.task.count = 10;
     this.task.example = '';
-    this.task.text = "A: **I\'ve never been/didn\'t go** to Hollywood.<br>B: Haven\'t you? I **went/\'ve been** there last year.\nA: How many films **have you acted/did you act** in so far?<br>B: I**\'ve acted/acted** in seven films up to now.";
+    this.task.text = "A: I**\'ve never been/didn\'t go** to Hollywood.<br>B: Haven\'t you? I **went/\'ve been** there last year.\nA: How many films **have you acted/did you act** in so far?<br>B: I**\'ve acted/acted** in seven films up to now.";
     this.task.answer = "1\n2";
   }
 }
