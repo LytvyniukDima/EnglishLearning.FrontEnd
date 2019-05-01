@@ -12,11 +12,13 @@ export class TaskSlashComponent implements OnInit {
   @Input() task: EnglishTaskModel;
   
   models: EnglishTaskSlashModel[] = [];
-
+  usersAnswears: number[][];
+  
   constructor() { }
 
   ngOnInit() {
     this.parseTask();
+    this.usersAnswears = new Array(this.models.length);
   }
 
   parseTask() {
@@ -71,5 +73,10 @@ export class TaskSlashComponent implements OnInit {
     }
 
     return result;
+  }
+
+  onChangedAnswears(answear: number[], index: number) {
+    this.usersAnswears[index] = answear;
+    console.log(this.usersAnswears);
   }
 }

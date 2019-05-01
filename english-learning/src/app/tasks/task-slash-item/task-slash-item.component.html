@@ -1,3 +1,15 @@
-<p>
-  task-slash-item works!
-</p>
+<div class="container">
+  <div *ngFor="let items of taskModel.items; let i = index">
+    <div class="row">
+      <div *ngFor="let item of items">
+        <div class="sentence-item" *ngIf="!item.isOption">
+          {{item.content}}
+        </div>
+        <select class="custom-select sentence-dropdown" *ngIf="item.isOption" (change)="selectOption($event.target.value, i)">
+          <option value=""></option>
+          <option *ngFor="let itemContent of item.content; let optionIndex = index" [value]="optionIndex + 1">{{itemContent}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { EnglishTaskSlashItem } from '../models/EnglishTaskSlashItem';
 import { EnglishTaskSlashModel } from '../models/EnglishTaskSlashModel';
 
@@ -9,10 +9,18 @@ import { EnglishTaskSlashModel } from '../models/EnglishTaskSlashModel';
 })
 export class TaskSlashItemComponent implements OnInit {
   @Input() taskModel: EnglishTaskSlashModel;
+  @Output() answears = new EventEmitter<number[]>();
+  
+  choosedValues: number[];
   
   constructor() { }
 
   ngOnInit() {
+    this.choosedValues = new Array(this.taskModel.items.length);
   }
 
+  selectOption(option: string, index: number) {
+    this.choosedValues[index] = parseInt(option);
+    this.answears.emit(this.choosedValues);
+  }
 }

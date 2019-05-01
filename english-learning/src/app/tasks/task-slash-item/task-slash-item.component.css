@@ -1,0 +1,16 @@
+.sentence-item {
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+    margin-right: 15px;
+    margin-left: 15px;
+    font-size: 15pt;
+}
+
+.sentence-dropdown {
+    height: 40px;
+}
+
+.container {
+    margin-top: 20px;
+}
