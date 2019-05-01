@@ -13,24 +13,28 @@ export class TaskSlashComponent implements OnInit {
   
   models: EnglishTaskSlashModel[] = [];
   usersAnswears: number[][];
-  
+  answears: number[][];
+
   constructor() { }
 
   ngOnInit() {
-    this.parseTask();
     this.usersAnswears = new Array(this.models.length);
+    this.answears = new Array(this.models.length);
+    this.parseAnswear();
+    this.parseTask();
   }
 
   parseTask() {
     let splitedText = this.task.text.split('\n');
-    for (let textItem of splitedText) {
+    for (let i = 0; i < splitedText.length ; i++) {
       let englishTaskSlashModel = new EnglishTaskSlashModel();
-      let splitedByNewLine = textItem.split('<br>');
+      let splitedByNewLine = splitedText[i].split('<br>');
 
       for (let line of splitedByNewLine) {
         englishTaskSlashModel.items.push(this.parseLine(line));
       }
 
+      englishTaskSlashModel.answears = this.answears[i];
       this.models.push(englishTaskSlashModel);
     }
 
@@ -73,6 +77,19 @@ export class TaskSlashComponent implements OnInit {
     }
 
     return result;
+  }
+
+  parseAnswear() {
+    let splitedAnswears = this.task.answear.split('\n');
+
+    for (let i = 0; i < splitedAnswears.length ; i++) {
+      this.answears[i] = [];
+
+      let sentencesItems = splitedAnswears[i].split('/')
+      for (let sentencesItem of sentencesItems) {
+        this.answears[i].push(parseInt(sentencesItem))
+      }
+    }
   }
 
   onChangedAnswears(answear: number[], index: number) {

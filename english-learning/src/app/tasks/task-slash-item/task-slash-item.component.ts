@@ -12,15 +12,24 @@ export class TaskSlashItemComponent implements OnInit {
   @Output() answears = new EventEmitter<number[]>();
   
   choosedValues: number[];
-  
+  isIncorrectAnswears: boolean[];
+
   constructor() { }
 
   ngOnInit() {
     this.choosedValues = new Array(this.taskModel.items.length);
+    this.isIncorrectAnswears = new Array(this.taskModel.items.length);
   }
 
   selectOption(option: string, index: number) {
-    this.choosedValues[index] = parseInt(option);
+    let numberOption = parseInt(option);
+    this.choosedValues[index] = numberOption;
     this.answears.emit(this.choosedValues);
+
+    if (this.taskModel.answears[index] !== numberOption) {
+      this.isIncorrectAnswears[index] = true;
+    } else {
+      this.isIncorrectAnswears[index] = false;
+    }
   }
 }

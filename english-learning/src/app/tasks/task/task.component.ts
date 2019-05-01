@@ -19,6 +19,6 @@ export class TaskComponent implements OnInit {
     this.task.count = 10;
     this.task.example = '';
     this.task.text = "A: I**\'ve never been/didn\'t go** to Hollywood.<br>B: Haven\'t you? I **went/\'ve been** there last year.\nA: How many films **have you acted/did you act** in so far?<br>B: I**\'ve acted/acted** in seven films up to now.";
-    this.task.answer = "1\n2";
+    this.task.answear = "1/2\n2/1";
   }
 }

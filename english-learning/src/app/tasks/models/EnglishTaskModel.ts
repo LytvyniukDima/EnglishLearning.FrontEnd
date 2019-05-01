@@ -8,5 +8,5 @@ export class EnglishTaskModel {
     count: number;
     example: string;
     text: string;
-    answer: string;
+    answear: string;
 }
