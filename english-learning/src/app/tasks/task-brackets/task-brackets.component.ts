@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { EnglishTaskModel } from '../models/EnglishTaskModel';
 
 @Component({
   selector: 'app-task-brackets',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./task-brackets.component.css']
 })
 export class TaskBracketsComponent implements OnInit {
+  @Input() task: EnglishTaskModel;
 
   constructor() { }
 
