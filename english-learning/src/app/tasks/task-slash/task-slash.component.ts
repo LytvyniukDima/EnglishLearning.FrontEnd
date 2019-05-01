@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { EnglishTaskModel } from '../models/EnglishTaskModel';
 import { EnglishTaskSlashModel } from '../models/EnglishTaskSlashModel';
 import { EnglishTaskSlashItem } from '../models/EnglishTaskSlashItem';
+import { EnglishTaskResult } from '../models/EnglishTaskResult';
 
 @Component({
   selector: 'app-task-slash',
@@ -14,6 +15,7 @@ export class TaskSlashComponent implements OnInit {
   models: EnglishTaskSlashModel[] = [];
   usersAnswears: number[][];
   answears: number[][];
+  resultModel = new EnglishTaskResult();
 
   constructor() { }
 
@@ -94,6 +96,27 @@ export class TaskSlashComponent implements OnInit {
 
   onChangedAnswears(answear: number[], index: number) {
     this.usersAnswears[index] = answear;
-    console.log(this.usersAnswears);
+  }
+
+  onFinish() {
+    this.resultModel.correct = 0;
+    this.resultModel.incorrect = 0;
+
+    console.log(this.answears);
+    for (let i = 0; i < this.answears.length; i++) {
+      for (let j = 0; j < this.answears[i].length; j++) {
+        if (this.answears[i][j] === this.usersAnswears[i][j]) {
+          this.resultModel.correct++;
+        } else {
+          this.resultModel.incorrect++;
+        }
+      }
+    }
+
+    if (this.resultModel.incorrect === 0 && this.resultModel.correct > 0) {
+      this.resultModel.headerMessage = "Congratulations!";
+    } else {
+      this.resultModel.headerMessage = "Good Try!"
+    }
   }
 }
