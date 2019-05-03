@@ -20,8 +20,8 @@ export class TaskSlashComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.usersAnswears = new Array(this.models.length);
-    this.answears = new Array(this.models.length);
+    this.usersAnswears = new Array(this.task.count);
+    this.answears = new Array(this.task.count);
     this.parseAnswear();
     this.parseTask();
   }
