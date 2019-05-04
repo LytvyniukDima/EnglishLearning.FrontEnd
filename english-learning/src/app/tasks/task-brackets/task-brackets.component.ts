@@ -32,7 +32,7 @@ export class TaskBracketsComponent implements OnInit {
       let englishTaskBracketsModel = new EnglishTaskBracketsModel();
       let splitedByContentOption = splitedText[i].split('|');
       let content = splitedByContentOption[0];
-      let options = splitedByContentOption[1];
+      let option = splitedByContentOption[1];
       let splitedByNewLine = content.split('<br>');
 
       for (let line of splitedByNewLine) {
@@ -78,8 +78,14 @@ export class TaskBracketsComponent implements OnInit {
         englishTaskBracketsModel.items.push(itemsArray);
       }
 
+      let bracketsItem = new EnglishTaskBracketsItem();
+      bracketsItem.isOption = false;
+      bracketsItem.content = `(${option})`;
+
       englishTaskBracketsModel.answears = this.answears[i];
-      englishTaskBracketsModel.inBrackets = options;
+
+      englishTaskBracketsModel.items[englishTaskBracketsModel.items.length - 1].push(bracketsItem);
+
       this.models.push(englishTaskBracketsModel);
     }
 
