@@ -60,6 +60,7 @@ export class TaskCorrectOptionComponent implements OnInit {
     this.resultModel.incorrect = 0;
 
     console.log(this.answears);
+    console.log(this.usersAnswears);
     for (let i = 0; i < this.answears.length; i++) {
       if (this.answears[i] === this.usersAnswears[i]) {
         this.resultModel.correct++;

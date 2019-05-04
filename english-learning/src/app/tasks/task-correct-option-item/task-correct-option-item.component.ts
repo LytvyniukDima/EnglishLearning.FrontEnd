@@ -8,6 +8,7 @@ import { EnglishTaskCorrectOptionModel } from '../models/EnglishTaskCorrectOptio
 })
 export class TaskCorrectOptionItemComponent implements OnInit {
   @Input() taskModel: EnglishTaskCorrectOptionModel;
+  @Input() modelIndex: number;
   @Output() answear = new EventEmitter<number>();
   
   choosedValue: number;
@@ -16,5 +17,12 @@ export class TaskCorrectOptionItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  handleChange(event, i) {
+    var target = event.target;
+      if (target.checked) {
+        this.answear.emit(parseInt(i));
+      }
   }
 }

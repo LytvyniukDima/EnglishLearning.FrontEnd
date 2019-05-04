@@ -1,3 +1,21 @@
-<p>
-  task-correct-option-item works!
-</p>
+<div class="container">
+  <div *ngFor="let item of taskModel.items; let itemIndex = index">
+    <div class="row">
+      <div class="sentence-item">
+        {{item}}
+      </div>
+    </div>
+  </div>
+
+  <div class="row answears">
+    <div class="col-3 form-check variants" *ngFor="let option of taskModel.options; let optionIndex = index">
+      <input class="form-check-input" (change)="handleChange($event, optionIndex + 1)" type="radio" [name]="'radios' + modelIndex" [id]="'exampleRadios' + optionIndex" [value]="optionIndex">
+      <label class="form-check-label" [for]="'exampleRadios' + optionIndex">
+        {{option}}
+      </label>
+  </div>
+
+  <div *ngIf="isIncorrectAnswear">
+    <p>Incorrect answear</p>
+  </div>
+</div>

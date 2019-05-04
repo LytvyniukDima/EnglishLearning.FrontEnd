@@ -1,7 +1,7 @@
 <div class="container">
   <ol>
     <li *ngFor="let taskModel of models; let i = index">
-      <app-task-correct-option-item [taskModel]="taskModel" (answears)="onChangedAnswears($event, i)">
+      <app-task-correct-option-item [taskModel]="taskModel" [modelIndex]="i" (answear)="onChangedAnswears($event, i)">
       </app-task-correct-option-item>
     </li>
   </ol>
@@ -9,7 +9,7 @@
   <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" id="finishButton" (click)="onFinish()">
     Finish
   </button>
-
+  
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -29,6 +29,6 @@
           <button type="button" class="btn btn-success" routerLink='/tasks/list' data-dismiss="modal">Continue</button>
         </div>
       </div>
-    </div>
+    </div> 
   </div>
 </div>
