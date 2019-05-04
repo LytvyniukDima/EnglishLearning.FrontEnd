@@ -13,9 +13,10 @@
       <label class="form-check-label" [for]="'exampleRadios' + optionIndex">
         {{option}}
       </label>
+    </div>
   </div>
 
-  <div *ngIf="isIncorrectAnswear">
+  <div class="row" *ngIf="isIncorrectAnswear">
     <p>Incorrect answear</p>
   </div>
 </div>

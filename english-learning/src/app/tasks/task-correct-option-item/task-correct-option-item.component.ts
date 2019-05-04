@@ -22,7 +22,13 @@ export class TaskCorrectOptionItemComponent implements OnInit {
   handleChange(event, i) {
     var target = event.target;
       if (target.checked) {
-        this.answear.emit(parseInt(i));
+        let answear = parseInt(i);
+        this.answear.emit(answear);
+
+        if (answear != this.taskModel.answear)
+          this.isIncorrectAnswear = true;
+        else
+          this.isIncorrectAnswear = false;
       }
   }
 }

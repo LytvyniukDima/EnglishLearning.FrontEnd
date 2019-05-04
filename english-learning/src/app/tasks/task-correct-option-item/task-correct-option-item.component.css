@@ -6,3 +6,13 @@
 .variants {
     margin-right: 15px;
 }
+
+p {
+    width: 100%;
+    margin-top: 0.25rem;
+    color: #dc3545;
+}
+
+.container {
+    margin-top: 20px;
+}
