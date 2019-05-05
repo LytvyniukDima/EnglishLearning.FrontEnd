@@ -119,6 +119,9 @@ export class TaskBracketsComponent implements OnInit {
         this.resultModel.correct++;
       } else {
         this.resultModel.incorrect++;
+        
+        let correctAnswear = `${i + 1}. correct answer - ${this.answers[i][0]}`;
+        this.resultModel.additionalMessages.push(correctAnswear);
       }
     }
 

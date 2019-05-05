@@ -2,4 +2,5 @@ export class EnglishTaskResult {
     headerMessage: string;
     correct: number;
     incorrect: number;
+    additionalMessages: string[] = [];
 }
