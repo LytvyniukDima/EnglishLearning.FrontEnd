@@ -34,4 +34,20 @@ export class TasksService {
     return this.http.get<EnglishTaskModel>(uri);
   }
 
+  getFilteredRandomInfoTasks(englishLevels: string[], grammarParts: string[], count = 30) {
+    let uri = this.tasksRandomInfoPath.concat('/' + count.toString() + '/filter?');
+
+    englishLevels.forEach((value) => {
+        uri = uri.concat('englishLevel=' + value + '&');
+    })
+
+    if (uri.endsWith('&'))
+        uri = uri.substring(0, uri.length - 1);
+
+    grammarParts.forEach((value) => {
+        uri = uri.concat('grammarPart=' + value);
+    })
+
+    return this.http.get<EnglishTaskInfoModel[]>(uri);
+  }
 }

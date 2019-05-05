@@ -59,6 +59,24 @@ export class TasksListComponent implements OnInit {
 
     grammarPartsToSearch = this.tasksMapper.mapToApiGrammarParts(grammarPartsToSearch);
 
+    console.log(grammarPartsToSearch);
+
+    if (englishLevelsToSearch.length > 0 || grammarPartsToSearch.length > 0) {
+    this.tasksService.getFilteredRandomInfoTasks(englishLevelsToSearch, grammarPartsToSearch).subscribe(data => {
+      console.log(data);
+      this.taskInfoList = data;
+      this.tasksMapper.fixNamingsForInfoModels(this.taskInfoList);
+    },
+      (err: HttpErrorResponse) => {
+        if (err.error instanceof Error) {
+          console.log('An error occurred:', err.error.message);
+        } else {
+          console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
+        }
+      })
+    } else {
+      this.getTasks();
+    }
   }
 
   onChagedEnglishLevelBox(event) {

@@ -18,7 +18,7 @@
         <h5>Grammar parts</h5>
         <div class="form-check" *ngFor="let grammarPart of grammarParts">
           <label class="form-check-label">
-            <input class="form-check-input" type="checkbox" [value]="grammarPart">
+            <input class="form-check-input" type="checkbox" [value]="grammarPart" (change)="onChangedGrammarPartBox($event)">
             {{grammarPart}}
           </label>
         </div>
