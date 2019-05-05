@@ -1,9 +1,11 @@
-<div *ngIf="task.taskType === 'Simple Brackets'">
-  <app-task-brackets [task]="task"></app-task-brackets>
-</div>
-<div *ngIf="task.taskType === 'Division By Slash'">
-  <app-task-slash [task]="task"></app-task-slash>
-</div>
-<div *ngIf="task.taskType === 'Correct Option'">
-  <app-task-correct-option [task]="task"></app-task-correct-option>
+<div *ngIf="task">
+  <div *ngIf="task.taskType === 'SimpleBrackets'">
+    <app-task-brackets [task]="task"></app-task-brackets>
+  </div>
+  <div *ngIf="task.taskType === 'DivisionBySlash'">
+    <app-task-slash [task]="task"></app-task-slash>
+  </div>
+  <div *ngIf="task.taskType === 'CorrectOption'">
+    <app-task-correct-option [task]="task"></app-task-correct-option>
+  </div>
 </div>

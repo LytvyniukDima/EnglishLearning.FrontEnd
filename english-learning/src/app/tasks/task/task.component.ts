@@ -10,7 +10,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./task.component.css']
 })
 export class TaskComponent implements OnInit {
-  public task = new EnglishTaskModel;
+  private task: EnglishTaskModel;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,18 +25,12 @@ export class TaskComponent implements OnInit {
     console.log(this.task);
   }
 
-  getTask(id: string) {
-    this.tasksService.getFullTaskById(id).subscribe(data => {
-      console.log(data);
-      this.task = data;
-      console.log(this.task);
-    },
-      (err: HttpErrorResponse) => {
-        if (err.error instanceof Error) {
-          console.log('An error occurred:', err.error.message);
-        } else {
-          console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
-        }
+  getTask = async (id) => {
+    await this.tasksService
+      .getFullTaskById(id)
+      .toPromise()
+      .then(data => {
+        this.task = data;
       })
   }
 }
