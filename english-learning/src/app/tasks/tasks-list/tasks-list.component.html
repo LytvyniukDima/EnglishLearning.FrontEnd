@@ -1,7 +1,37 @@
-<div class="container">
-  <div class="row justify-content-around">
-    <div *ngFor="let taskInfo of taskInfoList">
-      <app-tasks-list-card [taskInfo]="taskInfo"></app-tasks-list-card>
+<div class="row">
+  <div class="col-3 container-filter">
+    <div class="col">
+      <div class="filter-header">
+        <h3>Filter</h3>
+      </div>
+      <fieldset class="form-group">
+        <h5>EnglishLevels</h5>
+        <div class="form-check" *ngFor="let englishLevel of englishLevels">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" [value]="englishLevel" (change)="onChagedEnglishLevelBox($event)">
+            {{englishLevel}}
+          </label>
+        </div>
+      </fieldset>
+      <hr>
+      <fieldset class="form-group">
+        <h5>Grammar parts</h5>
+        <div class="form-check" *ngFor="let grammarPart of grammarParts">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" [value]="grammarPart">
+            {{grammarPart}}
+          </label>
+        </div>
+      </fieldset>
+      <hr>
+      <button type="button" class="btn btn-info" id="search-btn" (click)="onSearch()">Search</button>
+    </div>
+  </div>
+  <div class="col-9 container-tasks">
+    <div class="row justify-content-around">
+      <div *ngFor="let taskInfo of taskInfoList">
+        <app-tasks-list-card [taskInfo]="taskInfo"></app-tasks-list-card>
+      </div>
     </div>
   </div>
 </div>
