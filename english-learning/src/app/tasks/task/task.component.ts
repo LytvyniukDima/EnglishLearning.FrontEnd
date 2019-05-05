@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { EnglishTaskModel } from '../models/EnglishTaskModel';
+import { ActivatedRoute } from '@angular/router';
+import { TasksService } from '../services/tasks.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-task',
@@ -7,36 +10,33 @@ import { EnglishTaskModel } from '../models/EnglishTaskModel';
   styleUrls: ['./task.component.css']
 })
 export class TaskComponent implements OnInit {
-  public task = new EnglishTaskModel()
+  public task = new EnglishTaskModel;
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private tasksService: TasksService
+  ) { }
 
   ngOnInit() {
-    // this.task.id = 'asdfasd';
-    // this.task.taskType = 'Division By Slash';
-    // this.task.grammarPart = 'Present Simple';
-    // this.task.englishLevel = 'Intermediate';
-    // this.task.count = 10;
-    // this.task.example = '';
-    // this.task.text = "A: I**\'ve never been/didn\'t go** to Hollywood.<br>B: Haven\'t you? I **went/\'ve been** there last year.\nA: How many films **have you acted/did you act** in so far?<br>B: I**\'ve acted/acted** in seven films up to now.";
-    // this.task.answear = "1/2\n2/1";
+    let id = this.route.snapshot.paramMap.get('id');
 
-    // this.task.id = 'asdfasd';
-    // this.task.taskType = 'Correct Option';
-    // this.task.grammarPart = 'Present Simple';
-    // this.task.englishLevel = 'Intermediate';
-    // this.task.count = 10;
-    // this.task.example = '';
-    // this.task.text = "Jose is __________ - he speaks Spanish and<br>English.|monolingual/bilingual/multilingual\nHow should you dress before an interwiew?|messily/briliantly/smartly";
-    // this.task.answear = "1\n2";
+    this.getTask(id);
 
-    this.task.id = 'asdfasd';
-    this.task.taskType = 'Simple Brackets';
-    this.task.grammarPart = 'Present Simple';
-    this.task.englishLevel = 'Intermediate';
-    this.task.count = 10;
-    this.task.example = '';
-    this.task.text = "Margaret __ four languages - English, French, German and Spanish.|speak\nI __ my job. It's very boring.|like";
-    this.task.answear = "speaks\ndon\'t like/do not like";
+    console.log(this.task);
+  }
+
+  getTask(id: string) {
+    this.tasksService.getFullTaskById(id).subscribe(data => {
+      console.log(data);
+      this.task = data;
+      console.log(this.task);
+    },
+      (err: HttpErrorResponse) => {
+        if (err.error instanceof Error) {
+          console.log('An error occurred:', err.error.message);
+        } else {
+          console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
+        }
+      })
   }
 }

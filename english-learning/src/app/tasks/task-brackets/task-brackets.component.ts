@@ -13,16 +13,16 @@ export class TaskBracketsComponent implements OnInit {
   @Input() task: EnglishTaskModel;
 
   models: EnglishTaskBracketsModel[] = [];
-  usersAnswears: string[];
-  answears: string[][];
+  usersAnswers: string[];
+  answers: string[][];
   resultModel = new EnglishTaskResult();
 
   constructor() { }
 
   ngOnInit() {
-    this.usersAnswears = new Array(this.task.count);
-    this.answears = new Array(this.task.count);
-    this.parseAnswear();
+    this.usersAnswers = new Array(this.task.count);
+    this.answers = new Array(this.task.count);
+    this.parseAnswer();
     this.parseTask();
   }
 
@@ -82,7 +82,7 @@ export class TaskBracketsComponent implements OnInit {
       bracketsItem.isOption = false;
       bracketsItem.content = `(${option})`;
 
-      englishTaskBracketsModel.answears = this.answears[i];
+      englishTaskBracketsModel.answers = this.answers[i];
 
       englishTaskBracketsModel.items[englishTaskBracketsModel.items.length - 1].push(bracketsItem);
 
@@ -92,30 +92,30 @@ export class TaskBracketsComponent implements OnInit {
     console.log(this.models);
   }
 
-  parseAnswear() {
-    let splitedAnswears = this.task.answear.split('\n');
+  parseAnswer() {
+    let splitedAnswers = this.task.answer.split('\n');
 
-    for (let i = 0; i < splitedAnswears.length; i++) {
-      this.answears[i] = [];
+    for (let i = 0; i < splitedAnswers.length; i++) {
+      this.answers[i] = [];
 
-      let sentencesItems = splitedAnswears[i].split('/')
+      let sentencesItems = splitedAnswers[i].split('/')
       for (let sentencesItem of sentencesItems) {
-        this.answears[i].push(sentencesItem);
+        this.answers[i].push(sentencesItem);
       }
     }
   }
 
-  onChangedAnswears(answear: string, index: number) {
-    this.usersAnswears[index] = answear;
+  onChangedAnswers(answer: string, index: number) {
+    this.usersAnswers[index] = answer;
   }
 
   onFinish() {
     this.resultModel.correct = 0;
     this.resultModel.incorrect = 0;
 
-    console.log(this.answears);
-    for (let i = 0; i < this.answears.length; i++) {
-      if (this.answears[i].includes(this.usersAnswears[i])) {
+    console.log(this.answers);
+    for (let i = 0; i < this.answers.length; i++) {
+      if (this.answers[i].includes(this.usersAnswers[i])) {
         this.resultModel.correct++;
       } else {
         this.resultModel.incorrect++;

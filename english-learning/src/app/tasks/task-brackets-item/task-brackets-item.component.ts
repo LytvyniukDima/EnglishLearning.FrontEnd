@@ -8,9 +8,9 @@ import { EnglishTaskBracketsModel } from '../models/EnglishTaskBracketsModel';
 })
 export class TaskBracketsItemComponent implements OnInit {
   @Input() taskModel: EnglishTaskBracketsModel;
-  @Output() answear = new EventEmitter<string>();
+  @Output() answer = new EventEmitter<string>();
   
-  isIncorrectAnswear: boolean;
+  isIncorrectAnswer: boolean;
 
   constructor() { }
 
@@ -18,12 +18,12 @@ export class TaskBracketsItemComponent implements OnInit {
   }
 
   onInputChange(event) {
-    let userAnswear = event.target.value;
-    this.answear.emit(userAnswear);
+    let userAnswer = event.target.value;
+    this.answer.emit(userAnswer);
 
-    if (!this.taskModel.answears.includes(userAnswear))
-      this.isIncorrectAnswear = true;
+    if (!this.taskModel.answers.includes(userAnswer))
+      this.isIncorrectAnswer = true;
     else
-      this.isIncorrectAnswear = false;
+      this.isIncorrectAnswer = false;
   }
 }

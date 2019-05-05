@@ -1,7 +1,7 @@
 <div class="container">
   <ol>
     <li *ngFor="let taskModel of models; let i = index">
-      <app-task-brackets-item [taskModel]="taskModel" (answear)="onChangedAnswears($event, i)">
+      <app-task-brackets-item [taskModel]="taskModel" (answer)="onChangedAnswers($event, i)">
       </app-task-brackets-item>
     </li>
   </ol>

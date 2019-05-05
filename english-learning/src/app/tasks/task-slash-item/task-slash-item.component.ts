@@ -9,27 +9,27 @@ import { EnglishTaskSlashModel } from '../models/EnglishTaskSlashModel';
 })
 export class TaskSlashItemComponent implements OnInit {
   @Input() taskModel: EnglishTaskSlashModel;
-  @Output() answears = new EventEmitter<number[]>();
+  @Output() answers = new EventEmitter<number[]>();
   
   choosedValues: number[];
-  isIncorrectAnswears: boolean[];
+  isIncorrectAnswers: boolean[];
 
   constructor() { }
 
   ngOnInit() {
     this.choosedValues = new Array(this.taskModel.items.length);
-    this.isIncorrectAnswears = new Array(this.taskModel.items.length);
+    this.isIncorrectAnswers = new Array(this.taskModel.items.length);
   }
 
   selectOption(option: string, index: number) {
     let numberOption = parseInt(option);
     this.choosedValues[index] = numberOption;
-    this.answears.emit(this.choosedValues);
+    this.answers.emit(this.choosedValues);
 
-    if (this.taskModel.answears[index] !== numberOption) {
-      this.isIncorrectAnswears[index] = true;
+    if (this.taskModel.answers[index] !== numberOption) {
+      this.isIncorrectAnswers[index] = true;
     } else {
-      this.isIncorrectAnswears[index] = false;
+      this.isIncorrectAnswers[index] = false;
     }
   }
 }

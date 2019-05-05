@@ -1,7 +1,7 @@
 <div class="container">
   <ol>
     <li *ngFor="let taskModel of models; let i = index">
-      <app-task-slash-item [taskModel]="taskModel" (answears)="onChangedAnswears($event, i)">
+      <app-task-slash-item [taskModel]="taskModel" (answers)="onChangedAnswers($event, i)">
       </app-task-slash-item>
     </li>
   </ol>

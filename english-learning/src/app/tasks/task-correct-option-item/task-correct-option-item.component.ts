@@ -9,10 +9,10 @@ import { EnglishTaskCorrectOptionModel } from '../models/EnglishTaskCorrectOptio
 export class TaskCorrectOptionItemComponent implements OnInit {
   @Input() taskModel: EnglishTaskCorrectOptionModel;
   @Input() modelIndex: number;
-  @Output() answear = new EventEmitter<number>();
+  @Output() answer = new EventEmitter<number>();
   
   choosedValue: number;
-  isIncorrectAnswear: boolean;
+  isIncorrectAnswer: boolean;
 
   constructor() { }
 
@@ -22,13 +22,13 @@ export class TaskCorrectOptionItemComponent implements OnInit {
   handleChange(event, i) {
     var target = event.target;
       if (target.checked) {
-        let answear = parseInt(i);
-        this.answear.emit(answear);
+        let answer = parseInt(i);
+        this.answer.emit(answer);
 
-        if (answear != this.taskModel.answear)
-          this.isIncorrectAnswear = true;
+        if (answer != this.taskModel.answer)
+          this.isIncorrectAnswer = true;
         else
-          this.isIncorrectAnswear = false;
+          this.isIncorrectAnswer = false;
       }
   }
 }

@@ -13,16 +13,16 @@ export class TaskSlashComponent implements OnInit {
   @Input() task: EnglishTaskModel;
   
   models: EnglishTaskSlashModel[] = [];
-  usersAnswears: number[][];
-  answears: number[][];
+  usersAnswers: number[][];
+  answers: number[][];
   resultModel = new EnglishTaskResult();
 
   constructor() { }
 
   ngOnInit() {
-    this.usersAnswears = new Array(this.task.count);
-    this.answears = new Array(this.task.count);
-    this.parseAnswear();
+    this.usersAnswers = new Array(this.task.count);
+    this.answers = new Array(this.task.count);
+    this.parseAnswer();
     this.parseTask();
   }
 
@@ -36,7 +36,7 @@ export class TaskSlashComponent implements OnInit {
         englishTaskSlashModel.items.push(this.parseLine(line));
       }
 
-      englishTaskSlashModel.answears = this.answears[i];
+      englishTaskSlashModel.answers = this.answers[i];
       this.models.push(englishTaskSlashModel);
     }
 
@@ -81,31 +81,31 @@ export class TaskSlashComponent implements OnInit {
     return result;
   }
 
-  parseAnswear() {
-    let splitedAnswears = this.task.answear.split('\n');
+  parseAnswer() {
+    let splitedAnswers = this.task.answer.split('\n');
 
-    for (let i = 0; i < splitedAnswears.length ; i++) {
-      this.answears[i] = [];
+    for (let i = 0; i < splitedAnswers.length ; i++) {
+      this.answers[i] = [];
 
-      let sentencesItems = splitedAnswears[i].split('/')
+      let sentencesItems = splitedAnswers[i].split('/')
       for (let sentencesItem of sentencesItems) {
-        this.answears[i].push(parseInt(sentencesItem))
+        this.answers[i].push(parseInt(sentencesItem))
       }
     }
   }
 
-  onChangedAnswears(answear: number[], index: number) {
-    this.usersAnswears[index] = answear;
+  onChangedAnswers(answer: number[], index: number) {
+    this.usersAnswers[index] = answer;
   }
 
   onFinish() {
     this.resultModel.correct = 0;
     this.resultModel.incorrect = 0;
 
-    console.log(this.answears);
-    for (let i = 0; i < this.answears.length; i++) {
-      for (let j = 0; j < this.answears[i].length; j++) {
-        if (this.answears[i][j] === this.usersAnswears[i][j]) {
+    console.log(this.answers);
+    for (let i = 0; i < this.answers.length; i++) {
+      for (let j = 0; j < this.answers[i].length; j++) {
+        if (this.answers[i][j] === this.usersAnswers[i][j]) {
           this.resultModel.correct++;
         } else {
           this.resultModel.incorrect++;

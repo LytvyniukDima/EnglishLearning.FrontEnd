@@ -12,16 +12,16 @@ export class TaskCorrectOptionComponent implements OnInit {
   @Input() task: EnglishTaskModel;
 
   models: EnglishTaskCorrectOptionModel[] = [];
-  usersAnswears: number[];
-  answears: number[];
+  usersAnswers: number[];
+  answers: number[];
   resultModel = new EnglishTaskResult();
 
   constructor() { }
 
   ngOnInit() {
-    this.usersAnswears = new Array(this.models.length);
-    this.answears = new Array(this.models.length);
-    this.parseAnswear();
+    this.usersAnswers = new Array(this.models.length);
+    this.answers = new Array(this.models.length);
+    this.parseAnswer();
     this.parseTask();
   }
 
@@ -36,33 +36,33 @@ export class TaskCorrectOptionComponent implements OnInit {
       englishTaskCorrectOptionModel.items = content.split('<br>');
       englishTaskCorrectOptionModel.options = options.split('/');
 
-      englishTaskCorrectOptionModel.answear = this.answears[i];
+      englishTaskCorrectOptionModel.answer = this.answers[i];
       this.models.push(englishTaskCorrectOptionModel);
     }
 
     console.log(this.models);
   }
 
-  parseAnswear() {
-    let splitedAnswears = this.task.answear.split('\n');
+  parseAnswer() {
+    let splitedAnswers = this.task.answer.split('\n');
 
-    for (let answear of splitedAnswears) {
-      this.answears.push(parseInt(answear));
+    for (let answer of splitedAnswers) {
+      this.answers.push(parseInt(answer));
     }
   }
 
-  onChangedAnswears(answear: number, index: number) {
-    this.usersAnswears[index] = answear;
+  onChangedAnswers(answer: number, index: number) {
+    this.usersAnswers[index] = answer;
   }
 
   onFinish() {
     this.resultModel.correct = 0;
     this.resultModel.incorrect = 0;
 
-    console.log(this.answears);
-    console.log(this.usersAnswears);
-    for (let i = 0; i < this.answears.length; i++) {
-      if (this.answears[i] === this.usersAnswears[i]) {
+    console.log(this.answers);
+    console.log(this.usersAnswers);
+    for (let i = 0; i < this.answers.length; i++) {
+      if (this.answers[i] === this.usersAnswers[i]) {
         this.resultModel.correct++;
       } else {
         this.resultModel.incorrect++;

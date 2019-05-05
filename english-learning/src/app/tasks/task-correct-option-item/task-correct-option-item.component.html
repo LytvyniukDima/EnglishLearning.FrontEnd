@@ -7,7 +7,7 @@
     </div>
   </div>
 
-  <div class="row answears">
+  <div class="row answers">
     <div class="col-3 form-check variants" *ngFor="let option of taskModel.options; let optionIndex = index">
       <input class="form-check-input" (change)="handleChange($event, optionIndex + 1)" type="radio" [name]="'radios' + modelIndex" [id]="'exampleRadios' + optionIndex" [value]="optionIndex">
       <label class="form-check-label" [for]="'exampleRadios' + optionIndex">
@@ -16,7 +16,7 @@
     </div>
   </div>
 
-  <div class="row" *ngIf="isIncorrectAnswear">
-    <p>Incorrect answear</p>
+  <div class="row" *ngIf="isIncorrectAnswer">
+    <p>Incorrect answer</p>
   </div>
 </div>

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from './../../../environments/environment';
 import { EnglishTaskInfoModel } from '../models/EnglishTaskInfoModel';
+import { EnglishTaskModel } from '../models/EnglishTaskModel';
 
 @Injectable({
   providedIn: 'root'
@@ -24,25 +25,13 @@ export class TasksService {
   getRandomTasksInfoList(count = 30) {
     let uri = this.tasksRandomInfoPath.concat('/' + count.toString());
 
-    console.log(uri);
-
     return this.http.get<EnglishTaskInfoModel[]>(uri);
   }
 
-//   signUp(credentials: SignUpModel) {
-//     return this.http.post<any>(this.registrationPath, credentials);
-//   }
+  getFullTaskById(id: string) {
+    let uri = this.tasksFullPath.concat('/' + id);
 
-//   signIn(credentials: SignInModel) {
-//     return this.http.post<string>(this.authorizationPath, credentials, { responseType: 'text' as 'json' });
-//   }
+    return this.http.get<EnglishTaskModel>(uri);
+  }
 
-//   logout() {
-//     localStorage.removeItem('token');
-//     this.router.navigate(['']);
-//   }
-
-//   get isAuthentificated() {
-//     return !!localStorage.getItem('token');
-//   }
 }
