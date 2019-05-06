@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, EventEmitter } from '@angular/core';
 import { EnglishTaskInfoModel } from '../models/EnglishTaskInfoModel';
 import { TasksService } from '../services/tasks.service';
 import { TasksMapperService } from '../services/tasks-mapper.service';
@@ -17,6 +17,14 @@ export class TasksListComponent implements OnInit {
   public englishLevelsMap = new Map();
   public grammarPartsMap = new Map();
 
+  needScroll: EventEmitter<any> = new EventEmitter();
+
+  @ViewChild('scroll') private scrollContainer: ElementRef;
+  scrollParent: any;
+
+  scrolledValue = 0;
+  isScrolling = false;
+
   constructor(private tasksService: TasksService, private tasksMapper: TasksMapperService) { }
 
   ngOnInit() {
@@ -24,8 +32,17 @@ export class TasksListComponent implements OnInit {
     this.englishLevels = this.tasksMapper.getAllEnglishLevels();
     this.grammarParts = this.tasksMapper.getAllGrammaprParts();
 
-    this.grammarParts.forEach((value, indes) => { this.grammarPartsMap.set(value, false)});
-    this.englishLevels.forEach((value, index) => { this.englishLevelsMap.set(value, false)});
+    this.grammarParts.forEach((value, indes) => { this.grammarPartsMap.set(value, false) });
+    this.englishLevels.forEach((value, index) => { this.englishLevelsMap.set(value, false) });
+
+    console.log(this.scrollContainer.nativeElement)
+
+    this.scrollParent = this.getScrollParent(this.scrollContainer.nativeElement);
+    this.scrollParent.onscroll = () => this.onScroll()
+
+    this.needScroll.subscribe((value) => {
+      this.onScrollLoad();
+    });
   }
 
   getTasks() {
@@ -62,18 +79,18 @@ export class TasksListComponent implements OnInit {
     console.log(grammarPartsToSearch);
 
     if (englishLevelsToSearch.length > 0 || grammarPartsToSearch.length > 0) {
-    this.tasksService.getFilteredRandomInfoTasks(englishLevelsToSearch, grammarPartsToSearch).subscribe(data => {
-      console.log(data);
-      this.taskInfoList = data;
-      this.tasksMapper.fixNamingsForInfoModels(this.taskInfoList);
-    },
-      (err: HttpErrorResponse) => {
-        if (err.error instanceof Error) {
-          console.log('An error occurred:', err.error.message);
-        } else {
-          console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
-        }
-      })
+      this.tasksService.getFilteredRandomInfoTasks(englishLevelsToSearch, grammarPartsToSearch).subscribe(data => {
+        console.log(data);
+        this.taskInfoList = data;
+        this.tasksMapper.fixNamingsForInfoModels(this.taskInfoList);
+      },
+        (err: HttpErrorResponse) => {
+          if (err.error instanceof Error) {
+            console.log('An error occurred:', err.error.message);
+          } else {
+            console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
+          }
+        })
     } else {
       this.getTasks();
     }
@@ -101,7 +118,53 @@ export class TasksListComponent implements OnInit {
     } else {
       this.grammarPartsMap.set(value, false);
     }
-    
+
     console.log(event);
+  }
+
+  onScroll() {
+    let element: HTMLElement = document.getElementById('scroll2');
+    console.log(element)
+
+    let scrollFunc = function (node: HTMLElement): HTMLElement {
+      if (node.parentElement == null) {
+        return node;
+      }
+
+      if (node.scrollHeight > node.clientHeight) {
+        return node;
+      } else {
+        return scrollFunc(node.parentElement);
+      }
+    }
+
+    let newScrollParent = scrollFunc(element);
+
+    let scrolledValue = newScrollParent.scrollTop + newScrollParent.clientHeight;
+    let maxScroll = newScrollParent.scrollHeight - 20;
+
+    if (scrolledValue > this.scrolledValue && scrolledValue > maxScroll && !this.isScrolling) {
+      console.log("needScroll");
+      console.log(this.scrolledValue);
+      this.isScrolling = true;
+      this.onScrollLoad();
+    }
+    this.scrolledValue = scrolledValue;
+  }
+
+  getScrollParent(node) {
+    if (node.parentNode == null) {
+      return node;
+    }
+
+    if (node.scrollHeight > node.clientHeight) {
+      return node;
+    } else {
+      return this.getScrollParent(node.parentNode);
+    }
+  }
+
+  onScrollLoad() {
+    console.log("inScrollLoad")
   }
 }
