@@ -16,6 +16,8 @@ export class TasksListComponent implements OnInit {
   public grammarParts: string[];
   public englishLevelsMap = new Map();
   public grammarPartsMap = new Map();
+  public grammarPartsFromSearch: string[] = [];
+  public englishLevelsFromSearch: string[] = [];
 
   needScroll: EventEmitter<any> = new EventEmitter();
 
@@ -61,25 +63,25 @@ export class TasksListComponent implements OnInit {
   }
 
   onSearch() {
-    let englishLevelsToSearch = [];
-    let grammarPartsToSearch = [];
+    this.englishLevelsFromSearch = [];
+    this.grammarPartsFromSearch = [];
 
     this.englishLevelsMap.forEach((value, key) => {
       if (value)
-        englishLevelsToSearch.push(key);
+        this.englishLevelsFromSearch.push(key);
     })
 
     this.grammarPartsMap.forEach((value, key) => {
       if (value)
-        grammarPartsToSearch.push(key);
+        this.grammarPartsFromSearch.push(key);
     })
 
-    grammarPartsToSearch = this.tasksMapper.mapToApiGrammarParts(grammarPartsToSearch);
+    this.grammarPartsFromSearch = this.tasksMapper.mapToApiGrammarParts(this.grammarPartsFromSearch);
 
-    console.log(grammarPartsToSearch);
+    console.log(this.grammarPartsFromSearch);
 
-    if (englishLevelsToSearch.length > 0 || grammarPartsToSearch.length > 0) {
-      this.tasksService.getFilteredRandomInfoTasks(englishLevelsToSearch, grammarPartsToSearch).subscribe(data => {
+    if (this.englishLevelsFromSearch.length > 0 || this.grammarPartsFromSearch.length > 0) {
+      this.tasksService.getFilteredRandomInfoTasks(this.englishLevelsFromSearch, this.grammarPartsFromSearch).subscribe(data => {
         console.log(data);
         this.taskInfoList = data;
         this.tasksMapper.fixNamingsForInfoModels(this.taskInfoList);
@@ -145,7 +147,6 @@ export class TasksListComponent implements OnInit {
 
     if (scrolledValue > this.scrolledValue && scrolledValue > maxScroll && !this.isScrolling) {
       console.log("needScroll");
-      console.log(this.scrolledValue);
       this.isScrolling = true;
       this.onScrollLoad();
     }
@@ -165,6 +166,35 @@ export class TasksListComponent implements OnInit {
   }
 
   onScrollLoad() {
-    console.log("inScrollLoad")
+    if (this.englishLevelsFromSearch.length > 0 || this.grammarPartsFromSearch.length > 0) {
+      this.tasksService.getFilteredRandomInfoTasks(this.englishLevelsFromSearch, this.grammarPartsFromSearch).subscribe(data => {
+        this.taskInfoList = this.taskInfoList.concat(data);
+        this.tasksMapper.fixNamingsForInfoModels(this.taskInfoList);
+        this.isScrolling = false;
+      },
+        (err: HttpErrorResponse) => {
+          this.isScrolling = false;
+          if (err.error instanceof Error) {
+            console.log('An error occurred:', err.error.message);
+          } else {
+            console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
+          }
+        })
+    } else {
+      this.tasksService.getRandomTasksInfoList().subscribe(data => {
+        this.taskInfoList = this.taskInfoList.concat(data);
+        console.log(this.taskInfoList);
+        this.tasksMapper.fixNamingsForInfoModels(this.taskInfoList);
+        this.isScrolling = false;
+      },
+        (err: HttpErrorResponse) => {
+          this.isScrolling = false;
+          if (err.error instanceof Error) {
+            console.log('An error occurred:', err.error.message);
+          } else {
+            console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
+          }
+        });
+    }
   }
 }

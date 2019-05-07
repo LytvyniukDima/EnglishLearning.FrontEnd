@@ -41,12 +41,12 @@ export class TasksService {
         uri = uri.concat('englishLevel=' + value + '&');
     })
 
+    grammarParts.forEach((value) => {
+      uri = uri.concat('grammarPart=' + value + '&');
+    })
+
     if (uri.endsWith('&'))
         uri = uri.substring(0, uri.length - 1);
-
-    grammarParts.forEach((value) => {
-        uri = uri.concat('grammarPart=' + value);
-    })
 
     return this.http.get<EnglishTaskInfoModel[]>(uri);
   }
