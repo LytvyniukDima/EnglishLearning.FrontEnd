@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AuthorizationModule } from './authorization/authorization.module';
 import { TasksModule } from './tasks/tasks.module';
+import { MultimediaModule } from './multimedia/multimedia.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { TasksModule } from './tasks/tasks.module';
     NgbModule,
     AppRoutingModule,
     AuthorizationModule,
-    TasksModule
+    TasksModule,
+    MultimediaModule
   ],
   providers: [
     
