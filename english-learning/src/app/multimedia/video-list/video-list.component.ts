@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { EnglishVideoModel } from '../models/EnglishVideoModel';
 import { MultimediaService } from '../services/multimedia.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -17,16 +17,25 @@ export class VideoListComponent implements OnInit {
   public videoTypesKeys: string[];
   
   public textSearch = "";
-  public videoTypesFromSearch: string[];
-  public englishLevelsFromSearch: string[];
+  public videoTypesFromSearch: string[] = [];
+  public englishLevelsFromSearch: string[] = [];
   public videoTypesMap = new Map();
   public englishLevelsMap = new Map();
 
+  @ViewChild('scroll') private scrollContainer: ElementRef;
+  scrollParent: any;
+
+  scrolledValue = 0;
+  isScrolling = false;
+  
   constructor(private multimediaService: MultimediaService) { }
 
   ngOnInit() {
     this.getVideos();
     this.getFilter();
+
+    this.scrollParent = this.getScrollParent(this.scrollContainer.nativeElement);
+    this.scrollParent.onscroll = () => this.onScroll()
   }
 
   getVideos() {
@@ -118,7 +127,7 @@ export class VideoListComponent implements OnInit {
   }
 
   makeSearch() {
-    if (this.englishLevelsFromSearch.length > 0 || this.videoTypesFromSearch.length > 0 || this.textSearch.length > 0) {
+    if (this.englishLevelsFromSearch.length > 0 || this.videoTypesFromSearch.length > 0 || this.textSearch || this.textSearch.length > 0) {
       this.multimediaService.getFilteredRandomVideos(this.textSearch, this.englishLevelsFromSearch, this.videoTypesFromSearch).subscribe(data => {
         console.log(data);
         this.videoList = data;
@@ -132,6 +141,77 @@ export class VideoListComponent implements OnInit {
         })
     } else {
       this.getVideos();
+    }
+  }
+
+  onScroll() {
+    let element: HTMLElement = document.getElementById('scroll2');
+    console.log(element)
+
+    let scrollFunc = function (node: HTMLElement): HTMLElement {
+      if (node.parentElement == null) {
+        return node;
+      }
+
+      if (node.scrollHeight > node.clientHeight) {
+        return node;
+      } else {
+        return scrollFunc(node.parentElement);
+      }
+    }
+
+    let newScrollParent = scrollFunc(element);
+
+    let scrolledValue = newScrollParent.scrollTop + newScrollParent.clientHeight;
+    let maxScroll = newScrollParent.scrollHeight - 20;
+
+    if (scrolledValue > this.scrolledValue && scrolledValue > maxScroll && !this.isScrolling) {
+      console.log("needScroll");
+      this.isScrolling = true;
+      this.onScrollLoad();
+    }
+    this.scrolledValue = scrolledValue;
+  }
+
+  getScrollParent(node) {
+    if (node.parentNode == null) {
+      return node;
+    }
+
+    if (node.scrollHeight > node.clientHeight) {
+      return node;
+    } else {
+      return this.getScrollParent(node.parentNode);
+    }
+  }
+
+  onScrollLoad() {
+    if (this.englishLevelsFromSearch.length > 0 || this.videoTypesFromSearch.length > 0 || this.textSearch.length > 0) {
+      this.multimediaService.getFilteredRandomVideos(this.textSearch, this.englishLevelsFromSearch, this.videoTypesFromSearch).subscribe(data => {
+        this.videoList = this.videoList.concat(data);
+        this.isScrolling = false;
+      },
+        (err: HttpErrorResponse) => {
+          this.isScrolling = false;
+          if (err.error instanceof Error) {
+            console.log('An error occurred:', err.error.message);
+          } else {
+            console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
+          }
+        })
+    } else {
+      this.multimediaService.getRandomFullVideosList().subscribe(data => {
+        this.videoList = this.videoList.concat(data);
+        this.isScrolling = false;
+      },
+        (err: HttpErrorResponse) => {
+          this.isScrolling = false;
+          if (err.error instanceof Error) {
+            console.log('An error occurred:', err.error.message);
+          } else {
+            console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
+          }
+        });
     }
   }
 }
