@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-3"></div>
+  <div class="col-6">
+    <div class="headline-container">
+      <h1>{{textModel.headline}}</h1>
+    </div>
+    <div class="text-container">
+      <p>
+        <ng-container *ngFor="let line of text">
+          {{line}}<br>
+        </ng-container>
+      </p>
+    </div>
+  </div>
+</div>
