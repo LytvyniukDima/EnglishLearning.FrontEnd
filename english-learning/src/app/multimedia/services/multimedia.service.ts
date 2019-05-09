@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from './../../../environments/environment';
 import { EnglishVideoModel } from '../models/EnglishVideoModel';
+import { EnglishVideoFullFilterModel } from '../models/EnglishVideoFullFilterModel';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import { EnglishVideoModel } from '../models/EnglishVideoModel';
 export class MultimediaService {
   private readonly videosRandomFullPath: string;
   private readonly videosFullPath: string;
+  private readonly videosFiltersPath: string;
 
   private readonly apiBaseUrl: string;
 
@@ -17,6 +19,7 @@ export class MultimediaService {
     this.apiBaseUrl = environment['ApiBaseUrl'];
     this.videosRandomFullPath = this.apiBaseUrl.concat('/api/multimedia/random/video');
     this.videosFullPath = this.apiBaseUrl.concat('/api/multimedia/video');
+    this.videosFiltersPath = this.apiBaseUrl.concat('/api/multimedia/filters/video/full');
   }
 
   getRandomFullVideosList(count = 30) {
@@ -29,6 +32,10 @@ export class MultimediaService {
     let uri = this.videosFullPath.concat('/' + id);
 
     return this.http.get<EnglishVideoModel>(uri);
+  }
+
+  getFullVideoFilter() {
+      return this.http.get<EnglishVideoFullFilterModel>(this.videosFiltersPath);
   }
 
 //   getFilteredRandomInfoTasks(englishLevels: string[], grammarParts: string[], count = 30) {

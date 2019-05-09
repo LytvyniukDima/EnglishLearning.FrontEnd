@@ -1,0 +1,23 @@
+.container-filter {
+    margin-top: 30px;
+    border-right:1px solid #000;
+    padding-right: 10px;
+    padding-left: 20px;
+}
+
+.container-videos {
+    margin-top: 30px;
+    padding-right: 15px;
+    padding-left: 50px;
+}
+
+.filter-header {
+    text-align: center;
+    vertical-align: middle;
+    height: 80px;
+}
+
+#search-btn {
+    margin: 0 auto;
+    display: block;
+}

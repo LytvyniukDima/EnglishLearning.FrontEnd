@@ -1,7 +1,40 @@
-<div class="col-9 container-videos" #scroll (scroll)="onScroll()">
-  <div class="row justify-content-around" id="scroll2">
-    <div *ngFor="let video of videoList">
-      <app-video-list-card [videoInfo]="video"></app-video-list-card>
+<div class="row">
+  <div class="col-3 container-filter">
+    <div class="col">
+      <div class="filter-header">
+        <h3>Filter</h3>
+      </div>
+      <fieldset class="form-group" *ngIf="videoFilter">
+        <h5>EnglishLevels</h5>
+        <div class="form-check" *ngFor="let englishLevel of englishLevelsKeys">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" [value]="englishLevel"
+              (change)="onChagedEnglishLevelBox($event)">
+            {{englishLevel}} ({{ videoFilter.englishLevelFilterResult.filterOptions[englishLevel] }})
+          </label>
+        </div>
+      </fieldset>
+      <hr>
+      <fieldset class="form-group">
+        <h5>Video types</h5>
+        <div class="form-check" *ngFor="let videoType of videoTypesKeys">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" [value]="videoType"
+              (change)="onChangedGrammarPartBox($event)">
+            {{videoType}} ({{this.videoFilter.videoTypeFilterResult.filterOptions[videoType]}})
+          </label>
+        </div>
+      </fieldset>
+      <hr>
+      <button type="button" class="btn btn-info" id="search-btn" (click)="onSearch()">Search</button>
+    </div>
+  </div>
+
+  <div class="col-9 container-videos" #scroll (scroll)="onScroll()">
+    <div class="row justify-content-around" id="scroll2">
+      <div *ngFor="let video of videoList">
+        <app-video-list-card [videoInfo]="video"></app-video-list-card>
+      </div>
     </div>
   </div>
 </div>
