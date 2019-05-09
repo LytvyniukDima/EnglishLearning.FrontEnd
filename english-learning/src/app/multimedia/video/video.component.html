@@ -1,3 +1,22 @@
-<p>
-  video works!
-</p>
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+        <div class="title-container">
+            <h1>{{videoModel.title}}</h1>
+        </div>
+        <div class="video-container">
+            <iframe width="680" height="480" [src]="videoUrl" frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+
+            <!-- <img src="https://img.youtube.com/vi/7NP2ZkY8QZw/0.jpg"
+                alt="Grapefruit slice atop a pile of other slices" /> -->
+        </div>
+        <div class="transription-container">
+            <h3>Transription</h3>
+            <div class="transcription-text">
+                <p *ngFor="let line of transcription">{{line}}</p>
+            </div>
+        </div>
+    </div>
+</div>
