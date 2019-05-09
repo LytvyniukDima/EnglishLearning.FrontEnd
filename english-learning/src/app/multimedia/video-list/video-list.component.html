@@ -20,7 +20,7 @@
         <div class="form-check" *ngFor="let videoType of videoTypesKeys">
           <label class="form-check-label">
             <input class="form-check-input" type="checkbox" [value]="videoType"
-              (change)="onChangedGrammarPartBox($event)">
+              (change)="onChangedVideoTypeBox($event)">
             {{videoType}} ({{this.videoFilter.videoTypeFilterResult.filterOptions[videoType]}})
           </label>
         </div>
@@ -31,6 +31,10 @@
   </div>
 
   <div class="col-9 container-videos" #scroll (scroll)="onScroll()">
+    <div class="search-container">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" (change)="onChangeSearchField($event)">
+    </div>
+
     <div class="row justify-content-around" id="scroll2">
       <div *ngFor="let video of videoList">
         <app-video-list-card [videoInfo]="video"></app-video-list-card>
