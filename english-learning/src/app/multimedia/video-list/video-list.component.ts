@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EnglishVideoModel } from '../models/EnglishVideoModel';
+import { MultimediaService } from '../services/multimedia.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-video-list',
@@ -7,15 +9,25 @@ import { EnglishVideoModel } from '../models/EnglishVideoModel';
   styleUrls: ['./video-list.component.css']
 })
 export class VideoListComponent implements OnInit {
-  public videoModel = new EnglishVideoModel;
+  public videoList: EnglishVideoModel[];
 
-  constructor() { }
+  constructor(private multimediaService: MultimediaService) { }
 
   ngOnInit() {
-    this.videoModel.id = 'dskd';
-    this.videoModel.videoType = 'Trailer';
-    this.videoModel.title = 'Spider-Man: Into the Spider-Verse Trailer';
-    this.videoModel.englishLevel = 'Intermediate';
-    this.videoModel.apiId = 'pphn8cJSApo';
+    this.getVideos();
+  }
+
+  getVideos() {
+    this.multimediaService.getRandomFullVideosList().subscribe(data => {
+      console.log(data);
+      this.videoList = data;
+    },
+      (err: HttpErrorResponse) => {
+        if (err.error instanceof Error) {
+          console.log('An error occurred:', err.error.message);
+        } else {
+          console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
+        }
+      })
   }
 }

@@ -1,1 +1,7 @@
-<app-video-list-card [videoInfo]="videoModel"></app-video-list-card>
+<div class="col-9 container-videos" #scroll (scroll)="onScroll()">
+  <div class="row justify-content-around" id="scroll2">
+    <div *ngFor="let video of videoList">
+      <app-video-list-card [videoInfo]="video"></app-video-list-card>
+    </div>
+  </div>
+</div>

@@ -16,6 +16,7 @@ export class VideoListCardComponent implements OnInit {
   constructor(private router: Router, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
+    console.log(this.videoInfo);
     if (this.videoInfo.englishLevel === 'None')
       this.videoInfo.englishLevel = 'For all levels';
 
