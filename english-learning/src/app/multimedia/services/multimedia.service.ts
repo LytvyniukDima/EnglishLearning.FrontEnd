@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { environment } from './../../../environments/environment';
 import { EnglishVideoModel } from '../models/EnglishVideoModel';
 import { EnglishVideoFullFilterModel } from '../models/EnglishVideoFullFilterModel';
+import { EnglishTextModel } from '../models/EnglishTextModel';
+import { EnglishTextInfoModel } from '../models/EnglishTextInfoModel';
+import { EnglishTextFullFilterModel } from '../models/EnglishTextFullFilterModel';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +16,11 @@ export class MultimediaService {
   private readonly videosFullPath: string;
   private readonly videosFiltersPath: string;
   private readonly videosRandomSearchPath: string;
+
+  private readonly textRandomInfoPath: string;
+  private readonly textFullPath: string;
+  private readonly textFiltersPath: string;
+  private readonly textRandomSearchPath: string;
 
   private readonly apiBaseUrl: string;
 
@@ -28,6 +36,11 @@ export class MultimediaService {
     this.videosFullPath = this.apiBaseUrl.concat('/api/multimedia/video');
     this.videosFiltersPath = this.apiBaseUrl.concat('/api/multimedia/filters/video/full');
     this.videosRandomSearchPath = this.apiBaseUrl.concat('/api/multimedia/random/search/video');
+    
+    this.textRandomInfoPath = this.apiBaseUrl.concat('/api/multimedia/random/info/text');
+    this.textFullPath = this.apiBaseUrl.concat('/api/multimedia/text');
+    this.textFiltersPath = this.apiBaseUrl.concat('/api/multimedia/filters/text/full');
+    this.textRandomSearchPath = this.apiBaseUrl.concat('/api/multimedia/random/info/search/text');
   }
 
   getRandomFullVideosList(count = 30) {
@@ -67,77 +80,40 @@ export class MultimediaService {
     return this.http.get<EnglishVideoModel[]>(uri);
   }
 
-  onScroll() {
-    let element: HTMLElement = document.getElementById('scroll2');
-    console.log(element)
+  getRandomInfoTextsList(count = 30) {
+    let uri = this.textRandomInfoPath.concat('/' + count.toString());
 
-    let scrollFunc = function (node: HTMLElement): HTMLElement {
-      if (node.parentElement == null) {
-        return node;
-      }
-
-      if (node.scrollHeight > node.clientHeight) {
-        return node;
-      } else {
-        return scrollFunc(node.parentElement);
-      }
-    }
-
-    let newScrollParent = scrollFunc(element);
-
-    let scrolledValue = newScrollParent.scrollTop + newScrollParent.clientHeight;
-    let maxScroll = newScrollParent.scrollHeight - 20;
-
-    if (scrolledValue > this.scrolledValue && scrolledValue > maxScroll && !this.isScrolling) {
-      console.log("needScroll");
-      this.isScrolling = true;
-      this.onScrollLoad();
-    }
-    this.scrolledValue = scrolledValue;
+    return this.http.get<EnglishTextInfoModel[]>(uri);
   }
 
-  getScrollParent(node) {
-    if (node.parentNode == null) {
-      return node;
-    }
+  getFullTextById(id: string) {
+    let uri = this.textFullPath.concat('/' + id);
 
-    if (node.scrollHeight > node.clientHeight) {
-      return node;
-    } else {
-      return this.getScrollParent(node.parentNode);
-    }
+    return this.http.get<EnglishTextModel>(uri);
   }
 
-  onScrollLoad() {
-    if (this.englishLevelsFromSearch.length > 0 || this.grammarPartsFromSearch.length > 0) {
-      this.tasksService.getFilteredRandomInfoTasks(this.englishLevelsFromSearch, this.grammarPartsFromSearch).subscribe(data => {
-        this.taskInfoList = this.taskInfoList.concat(data);
-        this.tasksMapper.fixNamingsForInfoModels(this.taskInfoList);
-        this.isScrolling = false;
-      },
-        (err: HttpErrorResponse) => {
-          this.isScrolling = false;
-          if (err.error instanceof Error) {
-            console.log('An error occurred:', err.error.message);
-          } else {
-            console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
-          }
-        })
-    } else {
-      this.tasksService.getRandomTasksInfoList().subscribe(data => {
-        this.taskInfoList = this.taskInfoList.concat(data);
-        console.log(this.taskInfoList);
-        this.tasksMapper.fixNamingsForInfoModels(this.taskInfoList);
-        this.isScrolling = false;
-      },
-        (err: HttpErrorResponse) => {
-          this.isScrolling = false;
-          if (err.error instanceof Error) {
-            console.log('An error occurred:', err.error.message);
-          } else {
-            console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
-          }
-        });
+  getFullTextFilter() {
+      return this.http.get<EnglishTextFullFilterModel>(this.textFiltersPath);
+  }
+
+  getFilteredRandomTexts(phrase: string, englishLevels: string[], textTypes: string[], count = 30) {
+    let uri = this.textRandomInfoPath.concat('/' + count.toString() + '?');
+
+    if (phrase && phrase.length > 0) {
+        uri = uri.concat('phrase=' + phrase + '&');
     }
+
+    englishLevels.forEach((value) => {
+        uri = uri.concat('englishLevel=' + value + '&');
+    })
+
+    textTypes.forEach((value) => {
+      uri = uri.concat('textType=' + value + '&');
+    })
+
+    if (uri.endsWith('&'))
+        uri = uri.substring(0, uri.length - 1);
+
+    return this.http.get<EnglishTextInfoModel[]>(uri);
   }
 }

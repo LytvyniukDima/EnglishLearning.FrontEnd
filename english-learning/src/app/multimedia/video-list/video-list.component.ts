@@ -3,7 +3,6 @@ import { EnglishVideoModel } from '../models/EnglishVideoModel';
 import { MultimediaService } from '../services/multimedia.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { EnglishVideoFullFilterModel } from '../models/EnglishVideoFullFilterModel';
-import { stringify } from '@angular/core/src/util';
 
 @Component({
   selector: 'app-video-list',
