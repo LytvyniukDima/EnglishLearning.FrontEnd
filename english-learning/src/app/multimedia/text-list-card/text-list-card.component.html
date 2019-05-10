@@ -1,3 +1,8 @@
-<p>
-  text-list-card works!
-</p>
+<div (click)='routing()' class="card" style="max-width: 23rem; margin-right: 10px; margin-bottom: 30px;">
+  <div class="card-body">
+    <h5 class="card-title">{{textInfo.headline}}</h5>
+    <p class="card-text">{{textInfo.textType}}</p>
+    <p class="card-text"><small class="text-muted">{{textInfo.englishLevel}}</small></p>
+  </div>
+  <img [src]="imgUrl" class="card-img-top" alt="...">
+</div>
