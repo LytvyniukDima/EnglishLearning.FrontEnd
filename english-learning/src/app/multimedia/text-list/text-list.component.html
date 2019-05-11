@@ -1,3 +1,44 @@
-<p>
-  text-list works!
-</p>
+<div class="row">
+  <div class="col-3 container-filter">
+    <div class="col">
+      <div class="filter-header">
+        <h3>Filter</h3>
+      </div>
+      <fieldset class="form-group" *ngIf="textFilter">
+        <h5>EnglishLevels</h5>
+        <div class="form-check" *ngFor="let englishLevel of englishLevelsKeys">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" [value]="englishLevel"
+              (change)="onChagedEnglishLevelBox($event)">
+            {{englishLevel}} ({{ textFilter.englishLevelFilterOptions.filterOptions[englishLevel] }})
+          </label>
+        </div>
+      </fieldset>
+      <hr>
+      <fieldset class="form-group">
+        <h5>Text types</h5>
+        <div class="form-check" *ngFor="let textType of textTypesKeys">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" [value]="textType"
+              (change)="onChangedTextTypeBox($event)">
+            {{textType}} ({{this.textFilter.textTypeFilterOptions.filterOptions[textType]}})
+          </label>
+        </div>
+      </fieldset>
+      <hr>
+      <button type="button" class="btn btn-info" id="search-btn" (click)="onSearch()">Search</button>
+    </div>
+  </div>
+
+  <div class="col-9 container-texts" #scroll (scroll)="onScroll()">
+    <div class="search-container">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" (change)="onChangeSearchField($event)">
+    </div>
+
+    <div class="row justify-content-around" id="scroll2">
+      <div *ngFor="let text of textList">
+        <app-text-list-card [textInfo]="text"></app-text-list-card>
+      </div>
+    </div>
+  </div>
+</div>

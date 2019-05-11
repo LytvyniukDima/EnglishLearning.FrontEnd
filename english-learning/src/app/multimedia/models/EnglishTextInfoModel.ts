@@ -1,6 +1,6 @@
 export class EnglishTextInfoModel {
     id: string;
-    headline: string;
+    headLine: string;
     textType: string;
     englishLevel: string;
 }

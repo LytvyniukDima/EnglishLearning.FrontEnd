@@ -97,7 +97,7 @@ export class MultimediaService {
   }
 
   getFilteredRandomTexts(phrase: string, englishLevels: string[], textTypes: string[], count = 30) {
-    let uri = this.textRandomInfoPath.concat('/' + count.toString() + '?');
+    let uri = this.textRandomSearchPath.concat('/' + count.toString() + '?');
 
     if (phrase && phrase.length > 0) {
         uri = uri.concat('phrase=' + phrase + '&');

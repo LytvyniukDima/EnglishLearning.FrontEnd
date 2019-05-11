@@ -21,4 +21,7 @@ export class TextListCardComponent implements OnInit {
     this.imgUrl = this.sanitizer.bypassSecurityTrustResourceUrl('...');
   }
 
+  routing() {
+    this.router.navigate([`/multimedia/text/${this.textInfo.id}`]);
+  }
 }
