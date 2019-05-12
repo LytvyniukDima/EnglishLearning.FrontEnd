@@ -18,9 +18,6 @@
           <a class="dropdown-item" routerLink="multimedia/text_list">Texts</a>
         </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="" tabindex="-1" aria-disabled="true">Disabled</a>
-      </li>
     </ul>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item" *ngIf="!authService.isAuthentificated">
@@ -29,8 +26,29 @@
       <li class="nav-item" *ngIf="!authService.isAuthentificated">
           <a class="nav-link" routerLink="sign_up" *ngIf="!authService.isAuthentificated">Sign Up</a>
       </li>
-      <li class="nav-item" *ngIf="authService.isAuthentificated">
-          <a class="nav-link" (click)="authService.logout()" >Sign Out</a>
+      <!-- <li class="nav-item" *ngIf="authService.isAuthentificated">
+          <a class="nav-link" (click)="authService.logout()" >
+            <i class="material-icons">face</i>
+          </a>
+      </li> -->
+      <li class="nav-item dropdown personal-cabinet" *ngIf="authService.isAuthentificated">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="material-icons">account_circle</i>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" routerLink="multimedia/video_list" data-toggle="tooltip" data-placement="right" title="" data-original-title="Statistic">
+            <div class="dropdown-content">
+              <i class="material-icons">data_usage</i>
+              <span class="users-dropdown"><strong>Statistic</strong></span>
+            </div>
+          </a>
+          <a class="dropdown-item" (click)="authService.logout()" data-toggle="tooltip" data-placement="right" title="" data-original-title="Sign Out">
+            <div class="dropdown-content">
+              <i class="material-icons">exit_to_app</i>
+              <span class="users-dropdown"><strong>Sing Out</strong></span>
+            </div>
+          </a>
+        </div>
       </li>
     </ul>
   </div>
