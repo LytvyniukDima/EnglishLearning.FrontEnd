@@ -9,6 +9,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AuthorizationModule } from './authorization/authorization.module';
 import { TasksModule } from './tasks/tasks.module';
 import { MultimediaModule } from './multimedia/multimedia.module';
+import { StatisticModule } from './statistic/statistic.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { MultimediaModule } from './multimedia/multimedia.module';
     AppRoutingModule,
     AuthorizationModule,
     TasksModule,
-    MultimediaModule
+    MultimediaModule,
+    StatisticModule
   ],
   providers: [
     
