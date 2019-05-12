@@ -1,0 +1,18 @@
+<div class="full-container">
+  <div class="header-container">
+    <h5>
+      {{completedStatistic.date.day}}/{{completedStatistic.date.month}}/{{completedStatistic.date.year}}
+    </h5>
+  </div>
+  <div class="content-container">
+    <table class="table table-hover">
+      <tbody>
+        <tr [class]="getContentClass(completedStatisticItem)" *ngFor="let completedStatisticItem of completedStatistic.completedStatistics">
+          <th scope="row" class="type-cell">{{completedStatisticItem.type}}</th>
+          <td class="english-level-cell">{{completedStatisticItem.englishLevel}}</td>
+          <td class="message-cell">{{completedStatisticItem.message}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

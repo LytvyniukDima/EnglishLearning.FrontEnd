@@ -1,3 +1,13 @@
-<p>
-  completed-statistic works!
-</p>
+<div class="row">
+  <div class="col-2"></div>
+  <div class="col-8">
+    <div class="header-container">
+      <h3>Your completed tasks, and watched multimedia</h3>
+    </div>
+    <div class="content-container">
+      <div *ngFor="let completedStatisticItem of completedStatistic">
+        <app-completed-statistic-item [completedStatistic]="completedStatisticItem"></app-completed-statistic-item>
+      </div>
+    </div>
+  </div>
+</div>
