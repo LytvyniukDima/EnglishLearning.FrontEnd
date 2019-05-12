@@ -13,6 +13,7 @@ import { TaskCorrectOptionComponent } from './task-correct-option/task-correct-o
 import { TaskCorrectOptionItemComponent } from './task-correct-option-item/task-correct-option-item.component';
 import { TasksService } from './services/tasks.service';
 import { TasksMapperService } from './services/tasks-mapper.service';
+import { TasksStatisticService } from './services/tasks-statistic.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { TasksMapperService } from './services/tasks-mapper.service';
   ],
   providers: [
     TasksService,
-    TasksMapperService
+    TasksMapperService,
+    TasksStatisticService
   ]
 })
 export class TasksModule { }

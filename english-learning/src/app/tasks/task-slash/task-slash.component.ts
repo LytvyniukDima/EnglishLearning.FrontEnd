@@ -3,6 +3,11 @@ import { EnglishTaskModel } from '../models/EnglishTaskModel';
 import { EnglishTaskSlashModel } from '../models/EnglishTaskSlashModel';
 import { EnglishTaskSlashItem } from '../models/EnglishTaskSlashItem';
 import { EnglishTaskResult } from '../models/EnglishTaskResult';
+import { TasksMapperService } from '../services/tasks-mapper.service';
+import { TasksStatisticService } from '../services/tasks-statistic.service';
+import { AuthService } from 'src/app/authorization/serives/auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { CompletedEnglishTaskCreationModel } from '../models/CompletedEnglishTaskCreationModel';
 
 @Component({
   selector: 'app-task-slash',
@@ -17,7 +22,11 @@ export class TaskSlashComponent implements OnInit {
   answers: number[][];
   resultModel = new EnglishTaskResult();
 
-  constructor() { }
+  constructor(
+    private authService: AuthService, 
+    private statisticService: TasksStatisticService,
+    private taskMapper: TasksMapperService
+  ) { }
 
   ngOnInit() {
     this.usersAnswers = new Array(this.task.count);
@@ -118,5 +127,30 @@ export class TaskSlashComponent implements OnInit {
     } else {
       this.resultModel.headerMessage = "Good Try!"
     }
+  }
+
+  onCompleted() {
+    console.log('completed')
+    if (!this.authService.isAuthentificated)
+      return;
+
+    let completedTask = new CompletedEnglishTaskCreationModel();
+    completedTask.contentId = this.task.id;
+    completedTask.englishLevel = this.task.englishLevel;
+    completedTask.date = new Date(Date.now());
+    completedTask.grammarPart = this.taskMapper.parseGrammarPart(this.task.grammarPart);
+    completedTask.correctAnswers = this.resultModel.correct;
+    completedTask.incorrectAnswers = this.resultModel.incorrect;
+
+    this.statisticService.createCompletedEnglishTask(completedTask).subscribe(data => {
+
+    },
+      (err: HttpErrorResponse) => {
+        if (err.error instanceof Error) {
+          console.log('An error occurred:', err.error.message);
+        } else {
+          console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
+        }
+      })
   }
 }

@@ -3,6 +3,11 @@ import { EnglishTaskModel } from '../models/EnglishTaskModel';
 import { EnglishTaskBracketsModel } from '../models/EnglishTaskBracketsModel';
 import { EnglishTaskResult } from '../models/EnglishTaskResult';
 import { EnglishTaskBracketsItem } from '../models/EnglishTaskBracketsItem';
+import { AuthService } from 'src/app/authorization/serives/auth.service';
+import { TasksStatisticService } from '../services/tasks-statistic.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { CompletedEnglishTaskCreationModel } from '../models/CompletedEnglishTaskCreationModel';
+import { TasksMapperService } from '../services/tasks-mapper.service';
 
 @Component({
   selector: 'app-task-brackets',
@@ -17,7 +22,10 @@ export class TaskBracketsComponent implements OnInit {
   answers: string[][];
   resultModel = new EnglishTaskResult();
 
-  constructor() { }
+  constructor(
+    private authService: AuthService, 
+    private statisticService: TasksStatisticService,
+    private taskMapper: TasksMapperService) { }
 
   ngOnInit() {
     this.usersAnswers = new Array(this.task.count);
@@ -45,35 +53,35 @@ export class TaskBracketsComponent implements OnInit {
 
           if (targetPosition === 0) {
             let contentItem = new EnglishTaskBracketsItem();
-            contentItem.isOption =  false;
+            contentItem.isOption = false;
             contentItem.content = line.substring(2, line.length);
 
             itemsArray.push(targetItem);
             itemsArray.push(contentItem);
           } else {
             let contentItemFirst = new EnglishTaskBracketsItem();
-            contentItemFirst.isOption =  false;
+            contentItemFirst.isOption = false;
             contentItemFirst.content = line.substring(0, targetPosition);
 
             itemsArray.push(contentItemFirst);
             itemsArray.push(targetItem);
-            
+
             if (targetPosition + 2 < line.length) {
               let contentItemSecond = new EnglishTaskBracketsItem();
-              contentItemSecond.isOption =  false;
+              contentItemSecond.isOption = false;
               contentItemSecond.content = line.substring(targetPosition + 2, line.length);
 
               itemsArray.push(contentItemSecond);
             }
           }
-        } 
+        }
         else {
           let item = new EnglishTaskBracketsItem();
           item.isOption = false;
           item.content = line;
 
           itemsArray.push(item);
-        } 
+        }
 
         englishTaskBracketsModel.items.push(itemsArray);
       }
@@ -119,7 +127,7 @@ export class TaskBracketsComponent implements OnInit {
         this.resultModel.correct++;
       } else {
         this.resultModel.incorrect++;
-        
+
         let correctAnswear = `${i + 1}. correct answer - ${this.answers[i][0]}`;
         this.resultModel.additionalMessages.push(correctAnswear);
       }
@@ -130,5 +138,30 @@ export class TaskBracketsComponent implements OnInit {
     } else {
       this.resultModel.headerMessage = "Good Try!"
     }
+  }
+
+  onCompleted() {
+    console.log('completed')
+    if (!this.authService.isAuthentificated)
+      return;
+
+    let completedTask = new CompletedEnglishTaskCreationModel();
+    completedTask.contentId = this.task.id;
+    completedTask.englishLevel = this.task.englishLevel;
+    completedTask.date = new Date(Date.now());
+    completedTask.grammarPart = this.taskMapper.parseGrammarPart(this.task.grammarPart);
+    completedTask.correctAnswers = this.resultModel.correct;
+    completedTask.incorrectAnswers = this.resultModel.incorrect;
+
+    this.statisticService.createCompletedEnglishTask(completedTask).subscribe(data => {
+
+    },
+      (err: HttpErrorResponse) => {
+        if (err.error instanceof Error) {
+          console.log('An error occurred:', err.error.message);
+        } else {
+          console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
+        }
+      })
   }
 }
