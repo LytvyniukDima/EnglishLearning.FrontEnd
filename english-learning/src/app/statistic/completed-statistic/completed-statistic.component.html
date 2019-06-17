@@ -11,7 +11,22 @@
       </div>
     </div>
     <div class="col-6">
-      <app-tasks-correctness-statistic [tasksCorrectness]="fullStatistic.tasksCorrectnessStatistic"></app-tasks-correctness-statistic>
+      <app-tasks-correctness-statistic [tasksCorrectness]="fullStatistic.tasksCorrectnessStatistic">
+      </app-tasks-correctness-statistic>
+    </div>
+    <div class="row top-list">
+      <div class="col-6">
+        <h3>Your favourites types of videos:</h3>
+        <div *ngFor="let topVideoType of topVideoTypes; let i = index">
+          <h4>{{i + 1}}. {{topVideoType}}</h4>
+        </div>
+      </div>
+      <div class="col-6">
+        <h3>Your favourites types of texts:</h3>
+        <div *ngFor="let topTextType of topTextTypes; let i = index">
+            <h4>{{i + 1}}. {{topTextType}}</h4>
+          </div>
+      </div>
     </div>
     <div class="header-container">
       <h3>Your completed tasks, and watched multimedia</h3>

@@ -12,6 +12,8 @@ import { FullStatisticModel } from '../models/FullStatisticModel';
 export class CompletedStatisticComponent implements OnInit {
   completedStatistic: GroupedCompletedStatisticModel[];
   fullStatistic: FullStatisticModel;
+  topVideoTypes: string[];
+  topTextTypes: string[];
 
   constructor(private completedStatisticService: CompletedStatisticService) { }
 
@@ -25,6 +27,7 @@ export class CompletedStatisticComponent implements OnInit {
 
       this.completedStatistic = data.groupedCompletedStatistic;
       this.fullStatistic = data;
+      this.setStatisticData(this.fullStatistic);
     },
       (err: HttpErrorResponse) => {
         if (err.error instanceof Error) {
@@ -33,5 +36,43 @@ export class CompletedStatisticComponent implements OnInit {
           console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
         }
       });
+  }
+
+  setStatisticData(fullStatistic: FullStatisticModel) {
+    this.topVideoTypes = [];
+    this.topTextTypes = [];
+
+    let topVideoTypes = fullStatistic.perVideoTypeStatistic;
+    let topTextTypes = fullStatistic.perTextTypeStatistic;
+
+    topVideoTypes = topVideoTypes
+      .sort(function (a, b) {
+        if (a.count > b.count) {
+          return 1;
+        }
+        if (a.count < b.count) {
+          return -1;
+        }
+        return 0;
+      })
+      .reverse();
+
+    topTextTypes
+      .sort(function (a, b) {
+        if (a.count > b.count) {
+          return 1;
+        }
+        if (a.count < b.count) {
+          return -1;
+        }
+        return 0;
+      })
+      .reverse()
+
+      for (let i = 0; i < 3; i++)
+        this.topVideoTypes.push(topVideoTypes[i].contentType);
+
+      for (let i = 0; i < 3; i++)
+        this.topTextTypes.push(topTextTypes[i].contentType);
   }
 }
