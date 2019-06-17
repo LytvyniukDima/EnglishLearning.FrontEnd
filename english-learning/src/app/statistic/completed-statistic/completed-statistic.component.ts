@@ -18,10 +18,10 @@ export class CompletedStatisticComponent implements OnInit {
   }
 
   getCompletedStatistic() {
-    this.completedStatisticService.getCompletedStatistic().subscribe(data => {
+    this.completedStatisticService.getFullStatistic().subscribe(data => {
       console.log(data);
 
-      this.completedStatistic = data;
+      this.completedStatistic = data.groupedCompletedStatistic;
     },
       (err: HttpErrorResponse) => {
         if (err.error instanceof Error) {
