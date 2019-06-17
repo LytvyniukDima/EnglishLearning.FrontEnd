@@ -53,7 +53,8 @@ export class TextComponent implements OnInit {
     completedMultimedia.date = new Date(Date.now());
     completedMultimedia.tittle = this.textModel.headLine;
     completedMultimedia.multimediaType = MultimediaType[MultimediaType.Text];
-
+    completedMultimedia.contentType = this.textModel.textType;
+    
     this.statisticService.createCompletedEnglishMultimedia(completedMultimedia).subscribe(data => {
 
     },

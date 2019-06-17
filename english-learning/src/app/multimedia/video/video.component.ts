@@ -57,7 +57,8 @@ export class VideoComponent implements OnInit {
     completedMultimedia.date = new Date(Date.now());
     completedMultimedia.tittle = this.videoModel.title;
     completedMultimedia.multimediaType = MultimediaType[MultimediaType.Video];
-
+    completedMultimedia.contentType = this.videoModel.videoType;
+    
     this.statisticService.createCompletedEnglishMultimedia(completedMultimedia).subscribe(data => {
 
     },

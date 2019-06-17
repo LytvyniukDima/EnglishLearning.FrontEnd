@@ -21,6 +21,8 @@
     "@angular/platform-browser-dynamic": "^7.2.13",
     "@angular/router": "^7.2.13",
     "@ng-bootstrap/ng-bootstrap": "^4.1.1",
+    "@types/chart.js": "^2.7.54",
+    "chart.js": "^2.8.0",
     "core-js": "^2.5.4",
     "jwt-decode": "^2.2.0",
     "rxjs": "^6.0.0",

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CompletedStatisticService } from '../services/completed-statistic.service';
 import { GroupedCompletedStatisticModel } from '../models/GroupedCompletedStatisticModel';
 import { HttpErrorResponse } from '@angular/common/http';
+import { FullStatisticModel } from '../models/FullStatisticModel';
 
 @Component({
   selector: 'app-completed-statistic',
@@ -10,6 +11,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class CompletedStatisticComponent implements OnInit {
   completedStatistic: GroupedCompletedStatisticModel[];
+  fullStatistic: FullStatisticModel;
 
   constructor(private completedStatisticService: CompletedStatisticService) { }
 
@@ -22,6 +24,7 @@ export class CompletedStatisticComponent implements OnInit {
       console.log(data);
 
       this.completedStatistic = data.groupedCompletedStatistic;
+      this.fullStatistic = data;
     },
       (err: HttpErrorResponse) => {
         if (err.error instanceof Error) {

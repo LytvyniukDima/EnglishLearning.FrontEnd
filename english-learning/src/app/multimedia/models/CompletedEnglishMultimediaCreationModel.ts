@@ -4,4 +4,5 @@ export class CompletedEnglishMultimediaCreationModel {
     date: Date;
     tittle: string;
     multimediaType: string;
+    contentType: string;
 }
