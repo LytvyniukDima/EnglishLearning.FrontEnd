@@ -7,13 +7,15 @@ import { CompletedStatisticItemComponent } from './completed-statistic-item/comp
 import { CompletedStatisticService } from './services/completed-statistic.service';
 import { MultimediaLevelStatisticComponent } from './multimedia-level-statistic/multimedia-level-statistic.component';
 import { TasksLevelStatisticComponent } from './tasks-level-statistic/tasks-level-statistic.component';
+import { TasksCorrectnessStatisticComponent } from './tasks-correctness-statistic/tasks-correctness-statistic.component';
 
 @NgModule({
   declarations: [
     CompletedStatisticComponent, 
     CompletedStatisticItemComponent,
     MultimediaLevelStatisticComponent, 
-    TasksLevelStatisticComponent
+    TasksLevelStatisticComponent, 
+    TasksCorrectnessStatisticComponent
   ],
   imports: [
     CommonModule,
