@@ -30,7 +30,12 @@ export class TasksMapperService {
             "Present Continuous",
             'All Sentences',
             'Test',
-            'Present Simple and Present Continuous'
+            'Present Simple and Present Continuous',
+            "Future Plans",
+            "Question Tags",
+            "Possessive Adjectives",
+            "Suffixes",
+            "Present Perfect"
         ]
     }
 
@@ -60,6 +65,18 @@ export class TasksMapperService {
             }
             case 'PrSimpleAndPrContinuous': {
                 return 'Present Simple and Present Continuous'
+            }
+            case 'FuturePlans': {
+                return 'Future Plans'
+            }
+            case 'QuestionTags': {
+                return 'Question Tags'
+            }
+            case 'PossessiveAdjectives': {
+                return 'Possessive Adjectives'
+            }
+            case 'PRPerfect': {
+                return 'Present Perfect'
             }
             default: {
                 return grammarPart;
@@ -116,6 +133,21 @@ export class TasksMapperService {
             }
             case 'Present Simple and Present Continuous': {
                 return 'PrSimpleAndPrContinuous'
+            }
+            case 'Future Plans': {
+                return 'FuturePlans'
+            }
+            case 'Question Tags': {
+                return 'QuestionTags'
+            }
+            case 'Possessive Adjectives': {
+                return 'PossessiveAdjectives'
+            }
+            case 'Present Perfect': {
+                return 'PRPerfect'
+            }
+            default: {
+                return grammarPart;
             }
         }
     }

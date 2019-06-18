@@ -8,6 +8,7 @@ import { CompletedStatisticService } from './services/completed-statistic.servic
 import { MultimediaLevelStatisticComponent } from './multimedia-level-statistic/multimedia-level-statistic.component';
 import { TasksLevelStatisticComponent } from './tasks-level-statistic/tasks-level-statistic.component';
 import { TasksCorrectnessStatisticComponent } from './tasks-correctness-statistic/tasks-correctness-statistic.component';
+import { LastMonthStatisticComponent } from './last-month-statistic/last-month-statistic.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { TasksCorrectnessStatisticComponent } from './tasks-correctness-statisti
     CompletedStatisticItemComponent,
     MultimediaLevelStatisticComponent, 
     TasksLevelStatisticComponent, 
-    TasksCorrectnessStatisticComponent
+    TasksCorrectnessStatisticComponent, 
+    LastMonthStatisticComponent
   ],
   imports: [
     CommonModule,

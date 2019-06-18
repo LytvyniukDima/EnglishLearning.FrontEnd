@@ -1,0 +1,8 @@
+<div class="container-last-month-statistic">
+  <h3>Your last month activity</h3>
+  <div>
+    <div [hidden]="!chart">
+      <canvas id="canvas-last-month-statistic">{{ chart }}</canvas>
+    </div>
+  </div>
+</div>
