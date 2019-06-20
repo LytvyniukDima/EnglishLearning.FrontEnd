@@ -30,7 +30,7 @@ export class TextListCardComponent implements OnInit {
     switch(this.textInfo.textType)
     {
       case 'Poem': {
-        return '../../../assets/poem.png'
+        return '../../../assets/poem.jpg'
       }
       case 'Book Fragment': {
         return '../../../assets/book.jpg'
