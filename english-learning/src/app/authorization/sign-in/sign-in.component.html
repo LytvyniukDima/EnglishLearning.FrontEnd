@@ -23,6 +23,9 @@
             <div *ngIf="validationForm.controls['password'].invalid && (validationForm.controls['password'].dirty || validationForm.controls['password'].touched)">
               <p>Please enter correct password.</p>
             </div>
+            <div *ngIf="incorrecPassword">
+                <p>Incorrect passoword or email.</p>
+              </div>
           </div>
 
           <hr class="mb-4">

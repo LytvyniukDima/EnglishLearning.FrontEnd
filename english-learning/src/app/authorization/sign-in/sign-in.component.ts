@@ -13,12 +13,12 @@ import { AuthService } from '../serives/auth.service';
 export class SignInComponent implements OnInit {
   validationForm: FormGroup;
   confirmPassword = "";
-  differentPasswords = false;
+  incorrecPassword = false;
   
   constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) { 
     this.validationForm = this.fb.group({
       email: ['', [ Validators.required, Validators.email]],
-      password: ['', [ Validators.required, Validators.minLength(6), Validators.maxLength(40)]]
+      password: ['', [ Validators.required, Validators.maxLength(40)]]
     })
   }
 
@@ -26,21 +26,22 @@ export class SignInComponent implements OnInit {
   }
 
   onSignIn(): void {
+    this.incorrecPassword = false;
     let signInModel = this.createSignInModel();
 
     this.authService.signIn(signInModel).subscribe(data => {
       console.log(data);
       localStorage.setItem('token', data.toString());
+      this.router.navigate(['']);
     },
       (err: HttpErrorResponse) => {
         if (err.error instanceof Error) {
           console.log('An error occurred:', err.error.message);
         } else {
+          this.incorrecPassword = true;
           console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
         }
       })
-    
-    this.router.navigate(['']);
   }
 
   createSignInModel(): SignInModel {

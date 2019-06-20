@@ -14,6 +14,7 @@ export class SignUpComponent implements OnInit {
   validationForm: FormGroup;
   confirmPassword = "";
   differentPasswords = false;
+  userAlreadyExist = false;
 
   constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) { 
     this.validationForm = this.fb.group({
@@ -29,6 +30,7 @@ export class SignUpComponent implements OnInit {
   }
 
   onSignUp(): void {
+    this.userAlreadyExist = false;
     let password = this.validationForm.controls['password'].value;
     let confirmPassword = this.validationForm.controls['confirmPassword'].value;
     
@@ -40,16 +42,19 @@ export class SignUpComponent implements OnInit {
 
     let signUpModel = this.createSignUpModel();
 
-    this.authService.signUp(signUpModel).subscribe(data => { },
+    this.authService.signUp(signUpModel).subscribe(data => { 
+      this.router.navigate(['']);
+    },
       (err: HttpErrorResponse) => {
         if (err.error instanceof Error) {
           console.log('An error occurred:', err.error.message);
         } else {
+          if (err.status == 422) {
+            this.userAlreadyExist = true;
+          }
           console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
         }
       })
-    
-    this.router.navigate(['']);
   }
 
   createSignUpModel(): SignUpModel {
