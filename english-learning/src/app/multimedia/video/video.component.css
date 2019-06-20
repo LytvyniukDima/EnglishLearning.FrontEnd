@@ -13,4 +13,10 @@
 
 .transcription-text {
     padding-left: 10px;
+    height: 400px;
+    overflow-y: scroll;
+}
+
+.transription-container {
+    margin-top: 100px;
 }
