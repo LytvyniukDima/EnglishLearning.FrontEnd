@@ -8,8 +8,8 @@ export class FullStatisticModel {
     groupedCompletedStatistic: GroupedCompletedStatisticModel[];
     perDayStatistic: PerDayStatisticModel[];
 
-    perTasksLevelsStatistic: PerLevelStatisticModel[];
-    perMultimediaLevelsStatistic: PerLevelStatisticModel[];
+    perTasksEnglishLevelsStatistic: PerLevelStatisticModel[];
+    perMultimediaEnglishLevelsStatistic: PerLevelStatisticModel[];
 
     perTextTypeStatistic: PerMultimediaContentTypeStatisticModel[];
     perVideoTypeStatistic: PerMultimediaContentTypeStatisticModel[];
