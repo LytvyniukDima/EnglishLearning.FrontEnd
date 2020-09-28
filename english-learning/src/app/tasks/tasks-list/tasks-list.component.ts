@@ -126,7 +126,9 @@ export class TasksListComponent implements OnInit {
 
   onScroll() {
     let element: HTMLElement = document.getElementById('scroll2');
-    console.log(element)
+    if (element === null || element === undefined) {
+      return;
+    }
 
     let scrollFunc = function (node: HTMLElement): HTMLElement {
       if (node.parentElement == null) {
