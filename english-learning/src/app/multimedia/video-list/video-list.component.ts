@@ -21,7 +21,7 @@ export class VideoListComponent implements OnInit {
   public videoTypesMap = new Map();
   public englishLevelsMap = new Map();
 
-  @ViewChild('scroll') private scrollContainer: ElementRef;
+  @ViewChild('scroll', { static: true }) private scrollContainer: ElementRef;
   scrollParent: any;
 
   scrolledValue = 0;

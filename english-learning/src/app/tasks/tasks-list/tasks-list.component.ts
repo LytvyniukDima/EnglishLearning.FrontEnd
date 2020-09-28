@@ -21,7 +21,7 @@ export class TasksListComponent implements OnInit {
 
   needScroll: EventEmitter<any> = new EventEmitter();
 
-  @ViewChild('scroll') private scrollContainer: ElementRef;
+  @ViewChild('scroll', { static: true }) private scrollContainer: ElementRef;
   scrollParent: any;
 
   scrolledValue = 0;

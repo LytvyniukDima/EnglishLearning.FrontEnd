@@ -21,7 +21,7 @@ export class TextListComponent implements OnInit {
   public textTypesMap = new Map();
   public englishLevelsMap = new Map();
 
-  @ViewChild('scroll') private scrollContainer: ElementRef;
+  @ViewChild('scroll', { static: true }) private scrollContainer: ElementRef;
   scrollParent: any;
 
   scrolledValue = 0;

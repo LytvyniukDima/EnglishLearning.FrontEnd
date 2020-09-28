@@ -24,7 +24,6 @@ export class MultimediaService {
 
   private readonly apiBaseUrl: string;
 
-  @ViewChild('scroll') private scrollContainer: ElementRef;
   scrollParent: any;
 
   scrolledValue = 0;
