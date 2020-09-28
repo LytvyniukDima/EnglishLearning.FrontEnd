@@ -10,7 +10,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./task.component.css']
 })
 export class TaskComponent implements OnInit {
-  private task: EnglishTaskModel;
+  public task: EnglishTaskModel;
 
   constructor(
     private route: ActivatedRoute,
