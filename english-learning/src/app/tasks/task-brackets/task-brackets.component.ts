@@ -19,7 +19,7 @@ export class TaskBracketsComponent implements OnInit {
 
   models: EnglishTaskBracketsModel[];
   userResults: boolean[];
-  resultModel = new EnglishTaskResult();
+  resultModel = new EnglishTaskResult();;
 
   constructor(
     private authService: AuthService, 
@@ -42,6 +42,7 @@ export class TaskBracketsComponent implements OnInit {
   }
 
   onFinish() {
+    this.resultModel = new EnglishTaskResult();
     this.resultModel.correct = 0;
     this.resultModel.incorrect = 0;
 
@@ -50,6 +51,15 @@ export class TaskBracketsComponent implements OnInit {
         this.resultModel.correct++;
       } else {
         this.resultModel.incorrect++;
+
+        for (let j = 0; j < this.models[i].lines.length; j++) {
+          if (this.models[i].lines[j].answer === undefined || this.models[i].lines[j].answer.length === 0) {
+            continue;
+          }
+          
+          const message = `${i + 1}. correct answer - ${this.models[i].lines[j].answer[0]}`;
+          this.resultModel.additionalMessages.push(message);
+        }
       }
     }
 
