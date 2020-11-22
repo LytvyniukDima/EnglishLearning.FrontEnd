@@ -8,4 +8,7 @@ export class EnglishTaskModel {
     count: number;
     example: string;
     content: string;
+
+    answer: string;
+    text: string;
 }
