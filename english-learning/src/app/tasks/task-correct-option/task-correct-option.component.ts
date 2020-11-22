@@ -26,8 +26,8 @@ export class TaskCorrectOptionComponent implements OnInit {
     private taskMapper: TasksMapperService) { }
 
   ngOnInit() {
-    this.userResults = new Array(this.models.length);
     this.models = this.parseTask(this.task.content);
+    this.userResults = new Array(this.models.length);
   }
 
   parseTask(content: string): EnglishTaskCorrectOptionModel[] {
@@ -50,8 +50,9 @@ export class TaskCorrectOptionComponent implements OnInit {
         this.resultModel.correct++;
       } else {
         this.resultModel.incorrect++;
+        const answer = this.models[i].options[this.models[i].answer - 1];
 
-        const message = `${i + 1}. correct answer - ${this.models[i].answer}`;
+        const message = `${i + 1}. correct answer - ${answer}`;
         this.resultModel.additionalMessages.push(message);
       }
     }
