@@ -1,7 +1,6 @@
 import { EnglishTaskBracketsItem } from './EnglishTaskBracketsItem';
+import { EnglishTaskBracketsLineModel } from './EnglishTaskBracketsLineModel';
 
 export class EnglishTaskBracketsModel {
-    items: EnglishTaskBracketsItem[][] = [];
-    inBrackets: string;
-    answers: string[] = [];
+    lines: EnglishTaskBracketsLineModel[];
 }
