@@ -37,7 +37,7 @@ export class TaskBracketsComponent implements OnInit {
     return jObject as EnglishTaskBracketsModel[];
   }
 
-  onChangedAnswers(index: number, result: boolean) {
+  onChangedAnswers(result: boolean, index: number) {
     this.userResults[index] = result;
   }
 
