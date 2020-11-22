@@ -1,5 +1,5 @@
-export class EnglishTaskCorrectOptionModel {
-    items: string[] = [];
+export interface EnglishTaskCorrectOptionModel {
+    lines: string[];
     options: string[];
     answer: number;
 }
