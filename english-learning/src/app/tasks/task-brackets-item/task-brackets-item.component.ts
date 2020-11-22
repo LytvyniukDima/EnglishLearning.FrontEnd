@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { EnglishTaskBracketsItem } from '../models/EnglishTaskBracketsItem';
 import { EnglishTaskBracketsLineModel } from '../models/EnglishTaskBracketsLineModel';
 import { EnglishTaskBracketsModel } from '../models/EnglishTaskBracketsModel';
-import { EnglishTaskResultEvent } from '../models/EnglishTaskResultEvent';
 
 @Component({
   selector: 'app-task-brackets-item',
@@ -48,17 +47,18 @@ export class TaskBracketsItemComponent implements OnInit {
 
   private parseItems(taskLines: EnglishTaskBracketsLineModel[]): EnglishTaskBracketsItem[][] {
     const newItems: EnglishTaskBracketsItem[][] = [];
-    taskLines.forEach(element => {
-      const parsedItem = this.parseItem(element.content);
+    taskLines.forEach(line => {
+      const parsedItem = this.parseItem(line);
       newItems.push(parsedItem);
     });
 
     return newItems;
   }
 
-  private parseItem(item: string): EnglishTaskBracketsItem[] {
+  private parseItem(line: EnglishTaskBracketsLineModel): EnglishTaskBracketsItem[] {
     let newItems: EnglishTaskBracketsItem[] = [];
-    let optionPosition = item.indexOf("__");
+    const content = line.content;
+    let optionPosition = content.indexOf("__");
 
     if (optionPosition > -1) {
       let optionItem = new EnglishTaskBracketsItem();
@@ -69,20 +69,20 @@ export class TaskBracketsItemComponent implements OnInit {
 
         const contentItem = new EnglishTaskBracketsItem();
         contentItem.isOption = false;
-        contentItem.content = item.substring(2, item.length);
+        contentItem.content = content.substring(2, content.length);
         newItems.push(contentItem);
       } else {
         const contentItemFirst = new EnglishTaskBracketsItem();
         contentItemFirst.isOption = false;
-        contentItemFirst.content = item.substring(0, optionPosition);
+        contentItemFirst.content = content.substring(0, optionPosition);
 
         newItems.push(contentItemFirst);
         newItems.push(optionItem);
 
-        if (optionPosition + 2 < item.length) {
+        if (optionPosition + 2 < content.length) {
           const contentItemSecond = new EnglishTaskBracketsItem();
           contentItemSecond.isOption = false;
-          contentItemSecond.content = item.substring(optionPosition + 2, item.length);
+          contentItemSecond.content = content.substring(optionPosition + 2, content.length);
 
           newItems.push(contentItemSecond);
         }
@@ -91,9 +91,17 @@ export class TaskBracketsItemComponent implements OnInit {
     } else {
       const newItem = new EnglishTaskBracketsItem();
       newItem.isOption = false;
-      newItem.content = item;
+      newItem.content = content;
 
       newItems.push(newItem);
+    }
+
+    if(line.option !== undefined && line.option !== null) {
+      const bracketsItem = new EnglishTaskBracketsItem();
+      bracketsItem.isOption = false;
+      bracketsItem.content = `(${line.option})`;
+
+      newItems.push(bracketsItem);
     }
 
     return newItems;
