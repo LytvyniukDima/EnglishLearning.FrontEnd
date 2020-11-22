@@ -3,6 +3,7 @@ import { EnglishTaskModel } from '../models/EnglishTaskModel';
 import { ActivatedRoute } from '@angular/router';
 import { TasksService } from '../services/tasks.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-task',
@@ -10,7 +11,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./task.component.css']
 })
 export class TaskComponent implements OnInit {
-  public task: EnglishTaskModel;
+  public task$: Observable<EnglishTaskModel>;
 
   constructor(
     private route: ActivatedRoute,
@@ -20,17 +21,6 @@ export class TaskComponent implements OnInit {
   ngOnInit() {
     let id = this.route.snapshot.paramMap.get('id');
 
-    this.getTask(id);
-
-    console.log(this.task);
-  }
-
-  getTask = async (id) => {
-    await this.tasksService
-      .getFullTaskById(id)
-      .toPromise()
-      .then(data => {
-        this.task = data;
-      })
+    this.task$ = this.tasksService.getFullTaskById(id);
   }
 }
