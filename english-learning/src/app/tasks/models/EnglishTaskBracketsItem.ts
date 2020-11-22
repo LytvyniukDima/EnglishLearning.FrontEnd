@@ -1,4 +1,4 @@
-export class EnglishTaskBracketsItem {
+export interface EnglishTaskBracketsItem {
     isOption: boolean;
     content: string;
 }

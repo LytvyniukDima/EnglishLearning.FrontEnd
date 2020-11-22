@@ -1,4 +1,4 @@
-export class EnglishTaskBracketsLineModel {
+export interface EnglishTaskBracketsLineModel {
     content: string;
     option: string;
     answer: string;
