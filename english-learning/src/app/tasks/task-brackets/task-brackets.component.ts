@@ -17,7 +17,7 @@ import { EnglishTaskBracketsModel } from '../models/EnglishTaskBracketsModel';
 export class TaskBracketsComponent implements OnInit {
   @Input() task: EnglishTaskModel;
 
-  items: EnglishTaskBracketsModel[];
+  models: EnglishTaskBracketsModel[];
   userResults: boolean[];
   resultModel = new EnglishTaskResult();
 
@@ -28,7 +28,7 @@ export class TaskBracketsComponent implements OnInit {
 
   ngOnInit() {
     this.userResults = new Array(this.task.count);
-    this.items = this.parseTask(this.task.content);
+    this.models = this.parseTask(this.task.content);
   }
 
   parseTask(content: string): EnglishTaskBracketsModel[] {

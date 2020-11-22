@@ -1,18 +1,18 @@
 <div class="container">
-  <div *ngFor="let items of taskModel.items; let i = index">
+  <div *ngFor="let line of items; let lineIdex = index">
     <div class="row">
-      <div *ngFor="let item of items">
+      <div *ngFor="let item of line">
         <div class="sentence-item" *ngIf="!item.isOption">
           {{item.content}}
         </div>
       
         <div class="md-form" *ngIf="item.isOption">
-          <input type="text" id="form1" class="form-control" (change)="onInputChange($event)">
+          <input type="text" id="form1" class="form-control" (change)="onInputChange($event, lineIdex)">
         </div>
       </div>
     </div>
 
-    <div *ngIf="isIncorrectAnswer">
+    <div *ngIf="isIncorrectAnswer(lineIdex)">
       <p>Incorrect answer</p>
     </div>
   </div>
