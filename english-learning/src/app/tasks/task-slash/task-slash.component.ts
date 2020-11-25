@@ -52,7 +52,7 @@ export class TaskSlashComponent implements OnInit {
       } else {
         this.resultModel.incorrect++;
 
-        const message = `{i + 1}. correct answer - ${this.models[i].answers.join(',')}`;
+        const message = `${i + 1}. Incorrect answer`;
         this.resultModel.additionalMessages.push(message);
       }
     }
