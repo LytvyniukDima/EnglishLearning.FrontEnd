@@ -1,17 +1,19 @@
 <div class="container">
-  <div *ngFor="let items of taskModel.items; let i = index">
+  <div *ngFor="let items of allItems; let lineIndex = index">
     <div class="row">
       <div *ngFor="let item of items">
         <div class="sentence-item" *ngIf="!item.isOption">
           {{item.content}}
         </div>
-        <select class="custom-select sentence-dropdown" *ngIf="item.isOption" (change)="selectOption($event.target.value, i)">
+        <select class="custom-select sentence-dropdown" *ngIf="item.isOption" (change)="selectOption($event.target.value, lineIndex)">
           <option value=""></option>
-          <option *ngFor="let itemContent of item.content; let optionIndex = index" [value]="optionIndex + 1">{{itemContent}}</option>
+          <option *ngFor="let itemContent of item.content; let optionIndex = index" [value]="optionIndex + 1">
+            {{itemContent}}
+          </option>
         </select>
       </div>
     </div>
-    <div *ngIf="isIncorrectAnswers[i]">
+    <div *ngIf="isIncorrectAnswers[lineIndex]">
       <p>Incorrect answer</p>
     </div>
   </div>
