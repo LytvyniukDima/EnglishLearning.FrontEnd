@@ -17,8 +17,7 @@ export class TaskSlashComponent implements OnInit {
   @Input() task: EnglishTaskModel;
   
   models: EnglishTaskSlashModel[] = [];
-  usersAnswers: number[][];
-  answers: number[][];
+  userResults: boolean[];
   resultModel = new EnglishTaskResult();
 
   constructor(
@@ -28,9 +27,8 @@ export class TaskSlashComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.usersAnswers = new Array(this.task.count);
-    this.answers = new Array(this.task.count);
     this.models = this.parseTask(this.task);
+    this.userResults = new Array(this.models.length);
   }
 
   parseTask(task: EnglishTaskModel): EnglishTaskSlashModel[] {
@@ -39,22 +37,23 @@ export class TaskSlashComponent implements OnInit {
     return jObject as EnglishTaskSlashModel[];
   }
 
-  onChangedAnswers(answer: number[], index: number) {
-    this.usersAnswers[index] = answer;
+  onChangedAnswers(result: boolean, index: number) {
+    this.userResults[index] = result;
   }
 
   onFinish() {
+    this.resultModel = new EnglishTaskResult();
     this.resultModel.correct = 0;
     this.resultModel.incorrect = 0;
 
-    console.log(this.answers);
-    for (let i = 0; i < this.answers.length; i++) {
-      for (let j = 0; j < this.answers[i].length; j++) {
-        if (this.answers[i][j] === this.usersAnswers[i][j]) {
-          this.resultModel.correct++;
-        } else {
-          this.resultModel.incorrect++;
-        }
+    for (let i = 0; i < this.userResults.length; i++) {
+      if (this.userResults[i]) {
+        this.resultModel.correct++;
+      } else {
+        this.resultModel.incorrect++;
+
+        const message = `{i + 1}. correct answer - ${this.models[i].answers.join(',')}`;
+        this.resultModel.additionalMessages.push(message);
       }
     }
 
