@@ -1,6 +1,4 @@
-import { EnglishTaskSlashItem } from './EnglishTaskSlashItem';
-
-export class EnglishTaskSlashModel {
-    items: EnglishTaskSlashItem[][] = [];
-    answers: number[] = [];
+export interface EnglishTaskSlashModel {
+    lines: string[];
+    answers: number[];
 }
