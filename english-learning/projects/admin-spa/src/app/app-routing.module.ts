@@ -9,7 +9,12 @@ const routes: Routes = [
   { 
     path: '',
     canActivate: [AdminGuardService],
-    component: NavbarComponent
+    children: [
+      {
+         path: 'uploaded-files',
+         loadChildren: () => import('./uploaded-files/uploaded-files.module').then(m => m.UploadedFilesModule)
+      }
+    ]
   },
   { path: 'sign_in', component: SignInComponent },
   { path: 'sign_up', component: SignUpComponent }
