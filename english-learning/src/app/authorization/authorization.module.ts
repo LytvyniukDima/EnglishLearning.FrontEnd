@@ -8,20 +8,31 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthorizationRoutingModule } from './authorization-routing.module';
 import { AuthInterceptor } from './serives/auth.interceptor';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtModule } from '@auth0/angular-jwt';
+import { environment } from 'src/environments/environment';
+import { AdminGuardService } from './serives/admin-guard.service';
+import { ForbiddenPageComponent } from './forbidden-page/forbidden-page.component';
 
 @NgModule({
   declarations: [
     SignInComponent,
     SignUpComponent,
+    ForbiddenPageComponent,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     AuthorizationRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        allowedDomains: [environment.ApiBaseUrl],
+      }
+    })
   ],
   providers: [
     AuthService,
+    AdminGuardService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

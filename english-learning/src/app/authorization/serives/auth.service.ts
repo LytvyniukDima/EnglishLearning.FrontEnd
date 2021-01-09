@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { environment } from './../../../environments/environment';
 import { SignInModel } from '../models/SignInModel';
 import { SignUpModel } from '../models/SignUpModel';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 declare let require: any;
 
@@ -17,7 +18,10 @@ export class AuthService {
   private readonly apiBaseUrl: string;
   private decode = require('jwt-decode');
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private jwtHelper: JwtHelperService) {
     this.apiBaseUrl = environment['ApiBaseUrl'];
     this.registrationPath = this.apiBaseUrl.concat('/api/identity/user');
     this.authorizationPath = this.apiBaseUrl.concat('/api/identity/authorization');
@@ -38,5 +42,20 @@ export class AuthService {
 
   get isAuthentificated() {
     return !!localStorage.getItem('token');
+  }
+
+  get isAdmin(): boolean {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return false;
+    }
+    
+
+    if (this.jwtHelper.isTokenExpired(token)) {
+      return false;
+    }
+
+    const tokenPayload = this.decode(token);
+    return tokenPayload.role === 'Admin';
   }
 }

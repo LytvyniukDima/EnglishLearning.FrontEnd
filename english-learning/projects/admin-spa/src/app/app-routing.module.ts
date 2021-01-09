@@ -1,7 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AdminGuardService } from 'src/app/authorization/serives/admin-guard.service';
+import { SignInComponent } from 'src/app/authorization/sign-in/sign-in.component';
+import { SignUpComponent } from 'src/app/authorization/sign-up/sign-up.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { 
+    path: '',
+    canActivate: [AdminGuardService],
+    component: NavbarComponent
+  },
+  { path: 'sign_in', component: SignInComponent },
+  { path: 'sign_up', component: SignUpComponent }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

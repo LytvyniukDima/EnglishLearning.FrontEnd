@@ -10,5 +10,28 @@
             <a class="nav-link" href="" routerLink="">Uploaded files<span class="sr-only">(current)</span></a>
           </li>
         </ul>
+
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item" *ngIf="!authService.isAuthentificated">
+              <a class="nav-link" routerLink="sign_in">Sign In</a>
+          </li>
+          <li class="nav-item" *ngIf="!authService.isAuthentificated">
+              <a class="nav-link" routerLink="sign_up" *ngIf="!authService.isAuthentificated">Sign Up</a>
+          </li>
+
+          <li class="nav-item dropdown personal-cabinet" *ngIf="authService.isAuthentificated">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="material-icons">account_circle</i>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" (click)="authService.logout()">
+                <div class="dropdown-content">
+                  <i class="material-icons">exit_to_app</i>
+                  <span class="users-dropdown"><strong>Sing Out</strong></span>
+                </div>
+              </a>
+            </div>
+          </li>
+        </ul>
     </div>
 </nav>
