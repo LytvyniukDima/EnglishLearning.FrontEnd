@@ -44,14 +44,18 @@ export class AuthService {
     return !!localStorage.getItem('token');
   }
 
-  get isAdmin(): boolean {
+  get isTokenExpired(): boolean {
     const token = localStorage.getItem('token');
     if (!token) {
       return false;
     }
-    
 
-    if (this.jwtHelper.isTokenExpired(token)) {
+    return this.jwtHelper.isTokenExpired(token);
+  }
+
+  get isAdmin(): boolean {
+    const token = localStorage.getItem('token');
+    if (!token) {
       return false;
     }
 

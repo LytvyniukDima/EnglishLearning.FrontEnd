@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { FileTreeModel } from '../../models/file-tree.model';
+import { GridTreeItemModel } from '../../models/grid-tree-item.model';
+import { FileManagerApiService } from '../../services/file-manager-api.service';
+import { FileTreeMapperService } from '../../services/file-tree-mapper.service';
 
 @Component({
   selector: 'admin-uploaded-files',
@@ -6,10 +12,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./uploaded-files.component.scss']
 })
 export class UploadedFilesComponent implements OnInit {
+  public gridItems$: Observable<GridTreeItemModel[]>;
 
-  constructor() { }
+  constructor(
+    private fileManagerService: FileManagerApiService,
+    private mapperService: FileTreeMapperService
+  ) {
+      this.gridItems$ = this.fileManagerService.getTree()
+        .pipe(
+          map((tree: FileTreeModel) => this.mapperService.mapApiTreeToGridItems(tree))
+        );
+  }
 
   ngOnInit(): void {
   }
-
 }
