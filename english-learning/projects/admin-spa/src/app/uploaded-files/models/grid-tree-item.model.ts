@@ -5,5 +5,5 @@ export interface GridTreeItemModel {
     isFolder: boolean;
     originalItem: any;
     extension?: string;
-    lastModified?: Date;
+    lastModified?: string;
 }

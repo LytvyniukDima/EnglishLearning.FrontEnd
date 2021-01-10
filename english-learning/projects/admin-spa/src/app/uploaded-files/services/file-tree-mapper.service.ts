@@ -33,7 +33,7 @@ export class FileTreeMapperService {
                     path: newPath,
                     isFolder: false,
                     extension: file.extension,
-                    lastModified: file.lastModified,
+                    lastModified: new Date(file.lastModified).toLocaleString(),
                     originalItem: file
                 } as GridTreeItemModel
             });
