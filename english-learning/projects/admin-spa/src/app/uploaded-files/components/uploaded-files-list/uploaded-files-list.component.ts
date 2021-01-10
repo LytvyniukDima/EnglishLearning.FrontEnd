@@ -53,45 +53,48 @@ export class UploadedFilesListComponent implements OnInit {
     this.gridColumnApi = params.columnApi;
   }
 
-  getContextMenuItems(params) {
+  getContextMenuItems = (params) => {
     const gridItem: GridTreeItemModel = params.node?.data;
 
     const contextItems = [
       {
         name: 'Analyze file(s)',
-        action: () => {
-          console.log(gridItem);
-        },
+        action: () => this.onAnalyzeItemClick(gridItem),
         cssClasses: [],
         icon: '<span class="material-icons">analytics</span>'
       },
-      'separator',
-      {
-        name: 'Upload file',
-        action: () => {
-          console.log(gridItem);
-        },
-        cssClasses: [],
-        icon: '<span class="material-icons">cloud_upload</span>'
-      },
+      'separator'
     ];
 
     if (gridItem !== undefined && !gridItem.isFolder) {
       contextItems.push({
         name: 'Download file',
-        action: () => {
-          console.log(gridItem);
-        },
+        action: () => this.onDownloadItemClick(gridItem),
         cssClasses: [],
         icon: '<span class="material-icons">cloud_download</span>'
-      })
+      });
+    } else {
+      contextItems.push({
+        name: 'Upload file',
+        action: () => this.onUploadItemClick(gridItem),
+        cssClasses: [],
+        icon: '<span class="material-icons">cloud_upload</span>'
+      });
     }
 
     return contextItems;
   }
 
   public onUploadItemClick(item: GridTreeItemModel) {
-    
+    console.log(item);
+  }
+
+  public onDownloadItemClick(item: GridTreeItemModel) {
+    console.log(item);
+  }
+
+  public onAnalyzeItemClick(item: GridTreeItemModel) {
+    console.log(item);
   }
 }
 
