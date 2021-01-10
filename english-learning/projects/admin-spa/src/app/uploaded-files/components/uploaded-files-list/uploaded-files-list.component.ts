@@ -17,7 +17,16 @@ export class UploadedFilesListComponent implements OnInit {
   @Input() gridItems: GridTreeItemModel[];
 
   public components = { fileCellRenderer: getFileCellRenderer() };
-  public columnDefs = [{ field: 'extension' }, { field: 'lastModified' }];
+  public columnDefs = [
+    { 
+      field: 'extension',
+      suppressMenu: true
+    },
+    { 
+      field: 'lastModified',
+      suppressMenu: true
+    },
+  ];
   public defaultColDef = { flex: 1 };
   public autoGroupColumnDef = {
     headerName: 'Name',
@@ -26,6 +35,7 @@ export class UploadedFilesListComponent implements OnInit {
       suppressCount: true,
       innerRenderer: 'fileCellRenderer',
     },
+    suppressMenu: true
   };
   public groupDefaultExpanded = -1;
   public getDataPath = function (data: GridTreeItemModel) {
@@ -41,6 +51,47 @@ export class UploadedFilesListComponent implements OnInit {
   onGridReady(params) {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
+  }
+
+  getContextMenuItems(params) {
+    const gridItem: GridTreeItemModel = params.node?.data;
+
+    const contextItems = [
+      {
+        name: 'Analyze file(s)',
+        action: () => {
+          console.log(gridItem);
+        },
+        cssClasses: [],
+        icon: '<span class="material-icons">analytics</span>'
+      },
+      'separator',
+      {
+        name: 'Upload file',
+        action: () => {
+          console.log(gridItem);
+        },
+        cssClasses: [],
+        icon: '<span class="material-icons">cloud_upload</span>'
+      },
+    ];
+
+    if (gridItem !== undefined && !gridItem.isFolder) {
+      contextItems.push({
+        name: 'Download file',
+        action: () => {
+          console.log(gridItem);
+        },
+        cssClasses: [],
+        icon: '<span class="material-icons">cloud_download</span>'
+      })
+    }
+
+    return contextItems;
+  }
+
+  public onUploadItemClick(item: GridTreeItemModel) {
+    
   }
 }
 
