@@ -1,3 +1,4 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -25,5 +26,27 @@ export class UploadedFilesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  onDownloadFile(id: string) {
+    this.fileManagerService.downloadFile(id)
+      .subscribe((response: HttpResponse<Blob>) => {
+        console.log(response);
+        const contentDisposition = response.headers.get('content-disposition');
+        const fileName = this.getFilenameFromContentDisposition(contentDisposition);
+
+        const url = window.URL.createObjectURL(response.body);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = fileName;
+        link.click();
+      });
+  }
+
+  private getFilenameFromContentDisposition(contentDisposition: string): string {
+    const regex = /filename=(?<filename>[^,;]+);/g;
+    const match = regex.exec(contentDisposition);
+    const filename = match.groups.filename;
+    return filename;
   }
 }

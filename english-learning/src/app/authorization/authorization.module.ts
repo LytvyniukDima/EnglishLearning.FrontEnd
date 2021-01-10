@@ -27,6 +27,9 @@ import { ForbiddenPageComponent } from './forbidden-page/forbidden-page.componen
     JwtModule.forRoot({
       config: {
         allowedDomains: [environment.ApiBaseUrl],
+        tokenGetter: () => {
+          return localStorage.getItem('token');
+        }
       }
     })
   ],

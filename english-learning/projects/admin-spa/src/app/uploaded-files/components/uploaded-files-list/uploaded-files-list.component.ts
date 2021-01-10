@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import 'ag-grid-enterprise';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
@@ -15,6 +15,8 @@ export class UploadedFilesListComponent implements OnInit {
   private gridColumnApi;
 
   @Input() gridItems: GridTreeItemModel[];
+
+  @Output() downloadFile = new EventEmitter<string>();
 
   public components = { fileCellRenderer: getFileCellRenderer() };
   public columnDefs = [
@@ -90,7 +92,7 @@ export class UploadedFilesListComponent implements OnInit {
   }
 
   public onDownloadItemClick(item: GridTreeItemModel) {
-    console.log(item);
+    this.downloadFile.emit(item.id);
   }
 
   public onAnalyzeItemClick(item: GridTreeItemModel) {
