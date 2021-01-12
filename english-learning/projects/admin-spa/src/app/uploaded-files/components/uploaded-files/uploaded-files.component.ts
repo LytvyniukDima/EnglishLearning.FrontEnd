@@ -1,5 +1,6 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FileTreeModel } from '../../models/file-tree.model';
@@ -17,7 +18,9 @@ export class UploadedFilesComponent implements OnInit {
 
   constructor(
     private fileManagerService: FileManagerApiService,
-    private mapperService: FileTreeMapperService
+    private mapperService: FileTreeMapperService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {
       this.gridItems$ = this.fileManagerService.getTree()
         .pipe(
@@ -41,6 +44,10 @@ export class UploadedFilesComponent implements OnInit {
         link.download = fileName;
         link.click();
       });
+  }
+
+  onUploadFile(folderId: string) {
+    this.router.navigate([`upload-file/${folderId}`], { relativeTo: this.route });
   }
 
   private getFilenameFromContentDisposition(contentDisposition: string): string {

@@ -3,7 +3,8 @@
     <div class="col-10 list-container">
         <admin-uploaded-files-list
             [gridItems]="gridItems$ | async"
-            (downloadFile)="onDownloadFile($event)">
+            (downloadFile)="onDownloadFile($event)"
+            (uploadFile)="onUploadFile($event)">
         </admin-uploaded-files-list>
     </div>
 </div>

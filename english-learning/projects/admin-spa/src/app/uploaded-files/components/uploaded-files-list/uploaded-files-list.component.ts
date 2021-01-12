@@ -17,6 +17,7 @@ export class UploadedFilesListComponent implements OnInit {
   @Input() gridItems: GridTreeItemModel[];
 
   @Output() downloadFile = new EventEmitter<string>();
+  @Output() uploadFile = new EventEmitter<string>();
 
   public components = { fileCellRenderer: getFileCellRenderer() };
   public columnDefs = [
@@ -88,7 +89,9 @@ export class UploadedFilesListComponent implements OnInit {
   }
 
   public onUploadItemClick(item: GridTreeItemModel) {
-    console.log(item);
+    const folderId = item?.id ?? null;
+
+    this.uploadFile.emit(folderId);
   }
 
   public onDownloadItemClick(item: GridTreeItemModel) {
