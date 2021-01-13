@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 import { FileTreeModel } from "../models/file-tree.model";
+import { FolderInfoModel } from "../models/folder-info.model";
 
 @Injectable({
     providedIn: 'root',
@@ -13,6 +14,7 @@ export class FileManagerApiService {
     private readonly baseFileManagerUrl = 'api/file-manager'
     private readonly treeUrl = `${this.baseFileManagerUrl}/tree`;
     private readonly downloadFileUrl = `${this.baseFileManagerUrl}/file`;
+    private readonly folderUrl = `${this.baseFileManagerUrl}/folder`;
 
     constructor(private httpClient: HttpClient) {
         this.apiBaseUrl = environment['ApiBaseUrl'];
@@ -28,5 +30,11 @@ export class FileManagerApiService {
         const url = `${this.apiBaseUrl}/${this.downloadFileUrl}/${id}`;
 
         return this.httpClient.get(url, {responseType: 'blob', observe: 'response'});
+    }
+
+    getFolderInfo(id: string): Observable<FolderInfoModel> {
+        const url = `${this.apiBaseUrl}/${this.folderUrl}/${id}/info`;
+
+        return this.httpClient.get<FolderInfoModel>(url);
     }
 }

@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { FolderInfoModel } from '../../models/folder-info.model';
+import { FileManagerApiService } from '../../services/file-manager-api.service';
 
 @Component({
   selector: 'admin-upload-file',
@@ -12,8 +16,11 @@ export class UploadFileComponent implements OnInit {
 
   public metadataValuesIndexName = 0;
   public metadataIndexes: string[] = [];
+  
+  public folderPath$: Observable<string>;
 
   constructor(
+    private fileManagerApiService: FileManagerApiService,
     private route: ActivatedRoute,
     private fb: FormBuilder) { 
       this.uploadForm = fb.group({});
@@ -21,7 +28,15 @@ export class UploadFileComponent implements OnInit {
 
   ngOnInit(): void {
     const folderId = this.route.snapshot.paramMap.get('id');
-    console.log(folderId);
+    
+    if (folderId === null) {
+      this.folderPath$ = of('');
+    } else {
+      this.folderPath$ = this.fileManagerApiService.getFolderInfo(folderId)
+        .pipe(
+          map(folder => this.getFolderPath(folder))
+        );
+    }
   }
 
   onUploadFile() {
@@ -78,5 +93,12 @@ export class UploadFileComponent implements OnInit {
 
   getMetadataValueControl(metadataIndex: string): AbstractControl {
     return this.getFormControl(this.getMetadataValueIndex(metadataIndex));
+  }
+
+  private getFolderPath(folderInfo: FolderInfoModel): string {
+    const path = folderInfo.path;
+    path.push(folderInfo.name);
+
+    return path.join('/');
   }
 }
