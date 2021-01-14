@@ -18,8 +18,8 @@ export class SignUpComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) { 
     this.validationForm = this.fb.group({
-      firstName: ['',[ Validators.required, Validators.maxLength(40), Validators.pattern('^[a-zA-Z0-9]+$')]],
-      lastName: ['', [ Validators.required, Validators.maxLength(40), Validators.pattern('^[a-zA-Z0-9]+$')]],
+      firstName: ['',[ Validators.required, Validators.maxLength(40), Validators.pattern('^[a-zA-Z]+$')]],
+      lastName: ['', [ Validators.required, Validators.maxLength(40), Validators.pattern('^[a-zA-Z]+$')]],
       email: ['', [ Validators.required, Validators.email]],
       password: ['', [ Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{8,}')]],
       confirmPassword: ['', [ Validators.required, Validators.minLength(6), Validators.maxLength(40)]]

@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FolderInfoModel } from '../../models/folder-info.model';
+import { UploadNewFileModel } from '../../models/upload-new-file.model';
 import { FileManagerApiService } from '../../services/file-manager-api.service';
 
 @Component({
@@ -17,22 +18,30 @@ export class UploadFileComponent implements OnInit {
   public metadataValuesIndexName = 0;
   public metadataIndexes: string[] = [];
   
+  public folderId: string;
   public folderPath$: Observable<string>;
+
+  private uploadedFile: File;
 
   constructor(
     private fileManagerApiService: FileManagerApiService,
     private route: ActivatedRoute,
     private fb: FormBuilder) { 
-      this.uploadForm = fb.group({});
+      this.uploadForm = fb.group(
+        {
+          fileName: new FormControl('', [Validators.required, Validators.maxLength(80), Validators.pattern('^[a-zA-Z0-9_() ]+$')]),
+          uploadFile: new FormControl('', [Validators.required])
+        });
   }
 
   ngOnInit(): void {
-    const folderId = this.route.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('id');
+    this.folderId = id === 'null' ? null : id;
     
-    if (folderId === null) {
+    if (this.folderId === null) {
       this.folderPath$ = of('');
     } else {
-      this.folderPath$ = this.fileManagerApiService.getFolderInfo(folderId)
+      this.folderPath$ = this.fileManagerApiService.getFolderInfo(this.folderId)
         .pipe(
           map(folder => this.getFolderPath(folder))
         );
@@ -46,13 +55,9 @@ export class UploadFileComponent implements OnInit {
       return;
     }
 
-    const metadataMap = [];
-    for(let metadataIndex of this.metadataIndexes) {
-      const key = this.uploadForm.controls[`${metadataIndex}-key`].value;
-      const value = this.uploadForm.controls[`${metadataIndex}-value`].value;
-
-      metadataMap.push({ [key]: value });
-    }
+    const uploadFileModel = this.createUploadFileModel();
+    this.fileManagerApiService.uploadNewFile(uploadFileModel)
+      .subscribe(data => console.log(data));
   }
 
   onAddMetadata() {
@@ -72,6 +77,20 @@ export class UploadFileComponent implements OnInit {
 
       this.uploadForm.removeControl(`${metadataIndex}-key`);
       this.uploadForm.removeControl(`${metadataIndex}-value`);
+    }
+  }
+
+  onFileChange(event) {
+    const files: FileList = event.target.files;
+    if (files.length > 0) {
+      this.uploadedFile = files[0];
+
+      if (this.uploadForm.controls['fileName'].value === '') {
+        const fileNameWithoutExtension = this.getFileNameWithoutExtension(this.uploadedFile.name);
+        this.uploadForm.controls['fileName'].setValue(fileNameWithoutExtension);
+      }
+    } else {
+      this.uploadedFile = null;
     }
   }
 
@@ -100,5 +119,41 @@ export class UploadFileComponent implements OnInit {
     path.push(folderInfo.name);
 
     return path.join('/');
+  }
+
+  private getFileNameWithoutExtension(fileName: string): string {
+    const indexOfDot = fileName.lastIndexOf('.');
+    if (indexOfDot === -1) {
+      return fileName;
+    }
+
+    return fileName.substring(0, indexOfDot);
+  }
+
+  private createUploadFileModel(): UploadNewFileModel {
+    const newFile = new UploadNewFileModel();
+
+    newFile.folderId = this.folderId;
+    newFile.metadata = this.createMetadata();
+    newFile.name = this.uploadForm.controls['fileName'].value;
+    newFile.uploadedFile = this.uploadedFile;
+
+    return newFile;
+  }
+
+  private createMetadata(): { [key: string]: string } {
+    if (this.metadataIndexes.length === 0) {
+      return {};
+    }
+
+    const metadataMap = {};
+    for(let metadataIndex of this.metadataIndexes) {
+      const key = this.uploadForm.controls[`${metadataIndex}-key`].value;
+      const value = this.uploadForm.controls[`${metadataIndex}-value`].value;
+
+      metadataMap[key] = value;
+    }
+
+    return metadataMap;
   }
 }
