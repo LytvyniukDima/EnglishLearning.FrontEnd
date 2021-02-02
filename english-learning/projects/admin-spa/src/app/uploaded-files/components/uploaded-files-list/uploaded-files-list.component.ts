@@ -61,8 +61,8 @@ export class UploadedFilesListComponent implements OnInit {
 
     const contextItems = [
       {
-        name: 'Analyze file(s)',
-        action: () => this.onAnalyzeItemClick(gridItem),
+        name: 'analyse file(s)',
+        action: () => this.onanalyseItemClick(gridItem),
         cssClasses: [],
         icon: '<span class="material-icons">analytics</span>'
       },
@@ -98,7 +98,7 @@ export class UploadedFilesListComponent implements OnInit {
     this.downloadFile.emit(item.id);
   }
 
-  public onAnalyzeItemClick(item: GridTreeItemModel) {
+  public onanalyseItemClick(item: GridTreeItemModel) {
     console.log(item);
   }
 }
