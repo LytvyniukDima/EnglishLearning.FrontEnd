@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FolderInfoModel } from '../../models/folder-info.model';
@@ -26,6 +26,7 @@ export class UploadFileComponent implements OnInit {
   constructor(
     private fileManagerApiService: FileManagerApiService,
     private route: ActivatedRoute,
+    private router: Router,
     private fb: FormBuilder) { 
       this.uploadForm = fb.group(
         {
@@ -57,7 +58,9 @@ export class UploadFileComponent implements OnInit {
 
     const uploadFileModel = this.createUploadFileModel();
     this.fileManagerApiService.uploadNewFile(uploadFileModel)
-      .subscribe(data => console.log(data));
+      .subscribe(() => {
+        this.router.navigateByUrl('uploaded-files');
+      });
   }
 
   onAddMetadata() {
