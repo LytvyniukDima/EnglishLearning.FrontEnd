@@ -50,6 +50,10 @@ export class UploadedFilesComponent implements OnInit {
     this.router.navigate([`upload-file/${folderId}`], { relativeTo: this.route });
   }
 
+  onAnalyseFile(fileId: string) {
+    this.router.navigate([`analyse-form/${fileId}`], { relativeTo: this.route });
+  }
+
   private getFilenameFromContentDisposition(contentDisposition: string): string {
     const regex = /filename=(?<filename>[^,;]+);/g;
     const match = regex.exec(contentDisposition);

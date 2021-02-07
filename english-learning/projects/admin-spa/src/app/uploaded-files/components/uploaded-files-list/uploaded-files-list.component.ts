@@ -18,6 +18,7 @@ export class UploadedFilesListComponent implements OnInit {
 
   @Output() downloadFile = new EventEmitter<string>();
   @Output() uploadFile = new EventEmitter<string>();
+  @Output() analyseFile = new EventEmitter<string>();
 
   public components = { fileCellRenderer: getFileCellRenderer() };
   public columnDefs = [
@@ -59,15 +60,17 @@ export class UploadedFilesListComponent implements OnInit {
   getContextMenuItems = (params) => {
     const gridItem: GridTreeItemModel = params.node?.data;
 
-    const contextItems = [
-      {
-        name: 'analyse file(s)',
-        action: () => this.onanalyseItemClick(gridItem),
+    const contextItems = [];
+
+    if (gridItem !== undefined && !gridItem.isFolder) {
+      contextItems.push({
+        name: 'Analyse file',
+        action: () => this.onAnalyseItemClick(gridItem),
         cssClasses: [],
         icon: '<span class="material-icons">analytics</span>'
-      },
-      'separator'
-    ];
+      });
+      contextItems.push('separator');
+    }
 
     if (gridItem !== undefined && !gridItem.isFolder) {
       contextItems.push({
@@ -98,8 +101,8 @@ export class UploadedFilesListComponent implements OnInit {
     this.downloadFile.emit(item.id);
   }
 
-  public onanalyseItemClick(item: GridTreeItemModel) {
-    console.log(item);
+  public onAnalyseItemClick(item: GridTreeItemModel) {
+    this.analyseFile.emit(item.id);
   }
 }
 

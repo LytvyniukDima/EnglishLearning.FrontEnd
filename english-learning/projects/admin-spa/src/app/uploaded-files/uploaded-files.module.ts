@@ -6,9 +6,10 @@ import { UploadedFilesListComponent } from './components/uploaded-files-list/upl
 import { AgGridModule } from 'ag-grid-angular';
 import { UploadFileComponent } from './components/upload-file/upload-file.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AnalyzeFormComponent } from './components/analyze-form/analyze-form.component';
 
 @NgModule({
-  declarations: [UploadedFilesComponent, UploadedFilesListComponent, UploadFileComponent],
+  declarations: [UploadedFilesComponent, UploadedFilesListComponent, UploadFileComponent, AnalyzeFormComponent],
   imports: [
     CommonModule,
     UploadedFilesRoutingModule,

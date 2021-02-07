@@ -4,7 +4,8 @@
         <admin-uploaded-files-list
             [gridItems]="gridItems$ | async"
             (downloadFile)="onDownloadFile($event)"
-            (uploadFile)="onUploadFile($event)">
+            (uploadFile)="onUploadFile($event)"
+            (analyseFile)="onAnalyseFile($event)">
         </admin-uploaded-files-list>
     </div>
 </div>

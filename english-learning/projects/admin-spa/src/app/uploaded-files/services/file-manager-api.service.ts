@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpRequest, HttpResponse } from "@angular/com
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
+import { FileDetailsModel } from "../models/file-details.model";
 import { FileTreeModel } from "../models/file-tree.model";
 import { FolderInfoModel } from "../models/folder-info.model";
 import { UploadNewFileModel } from "../models/upload-new-file.model";
@@ -56,5 +57,11 @@ export class FileManagerApiService {
         const options = { headers: headers };
 
         return this.httpClient.post(url, formData, options);
+    }
+
+    getFileDetails(fileId: string): Observable<FileDetailsModel> {
+        const url = `${this.apiBaseUrl}/${this.baseFileUrl}/${fileId}/details`;
+
+        return this.httpClient.get<FileDetailsModel>(url);
     }
 }
