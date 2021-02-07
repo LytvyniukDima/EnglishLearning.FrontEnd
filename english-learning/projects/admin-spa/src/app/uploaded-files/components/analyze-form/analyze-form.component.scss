@@ -19,3 +19,19 @@
     font-size: 80%;
     color: #dc3545;
 }
+
+.spinner-container {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.flex-item {
+    margin: auto;    
+}
+
+.spinner-item {
+    height: 60px;
+    width: 60px;
+}

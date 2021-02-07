@@ -1,58 +1,72 @@
-<div class="container">
-    <div class="py-5 text-center">
-        <h2>Analyze file</h2>
-    </div>
-
-    <div class="row">
-        <div class="col-1">
-
+<ng-container *ngIf="!isSendingRequest">
+    <div class="container">
+        <div class="py-5 text-center">
+            <h2>Analyze file</h2>
         </div>
 
-        <div class="col-10">
-            <ng-container *ngIf="fileDetails$ | async as fileDetails">
-                <div class="row form-line">
-                    <div class="field-header file-name-prop">File Name:</div>
-                    <div>
-                        {{fileDetails.name }}
+        <div class="row">
+            <div class="col-1">
+
+            </div>
+
+            <div class="col-10">
+                <ng-container *ngIf="fileDetails$ | async as fileDetails">
+                    <div class="row form-line">
+                        <div class="field-header file-name-prop">File Name:</div>
+                        <div>
+                            {{fileDetails.name }}
+                        </div>
                     </div>
-                </div>
 
-                <div class="row form-line">
-                    <div class="field-header file-name-prop">File Path:</div>
-                    <div>
-                        {{ fileDetails.path.join('/') }}
+                    <div class="row form-line">
+                        <div class="field-header file-name-prop">File Path:</div>
+                        <div>
+                            {{ fileDetails.path.join('/') }}
+                        </div>
                     </div>
-                </div>
-            </ng-container>
+                </ng-container>
 
-            <form class="needs-validation" [formGroup]="analyseForm" (ngSubmit)="onAnalyseFile()" novalidate>
-                <div class="row form-line">
-                    <label for="analyseName" class="field-header">Analyse Name:</label>
-                </div>
-                <div class="row form-line">
-                    <div class="col-md-5 input-container">
-                        <input type="text" class="form-control" id="analyseName" name="analyseName"
-                            formControlName="analyseName">
+                <form class="needs-validation" [formGroup]="analyseForm" (ngSubmit)="onAnalyseFile()" novalidate>
+                    <div class="row form-line">
+                        <label for="analyseName" class="field-header">Analyse Name:</label>
+                    </div>
+                    <div class="row form-line">
+                        <div class="col-md-5 input-container">
+                            <input type="text" class="form-control" id="analyseName" name="analyseName"
+                                formControlName="analyseName">
 
-                        <div *ngIf="getFormControl('analyseName').invalid">
-                            <div *ngIf="getFormControl('analyseName').errors.required && (getFormControl('analyseName').dirty ||  getFormControl('analyseName').touched)"
-                                class="form-error">
-                                Name is required.
-                            </div>
-                            <div *ngIf="getFormControl('analyseName').errors.maxlength" class="form-error">
-                                Max length is 80 symbols.
-                            </div>
-                            <div *ngIf="getFormControl('analyseName').errors.pattern" class="form-error">
-                                Only letters are allowed.
+                            <div *ngIf="getFormControl('analyseName').invalid">
+                                <div *ngIf="getFormControl('analyseName').errors.required && (getFormControl('analyseName').dirty ||  getFormControl('analyseName').touched)"
+                                    class="form-error">
+                                    Name is required.
+                                </div>
+                                <div *ngIf="getFormControl('analyseName').errors.maxlength" class="form-error">
+                                    Max length is 80 symbols.
+                                </div>
+                                <div *ngIf="getFormControl('analyseName').errors.pattern" class="form-error">
+                                    Only letters are allowed.
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="form-line">
-                    <button class="btn btn-primary btn-lg btn-block" type="submit">Analyse file</button>
-                </div>
-            </form>
+                    <div class="form-line">
+                        <button class="btn btn-primary btn-lg btn-block" type="submit">
+                            Analyse file
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
+</ng-container>
+
+<ng-container *ngIf="isSendingRequest">
+    <div class="spinner-container">
+        <div class="flex-item">
+            <div class="spinner-border text-primary spinner-item" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </div>
+</ng-container>

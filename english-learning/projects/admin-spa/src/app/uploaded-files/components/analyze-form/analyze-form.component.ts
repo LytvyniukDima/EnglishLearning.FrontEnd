@@ -15,6 +15,7 @@ import { TextAnalyzerApiService } from '../../services/text-analyzer-api.service
 export class AnalyzeFormComponent implements OnInit {
   private fileId: string;
   fileDetails$: Observable<FileDetailsModel>;
+  isSendingRequest = false;
 
   public analyseForm: FormGroup;
 
@@ -43,7 +44,9 @@ export class AnalyzeFormComponent implements OnInit {
       analyzeName: this.analyseForm.controls['analyseName'].value
     }
 
+    this.isSendingRequest = true;
     this.textAnalyzerService.analyzeFile(form).subscribe(() => {
+      this.isSendingRequest = false;
       this.router.navigateByUrl('uploaded-files');
     });
   }
