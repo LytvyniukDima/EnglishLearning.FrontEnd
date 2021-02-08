@@ -19,7 +19,7 @@ const routes: Routes = [
   {
     path: 'grammar-analyse',
     canActivate: [AdminGuardService],
-    loadChildren: () => import('./grammar-analyse/grammar-analyse-routing.module').then(m => m.GrammaranalyseRoutingModule)
+    loadChildren: () => import('./grammar-analyse/grammar-analyse.module').then(m => m.GrammaranalyseModule)
   },
   { path: 'sign_in', component: SignInComponent },
   { path: 'sign_up', component: SignUpComponent }
