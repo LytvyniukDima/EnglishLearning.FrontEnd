@@ -1,1 +1,6 @@
-<admin-grammar-analyse-items></admin-grammar-analyse-items>
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col-10 list-container">
+        <admin-grammar-analyse-items [parsedSents]="parsedSents$ | async"></admin-grammar-analyse-items>
+    </div>
+</div>

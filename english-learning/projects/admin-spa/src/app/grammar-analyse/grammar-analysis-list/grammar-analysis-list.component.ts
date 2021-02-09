@@ -22,7 +22,8 @@ export class GrammarAnalysisListComponent implements OnInit {
     },
     { 
       field: 'sentCount',
-      suppressMenu: true
+      suppressMenu: true,
+      headerName: 'Number of Sentences'
     },
   ];
   public defaultColDef = { flex: 1 };

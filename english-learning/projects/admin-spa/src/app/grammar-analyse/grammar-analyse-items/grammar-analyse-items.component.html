@@ -1,1 +1,13 @@
-<p>grammar-analyse-items works!</p>
+<div class="grid-wrapper">
+    <ag-grid-angular 
+        #agGrid style="width: 100%; height: 100%;"
+        id="grammar-grid" class="ag-theme-alpine"
+        [rowData]="parsedSents"
+        [columnDefs]="columnDefs"
+        [animateRows]="true"
+        [defaultColDef]="defaultColDef"
+        [autoGroupColumnDef]="autoGroupColumnDef"
+        [getContextMenuItems]="getContextMenuItems"
+        (gridReady)="onGridReady($event)">
+    </ag-grid-angular>
+</div>
