@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { GrammarFileAnalysedModel } from '../models/grammar-file-analyzed.model';
 import 'ag-grid-enterprise';
 
@@ -12,6 +12,8 @@ export class GrammarAnalysisListComponent implements OnInit {
   private gridColumnApi;
 
   @Input() analysisList: GrammarFileAnalysedModel[];
+
+  @Output() openAnalyse = new EventEmitter<string>();
 
   public columnDefs = [
     { 
@@ -68,7 +70,7 @@ export class GrammarAnalysisListComponent implements OnInit {
   }
 
   public onOpenAnalyze(item: GrammarFileAnalysedModel) {
-    console.log(item);
+    this.openAnalyse.emit(item.id);
   }
 
 }
