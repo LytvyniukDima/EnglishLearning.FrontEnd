@@ -3,4 +3,5 @@ export class UploadNewFileModel {
     folderId: string;
     metadata: { [key: string]: string };
     uploadedFile: File;
+    csvColumnToRead: string;
 }

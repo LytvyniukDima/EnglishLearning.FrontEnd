@@ -26,7 +26,8 @@
                         multiple="false"
                         (change)="onFileChange($event)" />
                     <div *ngIf="getFormControl('uploadFile').invalid">
-                        <div *ngIf="getFormControl('uploadFile').errors.required && (getFormControl('uploadFile').dirty ||  getFormControl('uploadFile').touched)" class="form-error">
+                        <div *ngIf="getFormControl('uploadFile').errors.required && (getFormControl('uploadFile').dirty ||  getFormControl('uploadFile').touched)"
+                            class="form-error">
                             Value is required.
                         </div>
                     </div>
@@ -34,14 +35,10 @@
 
                 <div class="col-md-8 form-line name-container">
                     <label for="fileName">Name:</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        id="fileName"
-                        name="fileName"
-                        formControlName="fileName">
+                    <input type="text" class="form-control" id="fileName" name="fileName" formControlName="fileName">
                     <div *ngIf="getFormControl('fileName').invalid">
-                        <div *ngIf="getFormControl('fileName').errors.required && (getFormControl('fileName').dirty ||  getFormControl('fileName').touched)" class="form-error">
+                        <div *ngIf="getFormControl('fileName').errors.required && (getFormControl('fileName').dirty ||  getFormControl('fileName').touched)"
+                            class="form-error">
                              Name is required.
                         </div>
                         <div *ngIf="getFormControl('fileName').errors.maxlength" class="form-error">
@@ -53,19 +50,45 @@
                     </div>
                 </div>
 
+                <ng-container *ngIf="isCsvFile">
+                    <div class="col-md-8 form-line remove-padding">
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input class="custom-control-input" id="isUseReadFromColumn" type="checkbox"
+                                    [checked]="isUseReadFromColumn"
+                                    (change)="isUseReadFromColumn = !isUseReadFromColumn">
+                                <label class="custom-control-label" for="isUseReadFromColumn">
+                                    Load data from column
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8 form-line name-container" *ngIf="isUseReadFromColumn">
+                        <label for="csvColumnToRead">Column name:</label>
+                        <input type="text" class="form-control" id="csvColumnToRead" name="csvColumnToRead"
+                            formControlName="csvColumnToRead">
+                        <div *ngIf="getFormControl('csvColumnToRead').invalid">
+                            <div *ngIf="getFormControl('csvColumnToRead').errors.maxlength" class="form-error">
+                                Max length is 30 symbols.
+                            </div>
+                            <div *ngIf="getFormControl('csvColumnToRead').errors.pattern" class="form-error">
+                                Only letters are allowed.
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+
                 <h5 *ngIf="metadataIndexes.length > 0" class="form-line">Metadata:</h5>
                 <div *ngFor="let metadataIndex of metadataIndexes;" class="row metadata-container">
                     <div class="col-md-5">
                         <label for="{{ metadataIndex }}-key">Key</label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            [id]="getMetadataKeyIndex(metadataIndex)"
+                        <input type="text" class="form-control" [id]="getMetadataKeyIndex(metadataIndex)"
                             [name]="getMetadataKeyIndex(metadataIndex)"
                             [formControlName]="getMetadataKeyIndex(metadataIndex)">
                         
                         <div *ngIf="getMetadataKeyControl(metadataIndex).invalid">
-                            <div *ngIf="getMetadataKeyControl(metadataIndex).errors.required && (getMetadataKeyControl(metadataIndex).dirty ||  getMetadataKeyControl(metadataIndex).touched)" class="form-error">
+                            <div *ngIf="getMetadataKeyControl(metadataIndex).errors.required && (getMetadataKeyControl(metadataIndex).dirty ||  getMetadataKeyControl(metadataIndex).touched)"
+                                class="form-error">
                                 Key is required.
                             </div>
                             <div *ngIf="getMetadataKeyControl(metadataIndex).errors.maxlength" class="form-error">
@@ -75,15 +98,13 @@
                     </div>
                     <div class="col-md-5">
                         <label [for]="getMetadataValueIndex(metadataIndex)">Value</label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            [id]="getMetadataValueIndex(metadataIndex)"
+                        <input type="text" class="form-control" [id]="getMetadataValueIndex(metadataIndex)"
                             [name]="getMetadataValueIndex(metadataIndex)"
                             [formControlName]="getMetadataValueIndex(metadataIndex)">
 
                         <div *ngIf="getMetadataValueControl(metadataIndex).invalid">
-                             <div *ngIf="getMetadataValueControl(metadataIndex).errors.required && (getMetadataValueControl(metadataIndex).dirty ||  getMetadataValueControl(metadataIndex).touched)" class="form-error">
+                            <div *ngIf="getMetadataValueControl(metadataIndex).errors.required && (getMetadataValueControl(metadataIndex).dirty ||  getMetadataValueControl(metadataIndex).touched)"
+                                class="form-error">
                                 Value is required.
                             </div>
                             <div *ngIf="getMetadataValueControl(metadataIndex).errors.maxlength" class="form-error">
@@ -93,7 +114,8 @@
                     </div>
                     <div class="col-md-1">
                         <label></label>
-                        <button type="button" class="btn btn-danger" (click)="onRemoveMetadata(metadataIndex)">Remove</button>
+                        <button type="button" class="btn btn-danger"
+                            (click)="onRemoveMetadata(metadataIndex)">Remove</button>
                     </div>
                 </div> 
 

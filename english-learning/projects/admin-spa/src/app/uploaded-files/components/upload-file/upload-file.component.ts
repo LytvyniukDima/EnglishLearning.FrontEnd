@@ -17,7 +17,9 @@ export class UploadFileComponent implements OnInit {
 
   public metadataValuesIndexName = 0;
   public metadataIndexes: string[] = [];
-  
+  public isCsvFile = false;
+  public isUseReadFromColumn = false;
+
   public folderId: string;
   public folderPath$: Observable<string>;
 
@@ -31,7 +33,8 @@ export class UploadFileComponent implements OnInit {
       this.uploadForm = fb.group(
         {
           fileName: new FormControl('', [Validators.required, Validators.maxLength(80), Validators.pattern('^[a-zA-Z0-9_() ]+$')]),
-          uploadFile: new FormControl('', [Validators.required])
+          uploadFile: new FormControl('', [Validators.required]),
+          csvColumnToRead: new FormControl('', [Validators.maxLength(30), Validators.pattern('^[a-zA-Z0-9_() ]+$')]),
         });
   }
 
@@ -91,9 +94,16 @@ export class UploadFileComponent implements OnInit {
       if (this.uploadForm.controls['fileName'].value === '') {
         const fileNameWithoutExtension = this.getFileNameWithoutExtension(this.uploadedFile.name);
         this.uploadForm.controls['fileName'].setValue(fileNameWithoutExtension);
+
+        const fileExtension = this.getFileExtension(this.uploadedFile.name);
+        if (fileExtension.toLowerCase() === 'csv') {
+          this.isCsvFile = true;
+        }
       }
     } else {
       this.uploadedFile = null;
+      this.isCsvFile = true;
+      this.uploadForm.controls['csvColumnToRead'].setValue('');
     }
   }
 
@@ -133,6 +143,15 @@ export class UploadFileComponent implements OnInit {
     return fileName.substring(0, indexOfDot);
   }
 
+  private getFileExtension(fileName: string): string {
+    const indexOfDot = fileName.lastIndexOf('.');
+    if (indexOfDot === -1) {
+      return null;
+    }
+
+    return fileName.substring(indexOfDot + 1);
+  }
+
   private createUploadFileModel(): UploadNewFileModel {
     const newFile = new UploadNewFileModel();
 
@@ -140,6 +159,7 @@ export class UploadFileComponent implements OnInit {
     newFile.metadata = this.createMetadata();
     newFile.name = this.uploadForm.controls['fileName'].value;
     newFile.uploadedFile = this.uploadedFile;
+    newFile.csvColumnToRead = this.uploadForm.controls['csvColumnToRead'].value;
 
     return newFile;
   }

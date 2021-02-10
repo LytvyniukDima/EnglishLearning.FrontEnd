@@ -50,7 +50,8 @@ export class FileManagerApiService {
         formData.append('name', uploadFileModel.name);
         formData.append('metadata', JSON.stringify(uploadFileModel.metadata));
         formData.append('uploadedFile', uploadFileModel.uploadedFile, uploadFileModel.uploadedFile.name);
-
+        formData.append('csvColumnToRead', uploadFileModel.csvColumnToRead);
+        
         const headers = new HttpHeaders();
         headers.append('Content-Type', 'multipart/form-data');
         headers.append('Accept', 'application/json');
