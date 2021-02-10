@@ -57,7 +57,10 @@ export class UploadedFilesComponent implements OnInit {
   private getFilenameFromContentDisposition(contentDisposition: string): string {
     const regex = /filename=(?<filename>[^,;]+);/g;
     const match = regex.exec(contentDisposition);
-    const filename = match.groups.filename;
+    const filename = match.groups.filename
+      .replace('"', '')
+      .replace('"', '');
+
     return filename;
   }
 }
