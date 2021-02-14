@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { AnalyzeFileForm } from '../../models/analyze-file-form';
 import { FileDetailsModel } from '../../models/file-details.model';
 import { FileManagerApiService } from '../../services/file-manager-api.service';
@@ -45,10 +46,16 @@ export class AnalyzeFormComponent implements OnInit {
     }
 
     this.isSendingRequest = true;
-    this.textAnalyzerService.analyzeFile(form).subscribe(() => {
-      this.isSendingRequest = false;
-      this.router.navigateByUrl('uploaded-files');
-    });
+    this.textAnalyzerService.analyzeFile(form).pipe(
+        catchError((e) => {
+          this.isSendingRequest = false;
+          this.router.navigateByUrl('uploaded-files');
+          return throwError(e);
+        })
+      ).subscribe(() => {
+        this.isSendingRequest = false;
+        this.router.navigateByUrl('uploaded-files');
+      });
   }
 
   getFormControl(name: string): AbstractControl {

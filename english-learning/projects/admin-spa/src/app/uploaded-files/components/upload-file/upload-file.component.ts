@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { FolderInfoModel } from '../../models/folder-info.model';
 import { UploadNewFileModel } from '../../models/upload-new-file.model';
 import { FileManagerApiService } from '../../services/file-manager-api.service';
@@ -14,6 +14,7 @@ import { FileManagerApiService } from '../../services/file-manager-api.service';
 })
 export class UploadFileComponent implements OnInit {
   public uploadForm: FormGroup;
+  public isSendingRequest = false;
 
   public metadataValuesIndexName = 0;
   public metadataIndexes: string[] = [];
@@ -59,9 +60,16 @@ export class UploadFileComponent implements OnInit {
       return;
     }
 
+    this.isSendingRequest = true;
     const uploadFileModel = this.createUploadFileModel();
-    this.fileManagerApiService.uploadNewFile(uploadFileModel)
-      .subscribe(() => {
+    this.fileManagerApiService.uploadNewFile(uploadFileModel).pipe(
+        catchError((e) => {
+          this.isSendingRequest = false;
+          this.router.navigateByUrl('uploaded-files');
+          return throwError(e);
+        })
+      ).subscribe(() => {
+        this.isSendingRequest = false;
         this.router.navigateByUrl('uploaded-files');
       });
   }
