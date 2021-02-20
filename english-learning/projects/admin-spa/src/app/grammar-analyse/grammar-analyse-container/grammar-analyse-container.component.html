@@ -3,7 +3,8 @@
     <div class="col-10 list-container">
         <admin-grammar-analysis-list
             [analysisList]="analysisList$ | async"
-            (openAnalyse)="onOpenAnalyse($event)">
+            (openAnalyse)="onOpenAnalyse($event)"
+            (generateTasks)="onGenerateTasks($event)">
         </admin-grammar-analysis-list>
     </div>
 </div>

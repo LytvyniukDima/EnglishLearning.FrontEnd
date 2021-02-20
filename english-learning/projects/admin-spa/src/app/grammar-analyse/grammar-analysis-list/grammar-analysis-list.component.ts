@@ -14,6 +14,7 @@ export class GrammarAnalysisListComponent implements OnInit {
   @Input() analysisList: GrammarFileAnalysedModel[];
 
   @Output() openAnalyse = new EventEmitter<string>();
+  @Output() generateTasks = new EventEmitter<string>();
 
   public columnDefs = [
     { 
@@ -64,6 +65,13 @@ export class GrammarAnalysisListComponent implements OnInit {
         cssClasses: [],
         icon: '<span class="material-icons">open_in_new</span>'
       });
+      contextItems.push('separator');
+      contextItems.push({
+        name: 'Generate Tasks',
+        action: () => this.onGenerateTasks(analyseItem),
+        cssClasses: [],
+        icon: '<span class="material-icons">task</span>'
+      })
     }
 
 
@@ -74,4 +82,7 @@ export class GrammarAnalysisListComponent implements OnInit {
     this.openAnalyse.emit(item.id);
   }
 
+  public onGenerateTasks(item: GrammarFileAnalysedModel) {
+    this.generateTasks.emit(item.id);
+  }
 }

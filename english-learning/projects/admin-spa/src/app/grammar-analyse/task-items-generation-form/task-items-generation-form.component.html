@@ -1,0 +1,105 @@
+<ng-container *ngIf="!isSendingRequest">
+    <div class="container">
+        <div class="py-5 text-center">
+            <h2>Task Items Generation</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1"></div>
+
+        <div class="col-10">
+            <div class="row form-line">
+                <div class="col-2 field-header file-name-prop">Grammar Analyse Name:</div>
+                <ng-container *ngIf="grammarAnalyse$ | async as grammarAnalyse">
+                    <div>
+                        {{ grammarAnalyse.name }}
+                    </div>
+                </ng-container>
+            </div>
+
+            <form class="needs-validation" [formGroup]="taskItemsForm" (ngSubmit)="onGenerateTasks()" novalidate>
+                <div class="row form-line">
+                    <label for="generationName" class="field-header">Task Generation Name:</label>
+                </div>
+                <div class="row form-line">
+                    <div class="col-md-5 input-container">
+                        <input type="text" class="form-control" id="generationName" name="generationName"
+                            formControlName="generationName">
+
+                        <div *ngIf="getFormControl('generationName').invalid">
+                            <div *ngIf="getFormControl('generationName').errors.required && (getFormControl('generationName').dirty ||  getFormControl('generationName').touched)"
+                                class="form-error">
+                                Name is required.
+                            </div>
+                            <div *ngIf="getFormControl('generationName').errors.maxlength" class="form-error">
+                                Max length is 80 symbols.
+                            </div>
+                            <div *ngIf="getFormControl('generationName').errors.pattern" class="form-error">
+                                Only letters are allowed.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row form-line">
+                    <label for="grammarPart" class="field-header">Grammar part:</label>
+                </div>
+                <div class="row form-line">
+                    <div class="col-md-3 input-container">
+                        <select class="custom-select" formControlName="grammarPart">
+                            <option value="" disabled>Choose Grammar Part</option>
+                            <option *ngFor="let part of grammarParts" [value]="part">
+                                {{part}}
+                              </option>
+                         </select>
+
+                         <div *ngIf="getFormControl('grammarPart').invalid">
+                            <div *ngIf="getFormControl('grammarPart').errors.required && (getFormControl('grammarPart').dirty ||  getFormControl('grammarPart').touched)"
+                                class="form-error">
+                                Grammar Part is required.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row form-line">
+                    <label for="taskType" class="field-header">Type of Task:</label>
+                </div>
+                <div class="row form-line">
+                    <div class="col-md-3 input-container">
+                        <select class="custom-select" formControlName="taskType">
+                            <option value="" disabled>Choose Type of Task</option>
+                            <option *ngFor="let taskType of taskTypeMap" [value]="taskType[0]">
+                                {{taskType[1]}}
+                              </option>
+                         </select>
+
+                         <div *ngIf="getFormControl('taskType').invalid">
+                            <div *ngIf="getFormControl('taskType').errors.required && (getFormControl('taskType').dirty ||  getFormControl('taskType').touched)"
+                                class="form-error">
+                                Type of task is required.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-line">
+                    <button class="btn btn-primary btn-lg btn-block" type="submit">
+                        Generate Tasks
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="isSendingRequest">
+    <div class="spinner-container">
+        <div class="flex-item">
+            <div class="spinner-border text-primary spinner-item" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </div>
+</ng-container>

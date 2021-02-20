@@ -28,4 +28,10 @@ export class GrammarAnalyseApiService {
 
         return this.httpClient.get<ParsedSentModel[]>(url);
     }
+
+    getGrammarAnalyse(analyseId: string): Observable<GrammarFileAnalysedModel> {
+        const url = `${this.apiBaseUrl}/${this.baseGrammerFileAnalseUrl}/${analyseId}`;
+
+        return this.httpClient.get<GrammarFileAnalysedModel>(url);
+    }
 }

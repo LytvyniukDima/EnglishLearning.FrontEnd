@@ -24,4 +24,8 @@ export class GrammarAnalyseContainerComponent implements OnInit {
   onOpenAnalyse(id: string) {
     this.router.navigate([`../analyse/${id}`], { relativeTo: this.route })
   }
+
+  onGenerateTasks(id: string) {
+    this.router.navigate([`../generate/task-items/${id}`], { relativeTo: this.route })
+  }
 }
