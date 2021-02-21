@@ -76,8 +76,6 @@ export class TasksListComponent implements OnInit {
         this.grammarPartsFromSearch.push(key);
     })
 
-    this.grammarPartsFromSearch = this.tasksMapper.mapToApiGrammarParts(this.grammarPartsFromSearch);
-
     console.log(this.grammarPartsFromSearch);
 
     if (this.englishLevelsFromSearch.length > 0 || this.grammarPartsFromSearch.length > 0) {
@@ -120,8 +118,6 @@ export class TasksListComponent implements OnInit {
     } else {
       this.grammarPartsMap.set(value, false);
     }
-
-    console.log(event);
   }
 
   onScroll() {

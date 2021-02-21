@@ -79,7 +79,7 @@ export class TaskBracketsComponent implements OnInit {
     completedTask.contentId = this.task.id;
     completedTask.englishLevel = this.task.englishLevel;
     completedTask.date = new Date(Date.now());
-    completedTask.grammarPart = this.taskMapper.parseGrammarPart(this.task.grammarPart);
+    completedTask.grammarPart = this.task.grammarPart;
     completedTask.correctAnswers = this.resultModel.correct;
     completedTask.incorrectAnswers = this.resultModel.incorrect;
 

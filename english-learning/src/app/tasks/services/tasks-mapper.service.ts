@@ -18,7 +18,6 @@ export class TasksMapperService {
     }
 
     public fixNamingsForInfoModel(infoModel: EnglishTaskInfoModel): EnglishTaskInfoModel {
-        infoModel.grammarPart = this.parseGrammarPart(infoModel.grammarPart);
         infoModel.taskType = this.parseTaskType(infoModel.taskType);
 
         return infoModel;
@@ -41,47 +40,13 @@ export class TasksMapperService {
 
     public getAllEnglishLevels(): string[] {
         return [
+            "None",
             "Elementary",
             "PreIntermediate",
             'Intermediate',
             'UpperIntermediate',
             'Advanced'
         ]
-    }
-
-    public parseGrammarPart(grammarPart: string): string {
-        switch (grammarPart) {
-            case 'PRSimple': {
-                return 'Present Simple'
-            }
-            case 'PRContinuous': {
-                return 'Present Continuous';
-            }
-            case 'AllSentences': {
-                return 'All Sentences'
-            }
-            case 'Test': {
-                return 'Test'
-            }
-            case 'PrSimpleAndPrContinuous': {
-                return 'Present Simple and Present Continuous'
-            }
-            case 'FuturePlans': {
-                return 'Future Plans'
-            }
-            case 'QuestionTags': {
-                return 'Question Tags'
-            }
-            case 'PossessiveAdjectives': {
-                return 'Possessive Adjectives'
-            }
-            case 'PRPerfect': {
-                return 'Present Perfect'
-            }
-            default: {
-                return grammarPart;
-            }
-        }
     }
 
     public parseTaskType(taskType: string): string {
@@ -106,48 +71,6 @@ export class TasksMapperService {
             }
             default: {
                 return taskType;
-            }
-        }
-    }
-
-    public mapToApiGrammarParts(grammarParts: string[]): string[] {
-        for (let i = 0; i < grammarParts.length; i++)
-            grammarParts[i] = this.mapToApiGrammarPart(grammarParts[i]);
-
-        return grammarParts;
-    }
-
-    public mapToApiGrammarPart(grammarPart: string): string {
-        switch (grammarPart) {
-            case 'Present Simple': {
-                return 'PRSimple'
-            }
-            case 'Present Continuous': {
-                return 'PRContinuous';
-            }
-            case 'All Sentences': {
-                return 'AllSentences'
-            }
-            case 'Test': {
-                return 'Test'
-            }
-            case 'Present Simple and Present Continuous': {
-                return 'PrSimpleAndPrContinuous'
-            }
-            case 'Future Plans': {
-                return 'FuturePlans'
-            }
-            case 'Question Tags': {
-                return 'QuestionTags'
-            }
-            case 'Possessive Adjectives': {
-                return 'PossessiveAdjectives'
-            }
-            case 'Present Perfect': {
-                return 'PRPerfect'
-            }
-            default: {
-                return grammarPart;
             }
         }
     }
