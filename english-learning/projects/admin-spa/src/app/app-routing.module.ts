@@ -21,6 +21,11 @@ const routes: Routes = [
     canActivate: [AdminGuardService],
     loadChildren: () => import('./grammar-analyse/grammar-analyse.module').then(m => m.GrammaranalyseModule)
   },
+  {
+    path: 'tasks',
+    canActivate: [AdminGuardService],
+    loadChildren: () => import('./tasks/tasks.module').then(m => m.TasksModule)
+  },
   { path: 'sign_in', component: SignInComponent },
   { path: 'sign_up', component: SignUpComponent }
 ];
