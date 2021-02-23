@@ -1,9 +1,9 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { TaskItemsListContainerComponent } from "./components/task-items-list-container/task-items-list-container.component";
+import { TaskItemsListComponent } from "./components/task-items-list/task-items-list.component";
 
 const routes: Routes = [
-    { path: 'items', component: TaskItemsListContainerComponent },
+    { path: 'items', component: TaskItemsListComponent },
 ];
 
 @NgModule({
