@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { TaskItemModel } from '../../models/task-item.model';
 import { TaskItemsParametersModel } from '../../models/task-items-parameters.model';
 import { TasksItemsApiService } from '../../services/tasks-items-api.service';
 
@@ -10,13 +11,15 @@ import { TasksItemsApiService } from '../../services/tasks-items-api.service';
 })
 export class TaskItemsListComponent implements OnInit {
   public filterOptions$: Observable<TaskItemsParametersModel>;
+  public taskItems$: Observable<TaskItemModel>;
 
-  public grammarPartsSet = new Set();
-  public sentTypesSet = new Set();
-  public taskTypesSet = new Set();
+  public grammarPartsSet = new Set<string>();
+  public sentTypesSet = new Set<string>();
+  public taskTypesSet = new Set<string>();
 
   constructor(private itemsApiService: TasksItemsApiService) { 
     this.filterOptions$ = this.itemsApiService.getFilterOptions();
+    this.taskItems$ = this.itemsApiService.getTaskItems(this.getSearchParameters());
   }
 
   ngOnInit(): void {
@@ -56,8 +59,18 @@ export class TaskItemsListComponent implements OnInit {
   }
 
   onSearch() {
-    console.log(this.taskTypesSet);
-    console.log(this.sentTypesSet);
-    console.log(this.grammarPartsSet);
-  } 
+    const parameters = this.getSearchParameters();
+
+    this.taskItems$ = this.itemsApiService.getTaskItems(parameters);
+  }
+
+  private getSearchParameters(): TaskItemsParametersModel {
+    const parameters: TaskItemsParametersModel = {
+      grammarPart: Array.from(this.grammarPartsSet),
+      sentType: Array.from(this.sentTypesSet),
+      taskType: Array.from(this.taskTypesSet),
+    };
+
+    return parameters;
+  }
 }
