@@ -52,6 +52,7 @@
         </div>
     </div>
     <div class="col-9 container-tasks">
-        {{ taskItems$ | async }}
+        <admin-task-items-tree [taskItems]="taskItems$ | async">
+        </admin-task-items-tree>
     </div>
 </div>
