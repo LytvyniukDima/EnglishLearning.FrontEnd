@@ -4,11 +4,12 @@ import { TaskItemsListComponent } from './components/task-items-list/task-items-
 import { TasksRoutingModule } from './tasks-routing.module';
 import { TaskItemsTreeComponent } from './components/task-items-tree/task-items-tree.component';
 import { AgGridModule } from 'ag-grid-angular';
+import { CreateTaskFormComponent } from './components/create-task-form/create-task-form.component';
 
 
 
 @NgModule({
-  declarations: [TaskItemsListComponent, TaskItemsTreeComponent],
+  declarations: [TaskItemsListComponent, TaskItemsTreeComponent, CreateTaskFormComponent],
   imports: [
     CommonModule,
     TasksRoutingModule,
