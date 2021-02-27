@@ -7,6 +7,7 @@ import { AgGridModule } from 'ag-grid-angular';
 import { CreateTaskFormComponent } from './components/create-task-form/create-task-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SelectTaskItemsContainerComponent } from './components/select-task-items-container/select-task-items-container.component';
+import { SelectTaskItemsListComponent } from './components/select-task-items-list/select-task-items-list.component';
 
 
 
@@ -15,7 +16,8 @@ import { SelectTaskItemsContainerComponent } from './components/select-task-item
     TaskItemsListComponent,
     TaskItemsTreeComponent,
     CreateTaskFormComponent,
-    SelectTaskItemsContainerComponent
+    SelectTaskItemsContainerComponent,
+    SelectTaskItemsListComponent
   ],
   imports: [
     CommonModule,
