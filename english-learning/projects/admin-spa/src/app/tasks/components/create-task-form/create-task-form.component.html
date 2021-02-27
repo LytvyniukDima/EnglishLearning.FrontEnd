@@ -78,7 +78,13 @@
                     </ngContainer>
 
                     <ngContainer *ngIf="!isGenerateFromRandomTasks">
-                        <admin-select-task-items-container>
+                        <div *ngIf="isTaskItemsSelectedIncorrect">
+                            <div class="items-count-error">
+                                Number of items in Task must be from 6 to 12.
+                            </div>
+                        </div>
+
+                        <admin-select-task-items-container (selctedItemsChanged)="onSelectedItemsChanged($event)">
                         </admin-select-task-items-container>
                     </ngContainer>
 

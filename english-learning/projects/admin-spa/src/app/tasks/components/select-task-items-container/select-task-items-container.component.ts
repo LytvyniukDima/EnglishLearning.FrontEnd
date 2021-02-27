@@ -17,7 +17,7 @@ export class SelectTaskItemsContainerComponent implements OnInit {
   public sentTypesSet = new Set<string>();
   public taskTypesSet = new Set<string>();
 
-  @Output() selctedItems = new EventEmitter<string>();
+  @Output() selctedItemsChanged = new EventEmitter<string[]>();
 
   constructor(private itemsApiService: TasksItemsApiService) { 
     this.filterOptions$ = this.itemsApiService.getFilterOptions();
@@ -74,5 +74,9 @@ export class SelectTaskItemsContainerComponent implements OnInit {
     };
 
     return parameters;
+  }
+
+  onSelectedItemsChanged(items: string[]) {
+    this.selctedItemsChanged.emit(items);
   }
 }

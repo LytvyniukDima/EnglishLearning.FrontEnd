@@ -28,12 +28,14 @@ export class CreateTaskFormComponent implements OnInit {
   public grammarParts: string[];
   public taskTypeMap: any;
 
+  public selectedItems: string[];
+
   constructor(
     private fb: FormBuilder,
     private staticValuesService: StaticTaskValuesService,
     private createTaskService: CreateTaskApiService,
     private router: Router,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {
     this.taskForm = fb.group({
       grammarPart: new FormControl("", [Validators.required]),
@@ -52,7 +54,7 @@ export class CreateTaskFormComponent implements OnInit {
   onCreateTasks() {
     this.taskForm.markAllAsTouched();
 
-    if (this.taskForm.invalid) {
+    if (this.taskForm.invalid || this.isTaskItemsSelectedIncorrect) {
       return;
     }
 
@@ -69,6 +71,7 @@ export class CreateTaskFormComponent implements OnInit {
 
   onChangedRandomBox(event) {
     const target = event.target;
+    this.selectedItems = [];
 
     if (target.checked) {
       this.isGenerateFromRandomTasks = true;
@@ -81,26 +84,44 @@ export class CreateTaskFormComponent implements OnInit {
     this.itemsCount = event.target.value;
   }
 
+  onSelectedItemsChanged(items: string[]) {
+    this.selectedItems = items;
+  }
+
   private createRandomTask() {
     const model: CreateTaskFromRandomModel = {
-      grammarPart: this.taskForm.controls['grammarPart'].value,
-      taskType: this.taskForm.controls['taskType'].value,
-      englishLevel: 'None',
+      grammarPart: this.taskForm.controls["grammarPart"].value,
+      taskType: this.taskForm.controls["taskType"].value,
+      englishLevel: "None",
       itemsCount: this.itemsCount,
     };
 
-    this.createTaskService.createFromRandomItems(model).pipe(
-      catchError((e) => {
+    this.createTaskService
+      .createFromRandomItems(model)
+      .pipe(
+        catchError((e) => {
+          this.isSendingRequest = true;
+          this.router.navigate(["../items"], { relativeTo: this.route });
+          return throwError(e);
+        })
+      )
+      .subscribe((x) => {
         this.isSendingRequest = true;
-        this.router.navigate(['../items'], { relativeTo: this.route });
-        return throwError(e);
-      })
-    ).subscribe(x => {
-      this.isSendingRequest = true;
-      this.router.navigate(['../items'], { relativeTo: this.route });
-    });
+        this.router.navigate(["../items"], { relativeTo: this.route });
+      });
   }
 
-  private createFromItems() {
+  get isTaskItemsSelectedIncorrect(): boolean {
+    if (this.isGenerateFromRandomTasks) {
+      return false;
+    }
+
+    return (
+      this.selectedItems === undefined ||
+      this.selectedItems.length < 6 ||
+      this.selectedItems.length > 12
+    );
   }
+
+  private createFromItems() {}
 }

@@ -7,9 +7,14 @@
         [defaultColDef]="defaultColDef"
         [treeData]="true"
         [animateRows]="true"
+        [autoGroupColumnDef]="autoGroupColumnDef"
         [groupDefaultExpanded]="groupDefaultExpanded"
         [getDataPath]="getDataPath"
         [getContextMenuItems]="getContextMenuItems"
-        (gridReady)="onGridReady($event)">
+        [getRowNodeId]="getRowNodeId"
+        [rowSelection]="'multiple'"
+        [suppressRowClickSelection]="true"
+        (gridReady)="onGridReady($event)"
+        (selectionChanged)="onSelectionChanged()">
     </ag-grid-angular>
 </div>

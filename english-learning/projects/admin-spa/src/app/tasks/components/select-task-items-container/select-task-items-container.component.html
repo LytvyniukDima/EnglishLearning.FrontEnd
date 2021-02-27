@@ -52,7 +52,9 @@
         </div>
     </div>
     <div class="col-9 container-tasks">
-        <admin-select-task-items-list [taskItems]="taskItems$ | async">
+        <admin-select-task-items-list
+            [taskItems]="taskItems$ | async"
+            (selectedItemsChanged)="onSelectedItemsChanged($event)">
         </admin-select-task-items-list>
     </div>
 </div>
