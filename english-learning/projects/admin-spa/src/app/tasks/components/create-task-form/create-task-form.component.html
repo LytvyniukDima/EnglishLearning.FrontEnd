@@ -5,9 +5,7 @@
         </div>
 
         <div class="row">
-            <div class="col-1"></div>
-
-            <div class="col-10">
+            <div class="col-12">
                 <form class="needs-validation" [formGroup]="taskForm" (ngSubmit)="onCreateTasks()" novalidate>
                     <div class="row form-line">
                         <label for="grammarPart" class="field-header">Grammar part:</label>
@@ -77,6 +75,11 @@
                                     (change)="onChangeItemsCount($event)">
                             </div>
                         </div>
+                    </ngContainer>
+
+                    <ngContainer *ngIf="!isGenerateFromRandomTasks">
+                        <admin-select-task-items-container>
+                        </admin-select-task-items-container>
                     </ngContainer>
 
                     <div class="form-line">

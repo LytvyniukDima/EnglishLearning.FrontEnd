@@ -1,0 +1,58 @@
+<div class="row">
+    <div class="col-3 container-filter">
+        <div class="col">
+            <div class="filter-header">
+                <h3>Filter</h3>
+            </div>
+            <ng-container *ngIf="filterOptions$ | async as filterOptions">
+                <ng-container
+                    *ngIf="filterOptions.grammarPart !== undefined && filterOptions.grammarPart !== null && filterOptions.grammarPart.length > 0">
+                    <fieldset class="form-group">
+                        <h5 class="filter-item-header">Grammar parts</h5>
+                        <div class="form-check" *ngFor="let grammarItem of filterOptions.grammarPart">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" [value]="grammarItem"
+                                    (change)="onChangedGrammarPartBox($event)">
+                                {{grammarItem}}
+                            </label>
+                        </div>
+                    </fieldset>
+                    <hr>
+                </ng-container>
+                <ng-container
+                    *ngIf="filterOptions.sentType !== undefined && filterOptions.sentType !== null && filterOptions.sentType.length > 0">
+                    <fieldset class="form-group">
+                        <h5 class="filter-item-header">Types of Sentence</h5>
+                        <div class="form-check" *ngFor="let sentItem of filterOptions.sentType">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" [value]="sentItem"
+                                    (change)="onChagedSentTypeBox($event)">
+                                {{sentItem}}
+                            </label>
+                        </div>
+                    </fieldset>
+                    <hr>
+                </ng-container>
+                <ng-container
+                    *ngIf="filterOptions.taskType !== undefined && filterOptions.taskType !== null && filterOptions.taskType.length > 0">
+                    <fieldset class="form-group">
+                        <h5 class="filter-item-header">Types of Task</h5>
+                        <div class="form-check" *ngFor="let taskItem of filterOptions.taskType">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" [value]="taskItem"
+                                    (change)="onChagedTaskTypeBox($event)">
+                                {{taskItem}}
+                            </label>
+                        </div>
+                    </fieldset>
+                    <hr>
+                </ng-container>
+                <button type="button" class="btn btn-info" id="search-btn" (click)="onSearch()">Search</button>
+            </ng-container>
+        </div>
+    </div>
+    <div class="col-9 container-tasks">
+        <admin-task-items-tree [taskItems]="taskItems$ | async">
+        </admin-task-items-tree>
+    </div>
+</div>
