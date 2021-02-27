@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { StaticTaskValuesService } from "../../../common/tasks/static-task-values.service";
+import { CreateTaskFromItemsModel } from "../../models/create-task-from-items.model";
 import { CreateTaskFromRandomModel } from "../../models/create-task-from-random.model";
 import { CreateTaskApiService } from "../../services/create-task-api.service";
 
@@ -88,6 +89,18 @@ export class CreateTaskFormComponent implements OnInit {
     this.selectedItems = items;
   }
 
+  get isTaskItemsSelectedIncorrect(): boolean {
+    if (this.isGenerateFromRandomTasks) {
+      return false;
+    }
+
+    return (
+      this.selectedItems === undefined ||
+      this.selectedItems.length < 6 ||
+      this.selectedItems.length > 12
+    );
+  }
+
   private createRandomTask() {
     const model: CreateTaskFromRandomModel = {
       grammarPart: this.taskForm.controls["grammarPart"].value,
@@ -111,17 +124,26 @@ export class CreateTaskFormComponent implements OnInit {
       });
   }
 
-  get isTaskItemsSelectedIncorrect(): boolean {
-    if (this.isGenerateFromRandomTasks) {
-      return false;
-    }
+  private createFromItems() {
+    const model: CreateTaskFromItemsModel = {
+      grammarPart: this.taskForm.controls["grammarPart"].value,
+      taskType: this.taskForm.controls["taskType"].value,
+      englishLevel: "None",
+      items: this.selectedItems,
+    };
 
-    return (
-      this.selectedItems === undefined ||
-      this.selectedItems.length < 6 ||
-      this.selectedItems.length > 12
-    );
+    this.createTaskService
+    .createFromItems(model)
+    .pipe(
+      catchError((e) => {
+        this.isSendingRequest = true;
+        this.router.navigate(["../items"], { relativeTo: this.route });
+        return throwError(e);
+      })
+    )
+    .subscribe((x) => {
+      this.isSendingRequest = true;
+      this.router.navigate(["../items"], { relativeTo: this.route });
+    });
   }
-
-  private createFromItems() {}
 }

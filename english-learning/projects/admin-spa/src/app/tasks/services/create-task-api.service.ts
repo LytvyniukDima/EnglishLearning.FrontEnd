@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
+import { CreateTaskFromItemsModel } from "../models/create-task-from-items.model";
 import { CreateTaskFromRandomModel } from "../models/create-task-from-random.model";
 
 @Injectable({
@@ -21,5 +22,9 @@ export class CreateTaskApiService {
         const url = `${this.baseTaskFromItemsPath}/random`;
 
         return this.httpClient.post(url, model);
+    }
+
+    createFromItems(model: CreateTaskFromItemsModel): Observable<any> {
+        return this.httpClient.post(this.baseTaskFromItemsPath, model);
     }
 }
