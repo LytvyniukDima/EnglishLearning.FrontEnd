@@ -5,6 +5,7 @@ import { TasksRoutingModule } from './tasks-routing.module';
 import { TaskItemsTreeComponent } from './components/task-items-tree/task-items-tree.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { CreateTaskFormComponent } from './components/create-task-form/create-task-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -14,6 +15,7 @@ import { CreateTaskFormComponent } from './components/create-task-form/create-ta
     CommonModule,
     TasksRoutingModule,
     AgGridModule.withComponents([]),
+    ReactiveFormsModule,
   ]
 })
 export class TasksModule { }

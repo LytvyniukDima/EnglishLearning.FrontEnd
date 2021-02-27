@@ -1,1 +1,101 @@
-<p>create-task-form works!</p>
+<ng-container *ngIf="!isSendingRequest">
+    <div class="container">
+        <div class="py-5 text-center">
+            <h2>Create task</h2>
+        </div>
+
+        <div class="row">
+            <div class="col-1"></div>
+
+            <div class="col-10">
+                <form class="needs-validation" [formGroup]="taskForm" (ngSubmit)="onCreateTasks()" novalidate>
+                    <div class="row form-line">
+                        <label for="grammarPart" class="field-header">Grammar part:</label>
+                    </div>
+                    <div class="row form-line">
+                        <div class="col-md-3 input-container">
+                            <select class="custom-select" formControlName="grammarPart">
+                                <option value="" disabled>Choose Grammar Part</option>
+                                <option *ngFor="let part of grammarParts" [value]="part">
+                                    {{part}}
+                                </option>
+                            </select>
+
+                            <div *ngIf="getFormControl('grammarPart').invalid">
+                                <div *ngIf="getFormControl('grammarPart').errors.required && (getFormControl('grammarPart').dirty ||  getFormControl('grammarPart').touched)"
+                                    class="form-error">
+                                    Grammar Part is required.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row form-line">
+                        <label for="taskType" class="field-header">Type of Task:</label>
+                    </div>
+                    <div class="row form-line">
+                        <div class="col-md-3 input-container">
+                            <select class="custom-select" formControlName="taskType">
+                                <option value="" disabled>Choose Type of Task</option>
+                                <option *ngFor="let taskType of taskTypeMap" [value]="taskType[0]">
+                                    {{taskType[1]}}
+                                </option>
+                            </select>
+
+                            <div *ngIf="getFormControl('taskType').invalid">
+                                <div *ngIf="getFormControl('taskType').errors.required && (getFormControl('taskType').dirty ||  getFormControl('taskType').touched)"
+                                    class="form-error">
+                                    Type of Task is required.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row form-line form-group">
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" id="randomTask"
+                                (change)="onChangedRandomBox($event)" checked>
+                            <label class="custom-control-label field-header" for="randomTask">
+                                Generate task from random items
+                            </label>
+                        </div>
+                    </div>
+
+                    <ngContainer *ngIf="isGenerateFromRandomTasks">
+                        <div class="row form-line">
+                            <label for="itemsCount" class="field-header">Items count:</label>
+                        </div>
+                        <div class="row form-line">
+                            <div class="col-md-3 input-container">
+                                <input 
+                                    class="form-control"
+                                    type="number"
+                                    id="itemsCount"
+                                    min="6"
+                                    max="12"
+                                    [value]="itemsCount"
+                                    (change)="onChangeItemsCount($event)">
+                            </div>
+                        </div>
+                    </ngContainer>
+
+                    <div class="form-line">
+                        <button class="btn btn-primary btn-lg btn-block" type="submit">
+                            Create Task
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="isSendingRequest">
+    <div class="spinner-container">
+        <div class="flex-item">
+            <div class="spinner-border text-primary spinner-item" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </div>
+</ng-container>

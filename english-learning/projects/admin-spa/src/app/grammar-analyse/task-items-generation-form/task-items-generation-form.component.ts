@@ -33,7 +33,7 @@ export class TaskItemsGenerationFormComponent implements OnInit {
     private fb: FormBuilder,
     private staticValuesService: StaticTaskValuesService,
     private taskGenerationService: TaskGenerationApiService,
-  ) { 
+  ) {
     this.taskItemsForm = fb.group(
       {
         generationName: new FormControl('', [Validators.required, Validators.maxLength(80), Validators.pattern('^[a-zA-Z0-9_() ]+$')]),
@@ -53,7 +53,6 @@ export class TaskItemsGenerationFormComponent implements OnInit {
   }
 
   onGenerateTasks() {
-    console.log('soasdfas')
     this.taskItemsForm.markAllAsTouched();
 
     if (this.taskItemsForm.invalid) {
