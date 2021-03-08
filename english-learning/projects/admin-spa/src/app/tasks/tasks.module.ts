@@ -10,6 +10,7 @@ import { SelectTaskItemsContainerComponent } from './components/select-task-item
 import { SelectTaskItemsListComponent } from './components/select-task-items-list/select-task-items-list.component';
 import { TaskListContainerComponent } from './components/task-list-container/task-list-container.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
+import { TaskDetailsComponent } from './components/task-details/task-details.component';
 
 
 
@@ -21,12 +22,13 @@ import { TaskListComponent } from './components/task-list/task-list.component';
     SelectTaskItemsContainerComponent,
     SelectTaskItemsListComponent,
     TaskListContainerComponent,
-    TaskListComponent
+    TaskListComponent,
+    TaskDetailsComponent
   ],
   imports: [
     CommonModule,
     TasksRoutingModule,
-    AgGridModule.withComponents([]),
+    AgGridModule.withComponents([TaskDetailsComponent]),
     ReactiveFormsModule,
   ]
 })

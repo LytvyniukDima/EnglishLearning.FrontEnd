@@ -3,6 +3,7 @@ import { TaskModel } from "../../models/task.model";
 import 'ag-grid-enterprise';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
+import { TaskDetailsComponent } from "../task-details/task-details.component";
 
 @Component({
     selector: 'admin-task-list',
@@ -19,6 +20,7 @@ export class TaskListComponent implements OnInit {
     {
       field: 'grammarPart',
       suppressMenu: true,
+			cellRenderer: 'agGroupCellRenderer',
     },
 		{
       field: 'taskType',
@@ -34,6 +36,8 @@ export class TaskListComponent implements OnInit {
     },
   ];
   public defaultColDef = { flex: 1 };
+	public detailCellRenderer = 'myDetailCellRenderer';
+	public frameworkComponents = { myDetailCellRenderer: TaskDetailsComponent };
 
 	constructor() { }
 
