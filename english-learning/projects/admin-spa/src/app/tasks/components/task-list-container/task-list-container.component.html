@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col-3 container-filter">
+        <div class="col">
+            <div class="filter-header">
+                <h3>Filter</h3>
+            </div>
+            <ng-container *ngIf="filterOptions$ | async as filterOptions">
+                <fieldset class="form-group">
+                    <h5 class="filter-item-header">Grammar parts</h5>
+                    <div class="form-check" *ngFor="let grammarItem of getGrammarParts(filterOptions)">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" [value]="grammarItem"
+                                (change)="onChangedGrammarPartBox($event)">
+                            {{grammarItem}}
+                        </label>
+                    </div>
+                </fieldset>
+                <hr>
+                <fieldset class="form-group">
+                    <h5 class="filter-item-header">English Level</h5>
+                    <div class="form-check" *ngFor="let englishLevel of getEnglishLevels(filterOptions)">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" [value]="englishLevel"
+                                (change)="onChagedEnglishLevelBox($event)">
+                            {{englishLevel}}
+                        </label>
+                    </div>
+                </fieldset>
+                <hr>
+                <fieldset class="form-group">
+                    <h5 class="filter-item-header">Types of Task</h5>
+                    <div class="form-check" *ngFor="let taskItem of getTaskTypes(filterOptions)">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" [value]="taskItem"
+                                (change)="onChagedTaskTypeBox($event)">
+                            {{taskItem}}
+                        </label>
+                    </div>
+                </fieldset>
+                <hr>
+                <button type="button" class="btn btn-info" id="search-btn" (click)="onSearch()">Search</button>
+            </ng-container>
+        </div>
+    </div>
+    <div class="col-9 container-tasks">
+    </div>
+</div>
