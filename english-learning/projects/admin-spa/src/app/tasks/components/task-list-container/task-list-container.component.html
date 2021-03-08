@@ -43,5 +43,7 @@
         </div>
     </div>
     <div class="col-9 container-tasks">
+        <admin-task-list [tasks]="tasks$ | async">
+        </admin-task-list>
     </div>
 </div>

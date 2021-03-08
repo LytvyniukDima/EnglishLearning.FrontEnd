@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SelectTaskItemsContainerComponent } from './components/select-task-items-container/select-task-items-container.component';
 import { SelectTaskItemsListComponent } from './components/select-task-items-list/select-task-items-list.component';
 import { TaskListContainerComponent } from './components/task-list-container/task-list-container.component';
+import { TaskListComponent } from './components/task-list/task-list.component';
 
 
 
@@ -19,7 +20,8 @@ import { TaskListContainerComponent } from './components/task-list-container/tas
     CreateTaskFormComponent,
     SelectTaskItemsContainerComponent,
     SelectTaskItemsListComponent,
-    TaskListContainerComponent
+    TaskListContainerComponent,
+    TaskListComponent
   ],
   imports: [
     CommonModule,
