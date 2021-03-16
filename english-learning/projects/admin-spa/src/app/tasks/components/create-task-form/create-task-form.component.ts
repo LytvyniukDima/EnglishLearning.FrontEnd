@@ -12,6 +12,7 @@ import { catchError } from "rxjs/operators";
 import { StaticTaskValuesService } from "../../../common/tasks/static-task-values.service";
 import { CreateTaskFromItemsModel } from "../../models/create-task-from-items.model";
 import { CreateTaskFromRandomModel } from "../../models/create-task-from-random.model";
+import { TaskItemsParametersModel } from "../../models/task-items-parameters.model";
 import { CreateTaskApiService } from "../../services/create-task-api.service";
 
 @Component({
@@ -28,6 +29,7 @@ export class CreateTaskFormComponent implements OnInit {
 
   public grammarParts: string[];
   public taskTypeMap: any;
+  public englishLevels: string[];
 
   public selectedItems: string[];
 
@@ -41,6 +43,7 @@ export class CreateTaskFormComponent implements OnInit {
     this.taskForm = fb.group({
       grammarPart: new FormControl("", [Validators.required]),
       taskType: new FormControl("", [Validators.required]),
+      englishLevel: new FormControl("", [Validators.required])
     });
 
     this.grammarParts = this.staticValuesService.getAllGrammaprParts();
@@ -48,6 +51,7 @@ export class CreateTaskFormComponent implements OnInit {
       val.key,
       val.value,
     ]);
+    this.englishLevels = this.staticValuesService.getAllEnglishLevelsWithoutNone();
   }
 
   ngOnInit(): void {}
@@ -105,7 +109,7 @@ export class CreateTaskFormComponent implements OnInit {
     const model: CreateTaskFromRandomModel = {
       grammarPart: this.taskForm.controls["grammarPart"].value,
       taskType: this.taskForm.controls["taskType"].value,
-      englishLevel: "None",
+      englishLevel: this.taskForm.controls["englishLevel"].value,
       itemsCount: this.itemsCount,
     };
 
@@ -128,7 +132,7 @@ export class CreateTaskFormComponent implements OnInit {
     const model: CreateTaskFromItemsModel = {
       grammarPart: this.taskForm.controls["grammarPart"].value,
       taskType: this.taskForm.controls["taskType"].value,
-      englishLevel: "None",
+      englishLevel: this.taskForm.controls["englishLevel"].value,
       items: this.selectedItems,
     };
 

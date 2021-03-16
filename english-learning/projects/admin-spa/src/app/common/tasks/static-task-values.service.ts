@@ -30,6 +30,16 @@ export class StaticTaskValuesService {
         ];
     }
 
+    public getAllEnglishLevelsWithoutNone(): string[] {
+        return [
+            "Elementary",
+            "PreIntermediate",
+            'Intermediate',
+            'UpperIntermediate',
+            'Advanced'
+        ];
+    }
+
     public parseTaskType(taskType: string): string {
         switch (taskType) {
             case 'SimpleBrackets': {

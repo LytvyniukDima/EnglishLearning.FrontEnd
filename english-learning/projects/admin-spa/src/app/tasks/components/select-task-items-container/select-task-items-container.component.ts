@@ -16,6 +16,7 @@ export class SelectTaskItemsContainerComponent implements OnInit {
   public grammarPartsSet = new Set<string>();
   public sentTypesSet = new Set<string>();
   public taskTypesSet = new Set<string>();
+  public englishLevelSet = new Set<string>();
 
   @Output() selctedItemsChanged = new EventEmitter<string[]>();
 
@@ -60,6 +61,17 @@ export class SelectTaskItemsContainerComponent implements OnInit {
     }
   }
 
+  onChagedEnglishLevel(event) {
+    let target = event.target;
+    let value = target.value;
+
+    if (target.checked) {
+      this.englishLevelSet.add(value);
+    } else {
+      this.englishLevelSet.delete(value);
+    }
+  }
+
   onSearch() {
     const parameters = this.getSearchParameters();
 
@@ -71,6 +83,7 @@ export class SelectTaskItemsContainerComponent implements OnInit {
       grammarPart: Array.from(this.grammarPartsSet),
       sentType: Array.from(this.sentTypesSet),
       taskType: Array.from(this.taskTypesSet),
+      englishLevel: Array.from(this.englishLevelSet),
     };
 
     return parameters;

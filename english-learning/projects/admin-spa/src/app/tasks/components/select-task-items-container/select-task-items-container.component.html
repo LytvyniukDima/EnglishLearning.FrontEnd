@@ -47,6 +47,20 @@
                     </fieldset>
                     <hr>
                 </ng-container>
+                <ng-container
+                    *ngIf="filterOptions.englishLevel !== undefined && filterOptions.englishLevel !== null && filterOptions.englishLevel.length > 0">
+                    <fieldset class="form-group">
+                        <h5 class="filter-item-header">Level</h5>
+                        <div class="form-check" *ngFor="let level of filterOptions.englishLevel">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" [value]="level"
+                                    (change)="onChagedEnglishLevel($event)">
+                                {{level}}
+                            </label>
+                        </div>
+                    </fieldset>
+                    <hr>
+                </ng-container>
                 <button type="button" class="btn btn-info" id="search-btn" (click)="onSearch()">Search</button>
             </ng-container>
         </div>

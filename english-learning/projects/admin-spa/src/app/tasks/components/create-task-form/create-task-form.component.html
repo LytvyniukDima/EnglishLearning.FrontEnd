@@ -49,6 +49,27 @@
                         </div>
                     </div>
 
+                    <div class="row form-line">
+                        <label for="englishLevel" class="field-header">Level:</label>
+                    </div>
+                    <div class="row form-line">
+                        <div class="col-md-3 input-container">
+                            <select class="custom-select" formControlName="englishLevel">
+                                <option value="" disabled>Choose Level</option>
+                                <option *ngFor="let englishLevel of englishLevels" [value]="englishLevel">
+                                    {{englishLevel}}
+                                </option>
+                            </select>
+
+                            <div *ngIf="getFormControl('englishLevel').invalid">
+                                <div *ngIf="getFormControl('englishLevel').errors.required && (getFormControl('englishLevel').dirty ||  getFormControl('englishLevel').touched)"
+                                    class="form-error">
+                                    Level is required.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row form-line form-group">
                         <div class="custom-control custom-checkbox">
                             <input class="custom-control-input" type="checkbox" id="randomTask"
@@ -65,14 +86,8 @@
                         </div>
                         <div class="row form-line">
                             <div class="col-md-3 input-container">
-                                <input 
-                                    class="form-control"
-                                    type="number"
-                                    id="itemsCount"
-                                    min="6"
-                                    max="12"
-                                    [value]="itemsCount"
-                                    (change)="onChangeItemsCount($event)">
+                                <input class="form-control" type="number" id="itemsCount" min="6" max="12"
+                                    [value]="itemsCount" (change)="onChangeItemsCount($event)">
                             </div>
                         </div>
                     </ngContainer>
