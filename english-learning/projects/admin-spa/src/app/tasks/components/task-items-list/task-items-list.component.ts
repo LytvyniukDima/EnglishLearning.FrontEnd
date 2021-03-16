@@ -16,6 +16,7 @@ export class TaskItemsListComponent implements OnInit {
   public grammarPartsSet = new Set<string>();
   public sentTypesSet = new Set<string>();
   public taskTypesSet = new Set<string>();
+  public englishLevelSet = new Set<string>();
 
   constructor(private itemsApiService: TasksItemsApiService) { 
     this.filterOptions$ = this.itemsApiService.getFilterOptions();
@@ -58,6 +59,17 @@ export class TaskItemsListComponent implements OnInit {
     }
   }
 
+  onChangedEnglishLevelBox(event) {
+    let target = event.target;
+    let value = target.value;
+
+    if (target.checked) {
+      this.englishLevelSet.add(value);
+    } else {
+      this.englishLevelSet.delete(value);
+    }
+  }
+
   onSearch() {
     const parameters = this.getSearchParameters();
 
@@ -69,6 +81,7 @@ export class TaskItemsListComponent implements OnInit {
       grammarPart: Array.from(this.grammarPartsSet),
       sentType: Array.from(this.sentTypesSet),
       taskType: Array.from(this.taskTypesSet),
+      englishLevel: Array.from(this.englishLevelSet),
     };
 
     return parameters;

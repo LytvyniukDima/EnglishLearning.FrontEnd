@@ -29,6 +29,7 @@ export class TasksItemsApiService {
             grammarPart: parameters.grammarPart,
             sentType: parameters.sentType,
             taskType: parameters.taskType,
+            englishLevel: parameters.englishLevel,
         };
 
         return this.httpClient.get<TaskItemModel>(this.baseItemsPath, { params });
