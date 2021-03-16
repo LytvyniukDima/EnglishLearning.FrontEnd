@@ -6,5 +6,6 @@ export interface TaskItemModel {
     grammarPart: string;
     taskType: string;
     sentType: string;
+    englishLevel: string;
     content: string;
 }

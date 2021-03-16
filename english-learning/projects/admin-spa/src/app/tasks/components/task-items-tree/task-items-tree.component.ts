@@ -31,8 +31,9 @@ export class TaskItemsTreeComponent implements OnInit {
   public groupDefaultExpanded = -1;
   public getDataPath = function (data: TaskItemModel) {
     const fullPath = [];
-    fullPath.push(data.taskType);
+    fullPath.push(data.englishLevel);
     fullPath.push(data.grammarPart);
+    fullPath.push(data.taskType);
     fullPath.push(data.sentType);
     fullPath.push(data.generationName);
     fullPath.push(data.id);
