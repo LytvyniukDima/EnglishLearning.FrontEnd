@@ -15,6 +15,12 @@ export class GrammarAnalyseItemsComponent implements OnInit {
 
   public columnDefs = [
     { 
+      field: 'englishLevel',
+      suppressMenu: true,
+      rowGroup: true,
+      hide: true
+    },
+    { 
       field: 'sentType',
       suppressMenu: true,
       rowGroup: true,

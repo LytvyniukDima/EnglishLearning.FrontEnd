@@ -5,5 +5,6 @@ export interface ParsedSentModel {
     analyseId: string;
     sent: string;
     sentType: string;
+    englishLevel: string;
     tokens: SentTokenModel[];
 }
