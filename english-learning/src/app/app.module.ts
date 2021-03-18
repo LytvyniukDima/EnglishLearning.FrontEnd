@@ -9,6 +9,7 @@ import { AuthorizationModule } from './authorization/authorization.module';
 import { TasksModule } from './tasks/tasks.module';
 import { MultimediaModule } from './multimedia/multimedia.module';
 import { StatisticModule } from './statistic/statistic.module';
+import { DictionaryModule } from './dictionary/dictionary.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { StatisticModule } from './statistic/statistic.module';
     AuthorizationModule,
     TasksModule,
     MultimediaModule,
-    StatisticModule
+    StatisticModule,
+    DictionaryModule
   ],
   providers: [
     
