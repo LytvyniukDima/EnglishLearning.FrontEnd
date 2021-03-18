@@ -7,22 +7,24 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./word-container.component.css']
 })
 export class WordContainerComponent implements OnInit {
-  public word_param: string;
-  
-  public textSearch = "";
+  public word: string;
 
-  constructor(private route: ActivatedRoute,) { }
+  public textSearch: string;
+
+  constructor() { }
 
   ngOnInit(): void {
-    this.word_param = this.route.snapshot.paramMap.get('word');
-    console.log(this.word_param);
   }
 
   onSearch(): void {
-    console.log(this.textSearch);
+    this.word = this.textSearch;
   }
 
   onChangeSearchField(event) {
     this.textSearch = event.target.value;
+  }
+
+  isWordDefined(): boolean {
+    return this.word && !!this.word.trim();
   }
 }

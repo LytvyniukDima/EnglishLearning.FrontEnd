@@ -9,5 +9,10 @@
                 <button type="button" class="btn btn-info" id="search-btn" (click)="onSearch()">Search</button>
             </div>
         </div>
+
+        <ng-container *ngIf="isWordDefined">
+            <app-word-details-container [word]="word">
+            </app-word-details-container>
+        </ng-container>
     </div>
 </div>
