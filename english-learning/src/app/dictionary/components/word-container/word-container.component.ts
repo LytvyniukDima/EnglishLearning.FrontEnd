@@ -8,6 +8,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class WordContainerComponent implements OnInit {
   public word_param: string;
+  
+  public textSearch = "";
 
   constructor(private route: ActivatedRoute,) { }
 
@@ -16,4 +18,11 @@ export class WordContainerComponent implements OnInit {
     console.log(this.word_param);
   }
 
+  onSearch(): void {
+    console.log(this.textSearch);
+  }
+
+  onChangeSearchField(event) {
+    this.textSearch = event.target.value;
+  }
 }

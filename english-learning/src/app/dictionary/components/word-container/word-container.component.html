@@ -1,1 +1,13 @@
-<p>word-container works!</p>
+<div class="container">
+    <div class="word-container">
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-4 search-container">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" (change)="onChangeSearchField($event)">
+            </div>
+            <div>
+                <button type="button" class="btn btn-info" id="search-btn" (click)="onSearch()">Search</button>
+            </div>
+        </div>
+    </div>
+</div>
