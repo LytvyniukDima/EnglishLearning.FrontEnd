@@ -1,1 +1,9 @@
-<p>{{word}}</p>
+<ng-container *ngIf="wordSearch$ | async as wordSearch">
+    <ng-container *ngIf="wordSearch.word">
+        {{wordSearch.word}}
+    </ng-container>
+
+    <ng-container *ngIf="wordSearch.similarWords && wordSearch.similarWords.length > 0">
+        {{wordSearch.similarWords}}
+    </ng-container>
+</ng-container>

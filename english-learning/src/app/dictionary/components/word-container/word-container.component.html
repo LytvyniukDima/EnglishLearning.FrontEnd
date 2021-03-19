@@ -10,7 +10,7 @@
             </div>
         </div>
 
-        <ng-container *ngIf="isWordDefined">
+        <ng-container *ngIf="isWordDefined()">
             <app-word-details-container [word]="word">
             </app-word-details-container>
         </ng-container>

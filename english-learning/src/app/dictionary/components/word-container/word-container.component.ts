@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-word-container',
@@ -8,7 +7,6 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class WordContainerComponent implements OnInit {
   public word: string;
-
   public textSearch: string;
 
   constructor() { }
