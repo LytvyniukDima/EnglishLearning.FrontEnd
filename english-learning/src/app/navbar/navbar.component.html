@@ -24,6 +24,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" routerLink="dictionary/word">Search</a>
+          <a class="dropdown-item" routerLink="dictionary/list" *ngIf="authService.isAuthentificated">List</a>
         </div>
       </li>
     </ul>

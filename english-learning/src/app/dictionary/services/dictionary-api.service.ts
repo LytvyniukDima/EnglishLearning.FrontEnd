@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 import { AddWordListItemModel } from "../models/add-word-list-item.model";
+import { WordListItemModel } from "../models/word-list-item.model";
 import { WordSearchModel } from "../models/word-search.model";
 
 @Injectable({
@@ -28,5 +29,9 @@ export class DictionaryApiService {
 
     addWordToList(item: AddWordListItemModel): Observable<any> {
         return this.httpClient.post(this.baseWordListPath, item);
+    }
+
+    getWordList(): Observable<WordListItemModel> {
+        return this.httpClient.get<WordListItemModel>(this.baseWordListPath);
     }
 }
