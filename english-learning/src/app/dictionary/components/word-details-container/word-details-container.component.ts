@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { WordSearchModel } from '../../models/word-search.model';
 import { DictionaryApiService } from '../../services/dictionary-api.service';

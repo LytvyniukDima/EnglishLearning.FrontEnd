@@ -4,6 +4,31 @@
     </ng-container>
 
     <ng-container *ngIf="wordSearch.similarWords && wordSearch.similarWords.length > 0">
-        {{wordSearch.similarWords}}
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <div>
+                    <p class="info-text">Not found word "{{word}}".</p>
+                </div>
+                <div>
+                    <p class="info-text">Did you mean:</p>
+                </div>
+                <div>
+                    <app-word-list [words]="wordSearch.similarWords">
+                    </app-word-list>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="wordSearch.similarWords && wordSearch.similarWords.length === 0">
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <div>
+                    <p class="info-text">Not found word "{{word}}".</p>
+                </div>
+            </div>
+        </div>
     </ng-container>
 </ng-container>
