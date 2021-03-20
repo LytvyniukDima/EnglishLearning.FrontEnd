@@ -1,0 +1,29 @@
+<div class="card mb-3">
+    <h3 class="card-header">{{wordDetails.word}}</h3>
+    <ng-container *ngFor="let details of wordDetails.results">
+        <div class="card-body">
+            <h5 class="card-title">{{details.partOfSpeech}}</h5>
+            <div>
+                <p class="card-text">{{details.definition}}</p>
+            </div>
+
+            <ng-container *ngIf="details.examples && details.examples.length > 0">
+                <div class="content-container">
+                    <h6 class="card-subtitle text-muted">Examples:</h6>
+                    <div *ngFor="let example of details.examples">
+                        <em>{{example}}</em>
+                    </div>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="details.synonyms && details.synonyms.length > 0">
+                <div class="content-container">
+                    <h6 class="card-subtitle text-muted">Synonyms:</h6>
+                    <app-word-list [words]="details.synonyms">
+                    </app-word-list>
+                </div>
+            </ng-container>
+        </div>
+        <hr>
+    </ng-container>
+</div>

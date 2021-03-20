@@ -1,12 +1,12 @@
-<ng-container *ngIf="wordSearch$ | async as wordSearch">
-    <ng-container *ngIf="wordSearch.word">
-        {{wordSearch.word}}
-    </ng-container>
+<div class="row word-container">
+    <div class="col-2"></div>
+    <div class="col-8">
+        <ng-container *ngIf="wordSearch$ | async as wordSearch">
+            <ng-container *ngIf="wordSearch.word">
+                <app-word-details [wordDetails]="wordSearch.word"></app-word-details>
+            </ng-container>
 
-    <ng-container *ngIf="wordSearch.similarWords && wordSearch.similarWords.length > 0">
-        <div class="row">
-            <div class="col-2"></div>
-            <div class="col-8">
+            <ng-container *ngIf="wordSearch.similarWords && wordSearch.similarWords.length > 0">
                 <div>
                     <p class="info-text">Not found word "{{word}}".</p>
                 </div>
@@ -17,18 +17,13 @@
                     <app-word-list [words]="wordSearch.similarWords">
                     </app-word-list>
                 </div>
-            </div>
-        </div>
-    </ng-container>
+            </ng-container>
 
-    <ng-container *ngIf="wordSearch.similarWords && wordSearch.similarWords.length === 0">
-        <div class="row">
-            <div class="col-2"></div>
-            <div class="col-8">
+            <ng-container *ngIf="!wordSearch.word && wordSearch.similarWords && wordSearch.similarWords.length === 0">
                 <div>
                     <p class="info-text">Not found word "{{word}}".</p>
                 </div>
-            </div>
-        </div>
-    </ng-container>
-</ng-container>
+            </ng-container>
+        </ng-container>
+    </div>
+</div>
