@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AddWordListItemModel } from '../../models/add-word-list-item.model';
 import { WordSearchModel } from '../../models/word-search.model';
 import { DictionaryApiService } from '../../services/dictionary-api.service';
 
@@ -20,7 +21,10 @@ export class WordDetailsContainerComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-    console.error(this.word);
     this.wordSearch$ = this.apiService.searchWord(this.word);
+  }
+
+  onAddWordToList(item: AddWordListItemModel): void {
+    this.apiService.addWordToList(item).subscribe(() => {});
   }
 }

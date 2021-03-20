@@ -3,7 +3,9 @@
     <div class="col-8">
         <ng-container *ngIf="wordSearch$ | async as wordSearch">
             <ng-container *ngIf="wordSearch.word">
-                <app-word-details [wordDetails]="wordSearch.word"></app-word-details>
+                <app-word-details
+                [wordDetails]="wordSearch.word"
+                (addWordToList)="onAddWordToList($event)"></app-word-details>
             </ng-container>
 
             <ng-container *ngIf="wordSearch.similarWords && wordSearch.similarWords.length > 0">

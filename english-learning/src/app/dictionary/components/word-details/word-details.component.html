@@ -1,6 +1,6 @@
 <div class="card mb-3">
     <h3 class="card-header">{{wordDetails.word}}</h3>
-    <ng-container *ngFor="let details of wordDetails.results">
+    <ng-container *ngFor="let details of wordDetails.results; let detailsIndex = index">
         <div class="card-body">
             <h5 class="card-title">{{details.partOfSpeech}}</h5>
             <div>
@@ -23,6 +23,8 @@
                     </app-word-list>
                 </div>
             </ng-container>
+
+            <button type="button" class="btn btn-info" (click)="onAddWordToList(detailsIndex)" *ngIf="authService.isAuthentificated">Add to word list</button>
         </div>
         <hr>
     </ng-container>

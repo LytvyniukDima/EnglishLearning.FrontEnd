@@ -1,6 +1,6 @@
 import { WordDefinitionModel } from "./word-definition.model";
 
-export class WordDetailsModel {
+export class AddWordListItemModel {
     word: string;
-    results: WordDefinitionModel[];
+    wordDefinition: WordDefinitionModel;
 }
