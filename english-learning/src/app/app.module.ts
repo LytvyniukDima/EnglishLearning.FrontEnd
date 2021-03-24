@@ -10,6 +10,7 @@ import { TasksModule } from './tasks/tasks.module';
 import { MultimediaModule } from './multimedia/multimedia.module';
 import { StatisticModule } from './statistic/statistic.module';
 import { DictionaryModule } from './dictionary/dictionary.module';
+import { CourseModule } from './course/course.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { DictionaryModule } from './dictionary/dictionary.module';
     TasksModule,
     MultimediaModule,
     StatisticModule,
-    DictionaryModule
+    DictionaryModule,
+    CourseModule
   ],
   providers: [
     
