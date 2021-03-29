@@ -39,6 +39,21 @@ export class SignUpComponent implements OnInit {
       "Present Perfect"
   ];
 
+  videoTypes = [
+    "Audio Clip",
+    "Film Fragment",
+    "TED",
+    "Trailer",
+    "Cartoon Fragment"
+  ];
+
+  textTypes = [
+    "Tragedy fragment",
+    "Poem",
+    "Book Fragment",
+    "Story"
+  ];
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -131,8 +146,8 @@ export class SignUpComponent implements OnInit {
     signUpModel.password = this.validationForm.controls["password"].value;
     signUpModel.englishLevel = this.validationForm.controls["englishLevel"].value;
     signUpModel.grammarParts = Array.from(this.grammarPartsSet);
-    signUpModel.textTypes = [];
-    signUpModel.videoTypes = [];
+    signUpModel.textTypes = Array.from(this.textTypesSet);
+    signUpModel.videoTypes = Array.from(this.videoTypesSet);
   
     return signUpModel;
   }
@@ -149,6 +164,28 @@ export class SignUpComponent implements OnInit {
       this.grammarPartsSet.add(value);
     } else {
       this.grammarPartsSet.delete(value);
+    }
+  }
+
+  onChangedVideoTypeBox(event) {
+    let target = event.target;
+    let value = target.value;
+
+    if (target.checked) {
+      this.videoTypesSet.add(value);
+    } else {
+      this.videoTypesSet.delete(value);
+    }
+  }
+
+  onChangedTextTypeBox(event) {
+    let target = event.target;
+    let value = target.value;
+
+    if (target.checked) {
+      this.textTypesSet.add(value);
+    } else {
+      this.textTypesSet.delete(value);
     }
   }
 }
