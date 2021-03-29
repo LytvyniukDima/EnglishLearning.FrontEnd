@@ -11,15 +11,19 @@
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="firstName">First name</label>
-            <input type="text" class="form-control" id="firstName" name="firstName" formControlName="firstName" placeholder="" value="">
-            <div *ngIf="validationForm.controls['firstName'].invalid && (validationForm.controls['firstName'].dirty || validationForm.controls['firstName'].touched)">
+            <input type="text" class="form-control" id="firstName" name="firstName" formControlName="firstName"
+              placeholder="" value="">
+            <div
+              *ngIf="validationForm.controls['firstName'].invalid && (validationForm.controls['firstName'].dirty || validationForm.controls['firstName'].touched)">
               <p>Valid first name is required.</p>
             </div>
           </div>
           <div class="col-md-6 mb-3">
             <label for="lastName">Last name</label>
-            <input type="text" class="form-control" id="lastName" name="lastName" formControlName="lastName" placeholder="" value="">
-            <div *ngIf="validationForm.controls['lastName'].invalid && (validationForm.controls['lastName'].dirty || validationForm.controls['lastName'].touched)">
+            <input type="text" class="form-control" id="lastName" name="lastName" formControlName="lastName"
+              placeholder="" value="">
+            <div
+              *ngIf="validationForm.controls['lastName'].invalid && (validationForm.controls['lastName'].dirty || validationForm.controls['lastName'].touched)">
               <p>Valid last name is required.</p>
             </div>
           </div>
@@ -27,27 +31,33 @@
 
         <div class="mb-3">
           <label for="email">Email </label>
-          <input type="email" class="form-control" id="email" name="email" formControlName="email" placeholder="you@example.com">
-          <div *ngIf="validationForm.controls['email'].invalid && (validationForm.controls['email'].dirty || validationForm.controls['email'].touched)">
+          <input type="email" class="form-control" id="email" name="email" formControlName="email"
+            placeholder="you@example.com">
+          <div
+            *ngIf="validationForm.controls['email'].invalid && (validationForm.controls['email'].dirty || validationForm.controls['email'].touched)">
             <p>Please enter a valid email address.</p>
           </div>
           <div *ngIf="userAlreadyExist">
-              <p>User with this email is already exist.</p>
+            <p>User with this email is already exist.</p>
           </div>
         </div>
 
         <div class="mb-3">
           <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" name="password" formControlName="password" placeholder="Password">
-          <div *ngIf="validationForm.controls['password'].invalid && (validationForm.controls['password'].dirty || validationForm.controls['password'].touched)">
+          <input type="password" class="form-control" id="password" name="password" formControlName="password"
+            placeholder="Password">
+          <div
+            *ngIf="validationForm.controls['password'].invalid && (validationForm.controls['password'].dirty || validationForm.controls['password'].touched)">
             <p>Please enter correct password.</p>
           </div>
         </div>
 
         <div class="mb-3">
           <label for="confirmPassword">Confirm Password</label>
-          <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" formControlName="confirmPassword" placeholder="Confirm Password">
-          <div *ngIf="validationForm.controls['confirmPassword'].invalid && (validationForm.controls['confirmPassword'].dirty || validationForm.controls['confirmPassword'].touched)">
+          <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+            formControlName="confirmPassword" placeholder="Confirm Password">
+          <div
+            *ngIf="validationForm.controls['confirmPassword'].invalid && (validationForm.controls['confirmPassword'].dirty || validationForm.controls['confirmPassword'].touched)">
             <p>Please enter correct password.</p>
           </div>
           <div *ngIf="differentPasswords">
@@ -55,31 +65,31 @@
           </div>
         </div>
 
-        <!-- <div class="row">
-          <div class="col-md-5 mb-3">
-            <label for="country">Country</label>
-            <select class="custom-select d-block w-100" id="country" required>
-              <option value="">Choose...</option>
-              <option>United States</option>
+        <div>
+          <label for="englishLevel">English Level</label>
+        </div>
+        <div class="row form-line">
+          <div class="col-md-6 input-container">
+            <select class="custom-select" formControlName="englishLevel">
+              <option value="" disabled>Choose Level</option>
+              <option *ngFor="let englishLevel of englishLevels" [value]="englishLevel">
+                {{englishLevel}}
+              </option>
             </select>
-            <div class="invalid-feedback">
-              Please select a valid country.
-            </div>
-          </div>
-          <div class="col-md-4 mb-3">
-            <label for="state">State</label>
-            <select class="custom-select d-block w-100" id="state" required>
-              <option value="">Choose...</option>
-              <option>California</option>
-            </select>
-            <div class="invalid-feedback">
-              Please provide a valid state.
+
+            <div *ngIf="getFormControl('englishLevel').invalid">
+              <div
+                *ngIf="getFormControl('englishLevel').errors.required && (getFormControl('englishLevel').dirty ||  getFormControl('englishLevel').touched)"
+                class="form-error">
+                Level is required.
+              </div>
             </div>
           </div>
         </div>
-         -->
+
         <hr class="mb-4">
-        <button class="btn btn-primary btn-lg btn-block" type="submit" [disabled]="validationForm.pristine || validationForm.invalid">Sign up</button>
+        <button class="btn btn-primary btn-lg btn-block" type="submit"
+          [disabled]="validationForm.pristine || validationForm.invalid">Sign up</button>
       </form>
     </div>
     <div class="col-md-2"></div>

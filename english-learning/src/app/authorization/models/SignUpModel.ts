@@ -3,5 +3,9 @@ export class SignUpModel {
     surname: string;
     password: string;
     email: string;
+    englishLevel: string;
     roleId = 2;
+    grammarParts: string[];
+    textTypes: string[];
+    videoTypes: string[];
 }
