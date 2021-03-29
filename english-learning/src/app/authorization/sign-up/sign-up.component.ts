@@ -16,6 +16,10 @@ export class SignUpComponent implements OnInit {
   differentPasswords = false;
   userAlreadyExist = false;
 
+  private grammarPartsSet = new Set<string>();
+  private videoTypesSet = new Set<string>();
+  private textTypesSet = new Set<string>();
+
   englishLevels = [
     "Elementary",
     "PreIntermediate",
@@ -27,8 +31,6 @@ export class SignUpComponent implements OnInit {
   grammarParts = [
       "Present Simple",
       "Present Continuous",
-      'All Sentences',
-      'Test',
       'Present Simple and Present Continuous',
       "Future Plans",
       "Question Tags",
@@ -128,7 +130,7 @@ export class SignUpComponent implements OnInit {
     signUpModel.email = this.validationForm.controls["email"].value;
     signUpModel.password = this.validationForm.controls["password"].value;
     signUpModel.englishLevel = this.validationForm.controls["englishLevel"].value;
-    signUpModel.grammarParts = [];
+    signUpModel.grammarParts = Array.from(this.grammarPartsSet);
     signUpModel.textTypes = [];
     signUpModel.videoTypes = [];
   
@@ -137,5 +139,16 @@ export class SignUpComponent implements OnInit {
 
   getFormControl(name: string): AbstractControl {
     return this.validationForm.controls[name];
+  }
+
+  onChangedGrammarPartBox(event) {
+    let target = event.target;
+    let value = target.value;
+
+    if (target.checked) {
+      this.grammarPartsSet.add(value);
+    } else {
+      this.grammarPartsSet.delete(value);
+    }
   }
 }
