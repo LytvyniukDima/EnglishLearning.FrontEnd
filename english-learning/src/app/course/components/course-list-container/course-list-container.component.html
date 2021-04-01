@@ -1,1 +1,6 @@
 <p>course-list-container works!</p>
+<div *ngIf="courseItems$ | async as items">
+    <div *ngFor="let item of items">
+        {{ item.type }}
+    </div>
+</div>

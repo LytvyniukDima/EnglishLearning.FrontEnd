@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { CourseItemModel } from '../../models/course-item.model';
+import { CourseApiService } from '../../services/course-api.service';
 
 @Component({
   selector: 'app-course-list-container',
@@ -6,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./course-list-container.component.css']
 })
 export class CourseListContainerComponent implements OnInit {
+  courseItems$: Observable<CourseItemModel[]>;
 
-  constructor() { }
+  constructor(private apiService: CourseApiService) { }
 
   ngOnInit(): void {
+    this.courseItems$ = this.apiService.getItems();
   }
 
 }
