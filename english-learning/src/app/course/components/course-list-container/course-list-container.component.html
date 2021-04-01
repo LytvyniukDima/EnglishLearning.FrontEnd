@@ -1,6 +1,14 @@
 <p>course-list-container works!</p>
 <div *ngIf="courseItems$ | async as items">
     <div *ngFor="let item of items">
-        {{ item.type }}
+        <ng-container [ngSwitch]="item.type">
+            <ng-container *ngSwitchCase="'Task'">
+                <app-task-course-item-container [courseItem]="getTaskItem(item)"></app-task-course-item-container>    
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'Dictionary'">
+                <app-dictionary-course-item-container [courseItem]="getDictionaryItem(item)"></app-dictionary-course-item-container>
+            </ng-container>
+        </ng-container>
     </div>
 </div>

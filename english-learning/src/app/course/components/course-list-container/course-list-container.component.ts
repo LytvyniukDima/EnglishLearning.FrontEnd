@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CourseItemModel } from '../../models/course-item.model';
+import { DictionaryCourseItemModel } from '../../models/dictionary-course-item.model';
+import { TaskCourseItemModel } from '../../models/task-course-item.model';
 import { CourseApiService } from '../../services/course-api.service';
 
 @Component({
@@ -17,4 +19,11 @@ export class CourseListContainerComponent implements OnInit {
     this.courseItems$ = this.apiService.getItems();
   }
 
+  getDictionaryItem(item: CourseItemModel): DictionaryCourseItemModel {
+    return item as DictionaryCourseItemModel;
+  }
+
+  getTaskItem(item: CourseItemModel): TaskCourseItemModel {
+    return item as TaskCourseItemModel;
+  }
 }
