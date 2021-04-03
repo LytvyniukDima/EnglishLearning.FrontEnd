@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { CompletedEnglishTaskCreationModel } from '../models/CompletedEnglishTaskCreationModel';
 import { EnglishTaskModel } from '../models/EnglishTaskModel';
 
 @Component({
@@ -8,9 +9,14 @@ import { EnglishTaskModel } from '../models/EnglishTaskModel';
 })
 export class TaskComponent implements OnInit {
   @Input() task: EnglishTaskModel;
+  @Output() completedTask = new EventEmitter<CompletedEnglishTaskCreationModel>();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onTaskCompleted(completedTask: CompletedEnglishTaskCreationModel): void {
+    this.completedTask.emit(completedTask);
   }
 }

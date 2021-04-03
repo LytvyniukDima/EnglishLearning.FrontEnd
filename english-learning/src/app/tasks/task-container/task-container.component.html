@@ -1,2 +1,4 @@
-<app-task [task]="task$ | async">
+<app-task
+    [task]="task$ | async"
+    (completedTask)="onCompletedTask($event)">
 </app-task>

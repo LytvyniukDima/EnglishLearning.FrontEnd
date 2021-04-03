@@ -1,11 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { EnglishTaskModel } from '../models/EnglishTaskModel';
 import { EnglishTaskCorrectOptionModel } from '../models/EnglishTaskCorrectOptionModel';
 import { EnglishTaskResult } from '../models/EnglishTaskResult';
 import { AuthService } from 'src/app/authorization/serives/auth.service';
-import { TasksStatisticService } from '../services/tasks-statistic.service';
 import { TasksMapperService } from '../services/tasks-mapper.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { CompletedEnglishTaskCreationModel } from '../models/CompletedEnglishTaskCreationModel';
 
 @Component({
@@ -16,13 +14,14 @@ import { CompletedEnglishTaskCreationModel } from '../models/CompletedEnglishTas
 export class TaskCorrectOptionComponent implements OnInit {
   @Input() task: EnglishTaskModel;
 
+  @Output() completedTask = new EventEmitter<CompletedEnglishTaskCreationModel>();
+
   models: EnglishTaskCorrectOptionModel[];
   userResults: boolean[];
   resultModel = new EnglishTaskResult();
 
   constructor(
-    private authService: AuthService, 
-    private statisticService: TasksStatisticService,
+    private authService: AuthService,
     private taskMapper: TasksMapperService) { }
 
   ngOnInit() {
@@ -77,15 +76,6 @@ export class TaskCorrectOptionComponent implements OnInit {
     completedTask.correctAnswers = this.resultModel.correct;
     completedTask.incorrectAnswers = this.resultModel.incorrect;
 
-    this.statisticService.createCompletedEnglishTask(completedTask).subscribe(data => {
-
-    },
-      (err: HttpErrorResponse) => {
-        if (err.error instanceof Error) {
-          console.log('An error occurred:', err.error.message);
-        } else {
-          console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
-        }
-      })
+    this.completedTask.emit(completedTask);
   }
 }

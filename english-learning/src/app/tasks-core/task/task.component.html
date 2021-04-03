@@ -1,11 +1,18 @@
 <div>
   <div *ngIf="task.taskType === 'SimpleBrackets'">
-    <app-task-brackets [task]="task"></app-task-brackets>
+    <app-task-brackets
+      [task]="task"
+      (completedTask)="onTaskCompleted($event)">
+    </app-task-brackets>
   </div>
   <div *ngIf="task.taskType === 'DivisionBySlash'">
-    <app-task-slash [task]="task"></app-task-slash>
+    <app-task-slash
+      [task]="task"
+      (completedTask)="onTaskCompleted($event)"></app-task-slash>
   </div>
   <div *ngIf="task.taskType === 'CorrectOption'">
-    <app-task-correct-option [task]="task"></app-task-correct-option>
+    <app-task-correct-option
+      [task]="task"
+      (completedTask)="onTaskCompleted($event)"></app-task-correct-option>
   </div>
 </div>

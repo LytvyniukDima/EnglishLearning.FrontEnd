@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { environment } from './../../../environments/environment';
-import { CompletedEnglishTaskCreationModel } from '../models/CompletedEnglishTaskCreationModel';
+import { environment } from '../../../environments/environment';
+import { CompletedEnglishTaskCreationModel } from 'src/app/tasks-core/models/CompletedEnglishTaskCreationModel';
 
 @Injectable({
   providedIn: 'root'
