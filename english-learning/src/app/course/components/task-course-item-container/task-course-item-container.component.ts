@@ -41,4 +41,21 @@ export class TaskCourseItemContainerComponent implements OnInit {
   getPercentage(): number {
     return this.courseItem.completedInfo?.correctnessPercentage ?? 0;
   }
+
+  getProgressBarStyle(): any {
+    const percentage = this.getPercentage();
+    return {
+      width: `${percentage}%`
+    };
+  }
+
+  getProgressBarClass(): any {
+    const progressClass = this.courseItem.successRatePercentage > this.getPercentage()
+      ? "bg-danger"
+      : "bg-success";
+
+    const obj = {};
+    obj[progressClass] = true;
+    return obj;
+  };
 }
