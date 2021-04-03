@@ -20,24 +20,26 @@
 
                 <div [id]="getId()" class="collapse" [attr.data-parent]="getTargetAccordionId()">
                     <div class="card-body">
-                        <div class="row">
-                            <div>
+                        <div class="row info-item">
+                            <div class="task-info">
                                 <h5>Completed Tasks:</h5>
                             </div>
-                            <div>
-                                {{ courseItem.completedInfo?.taskCount }}
+                            <div class="task-info">
+                                <p>{{ getCompletedTasks() }}</p>
                             </div>
                         </div>
-                        <div class="row">
-                            <div>
+                        <div class="row info-item">
+                            <div class="task-info">
                                 <h5>Avg result:</h5>
                             </div>
-                            <div>
-                                {{ courseItem.completedInfo?.correctnessPercentage }}
+                            <div class="task-info">
+                                <p>{{ getPercentage() }}%<p>
                             </div>
                         </div>
 
-                        <button type="button" class="btn btn-info">Train</button>
+                        <div class="info-item">
+                            <button type="button" class="btn btn-info">Train</button>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -24,7 +24,7 @@ export class TaskCourseItemContainerComponent implements OnInit {
   }
 
   getId(): string {
-    // const id = this.courseItem.grammarPart.replaceAll(' ', '');
+    //const id = this.courseItem.grammarPart.replaceAll(' ', '');
     const id = this.courseItem.grammarPart.split(' ').join('');
     return `item-${id}`;
   }
@@ -32,5 +32,13 @@ export class TaskCourseItemContainerComponent implements OnInit {
   getTargetId(): string {
     const id = this.getId();
     return `#${id}`;
+  }
+
+  getCompletedTasks(): number {
+    return this.courseItem.completedInfo?.taskCount ?? 0;
+  }
+
+  getPercentage(): number {
+    return this.courseItem.completedInfo?.correctnessPercentage ?? 0;
   }
 }
