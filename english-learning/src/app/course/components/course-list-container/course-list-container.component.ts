@@ -30,4 +30,8 @@ export class CourseListContainerComponent implements OnInit {
   onTaskTrain(grammarPart: string): void {
     console.log(grammarPart);
   }
+
+  onTopicTrain(topic: string): void {
+    console.log(topic);
+  }
 }

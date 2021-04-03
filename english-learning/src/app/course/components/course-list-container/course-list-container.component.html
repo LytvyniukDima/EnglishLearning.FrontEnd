@@ -11,7 +11,9 @@
                 </div>
 
                 <div *ngSwitchCase="'Dictionary'" class="course-item">
-                    <app-dictionary-course-item-container [courseItem]="getDictionaryItem(item)">
+                    <app-dictionary-course-item-container
+                        [courseItem]="getDictionaryItem(item)"
+                        (trainTopic)="onTopicTrain($event)">
                     </app-dictionary-course-item-container>
                 </div>
             </ng-container>
