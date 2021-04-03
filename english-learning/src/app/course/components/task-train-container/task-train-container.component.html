@@ -8,7 +8,7 @@
 
     <ng-container *ngIf="trainModel.taskType !== 'Audio'">
         <ng-container *ngIf="randomTask$ | async as randomTask">
-            {{randomTask.englishLevel}}
+            <app-task [task]="randomTask" (completedTask)="onCompletedRandomTask($event)"></app-task>
         </ng-container>
     </ng-container>
 </ng-container>

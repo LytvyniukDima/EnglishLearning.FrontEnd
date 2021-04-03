@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AudioTaskModel } from 'src/app/tasks-core/models/audio-task.model';
+import { CompletedEnglishTaskCreationModel } from 'src/app/tasks-core/models/CompletedEnglishTaskCreationModel';
 import { EnglishTaskModel } from 'src/app/tasks-core/models/EnglishTaskModel';
 import { TaskTrainModel } from '../../models/task-train.model';
 import { CourseApiService } from '../../services/course-api.service';
@@ -36,5 +37,9 @@ export class TaskTrainContainerComponent implements OnInit {
         this.randomTask$ = this.taskApiService.getRandomTask(model);
       }
     });
+  }
+
+  onCompletedRandomTask(completed: CompletedEnglishTaskCreationModel): void {
+    console.log(completed);
   }
 }
