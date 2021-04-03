@@ -26,4 +26,8 @@ export class CourseListContainerComponent implements OnInit {
   getTaskItem(item: CourseItemModel): TaskCourseItemModel {
     return item as TaskCourseItemModel;
   }
+
+  onTaskTrain(grammarPart: string): void {
+    console.log(grammarPart);
+  }
 }

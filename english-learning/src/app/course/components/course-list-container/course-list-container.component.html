@@ -3,7 +3,11 @@
         <div *ngFor="let item of items">
             <ng-container [ngSwitch]="item.type">
                 <div *ngSwitchCase="'Task'" class="course-item">
-                    <app-task-course-item-container [courseItem]="getTaskItem(item)"></app-task-course-item-container>
+                    <app-task-course-item-container
+                        [courseItem]="getTaskItem(item)"
+                        (trainTask)="onTaskTrain($event)"
+                        >
+                    </app-task-course-item-container>
                 </div>
 
                 <div *ngSwitchCase="'Dictionary'" class="course-item">

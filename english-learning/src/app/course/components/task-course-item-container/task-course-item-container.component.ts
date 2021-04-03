@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TaskCourseItemModel } from '../../models/task-course-item.model';
 
 @Component({
@@ -8,6 +8,7 @@ import { TaskCourseItemModel } from '../../models/task-course-item.model';
 })
 export class TaskCourseItemContainerComponent implements OnInit {
   @Input() courseItem: TaskCourseItemModel;
+  @Output() trainTask = new EventEmitter<string>();
 
   constructor() { }
 
@@ -58,4 +59,8 @@ export class TaskCourseItemContainerComponent implements OnInit {
     obj[progressClass] = true;
     return obj;
   };
+
+  onTrainTask(): void {
+    this.trainTask.emit(this.courseItem.grammarPart);
+  }
 }
