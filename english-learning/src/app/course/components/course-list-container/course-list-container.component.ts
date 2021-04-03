@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CourseItemModel } from '../../models/course-item.model';
 import { DictionaryCourseItemModel } from '../../models/dictionary-course-item.model';
 import { TaskCourseItemModel } from '../../models/task-course-item.model';
+import { TaskTrainModel } from '../../models/task-train.model';
 import { CourseApiService } from '../../services/course-api.service';
 
 @Component({
@@ -13,7 +15,9 @@ import { CourseApiService } from '../../services/course-api.service';
 export class CourseListContainerComponent implements OnInit {
   courseItems$: Observable<CourseItemModel[]>;
 
-  constructor(private apiService: CourseApiService) { }
+  constructor(
+    private apiService: CourseApiService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.courseItems$ = this.apiService.getItems();
@@ -28,10 +32,10 @@ export class CourseListContainerComponent implements OnInit {
   }
 
   onTaskTrain(grammarPart: string): void {
-    console.log(grammarPart);
+    this.router.navigate([`/course/train/task/${grammarPart}`]);
   }
 
   onTopicTrain(topic: string): void {
-    console.log(topic);
+    this.router.navigate([`/course/train/dictionary/${topic}`]);
   }
 }

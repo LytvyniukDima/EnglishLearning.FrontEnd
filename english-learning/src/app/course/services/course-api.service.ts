@@ -28,12 +28,12 @@ export class CourseApiService {
     }
 
     getTaskTrainModel(grammarPart: string): Observable<TaskTrainModel> {
-        const url = `${this.taskTrainBasePath}/grammarPart`;
+        const url = `${this.taskTrainBasePath}/${grammarPart}`;
         return this.httpClient.get<TaskTrainModel>(url);
     }
 
     getDictionaryTrainModel(topic: string): Observable<DictionaryTrainModel> {
-        const url = `${this.dictionaryTrainBasePath}/topic`;
+        const url = `${this.dictionaryTrainBasePath}/${topic}`;
         return this.httpClient.get<DictionaryTrainModel>(url);
     }
 }
