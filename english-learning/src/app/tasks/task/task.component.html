@@ -1,4 +1,4 @@
-<div *ngIf="(task$ | async) as task">
+<div>
   <div *ngIf="task.taskType === 'SimpleBrackets'">
     <app-task-brackets [task]="task"></app-task-brackets>
   </div>

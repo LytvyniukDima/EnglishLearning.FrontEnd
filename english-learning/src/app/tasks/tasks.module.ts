@@ -14,6 +14,7 @@ import { TaskCorrectOptionItemComponent } from './task-correct-option-item/task-
 import { TasksService } from './services/tasks.service';
 import { TasksMapperService } from './services/tasks-mapper.service';
 import { TasksStatisticService } from './services/tasks-statistic.service';
+import { TaskContainerComponent } from './task-container/task-container.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { TasksStatisticService } from './services/tasks-statistic.service';
     TaskSlashComponent, 
     TaskSlashItemComponent, 
     TaskCorrectOptionComponent, 
-    TaskCorrectOptionItemComponent
+    TaskCorrectOptionItemComponent,
+    TaskContainerComponent
   ],
   imports: [
     CommonModule,
