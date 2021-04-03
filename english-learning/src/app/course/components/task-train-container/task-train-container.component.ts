@@ -1,5 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AudioTaskModel } from 'src/app/tasks/models/audio-task.model';
+import { EnglishTaskModel } from 'src/app/tasks/models/EnglishTaskModel';
+import { TaskTrainModel } from '../../models/task-train.model';
+import { CourseApiService } from '../../services/course-api.service';
+import { TaskTrainApiService } from '../../services/task-train-api.service';
 
 @Component({
   selector: 'app-task-train-container',
@@ -9,10 +15,26 @@ import { ActivatedRoute } from '@angular/router';
 export class TaskTrainContainerComponent implements OnInit {
   grammarPart: string;
 
-  constructor(private route: ActivatedRoute) { }
+  trainModel: TaskTrainModel;
+
+  audioTask$: Observable<AudioTaskModel>;
+  randomTask$: Observable<EnglishTaskModel>;
+
+  constructor(
+    private route: ActivatedRoute,
+    private apiService: CourseApiService,
+    private taskApiService: TaskTrainApiService) { }
 
   ngOnInit(): void {
     this.grammarPart = this.route.snapshot.paramMap.get('grammarPart');
-  }
+    this.apiService.getTaskTrainModel(this.grammarPart).subscribe(model => {
+      this.trainModel = model;
 
+      if (this.trainModel.taskType === 'Audio') {
+        this.audioTask$ = this.taskApiService.getAudioTask(model);
+      } else {
+        this.randomTask$ = this.taskApiService.getRandomTask(model);
+      }
+    });
+  }
 }

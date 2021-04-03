@@ -1,1 +1,14 @@
-<p>{{grammarPart}}</p>
+<ng-container *ngIf="trainModel">
+    {{ trainModel.taskType }}
+    <ng-container *ngIf="trainModel.taskType === 'Audio'">
+        <ng-container *ngIf="audioTask$ | async as audioTask">
+            {{audioTask.englishLevel}}
+        </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="trainModel.taskType !== 'Audio'">
+        <ng-container *ngIf="randomTask$ | async as randomTask">
+            {{randomTask.englishLevel}}
+        </ng-container>
+    </ng-container>
+</ng-container>
