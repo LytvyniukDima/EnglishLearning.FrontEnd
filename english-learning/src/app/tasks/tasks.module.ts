@@ -15,6 +15,7 @@ import { TasksService } from './services/tasks.service';
 import { TasksMapperService } from './services/tasks-mapper.service';
 import { TasksStatisticService } from './services/tasks-statistic.service';
 import { TaskContainerComponent } from './task-container/task-container.component';
+import { TasksCoreModule } from '../tasks-core/tasks-core.module';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { TaskContainerComponent } from './task-container/task-container.componen
   ],
   imports: [
     CommonModule,
-    TasksRoutingModule
+    TasksRoutingModule,
+    TasksCoreModule
   ],
   providers: [
     TasksService,

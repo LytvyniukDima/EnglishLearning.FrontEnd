@@ -7,6 +7,7 @@ import { TaskCourseItemContainerComponent } from './components/task-course-item-
 import { DictionaryCourseItemContainerComponent } from './components/dictionary-course-item-container/dictionary-course-item-container.component';
 import { TaskTrainContainerComponent } from './components/task-train-container/task-train-container.component';
 import { DictionaryTrainContainerComponent } from './components/dictionary-train-container/dictionary-train-container.component';
+import { TasksCoreModule } from '../tasks-core/tasks-core.module';
 
 
 
@@ -15,6 +16,7 @@ import { DictionaryTrainContainerComponent } from './components/dictionary-train
   imports: [
     CommonModule,
     CourseRoutingModule,
+    TasksCoreModule
   ]
 })
 export class CourseModule { }
