@@ -11,3 +11,8 @@
 .info-item {
     margin-left: 20px;
 }
+
+.header-container {
+    color: #22b24c;
+    box-shadow: 0 0 0 0;
+}
