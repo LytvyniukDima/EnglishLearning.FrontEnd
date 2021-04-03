@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { EnglishTaskModel } from '../models/EnglishTaskModel';
+import { EnglishTaskModel } from 'src/app/tasks-core/models/EnglishTaskModel';
 import { TasksService } from '../services/tasks.service';
 
 @Component({

@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AudioTaskModel } from 'src/app/tasks/models/audio-task.model';
-import { EnglishTaskModel } from 'src/app/tasks/models/EnglishTaskModel';
+import { AudioTaskModel } from 'src/app/tasks-core/models/audio-task.model';
+import { EnglishTaskModel } from 'src/app/tasks-core/models/EnglishTaskModel';
 import { TaskTrainModel } from '../../models/task-train.model';
 import { CourseApiService } from '../../services/course-api.service';
 import { TaskTrainApiService } from '../../services/task-train-api.service';

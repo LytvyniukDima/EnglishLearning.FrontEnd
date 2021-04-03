@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef, EventEmitter } from '@angular/core';
-import { EnglishTaskInfoModel } from '../models/EnglishTaskInfoModel';
 import { TasksService } from '../services/tasks.service';
-import { TasksMapperService } from '../services/tasks-mapper.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { EnglishTaskInfoModel } from 'src/app/tasks-core/models/EnglishTaskInfoModel';
+import { TasksMapperService } from 'src/app/tasks-core/services/tasks-mapper.service';
 
 @Component({
   selector: 'app-tasks-list',

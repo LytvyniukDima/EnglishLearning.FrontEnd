@@ -1,8 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { AudioTaskModel } from "src/app/tasks/models/audio-task.model";
-import { EnglishTaskModel } from "src/app/tasks/models/EnglishTaskModel";
+import { AudioTaskModel } from "src/app/tasks-core/models/audio-task.model";
+import { EnglishTaskModel } from "src/app/tasks-core/models/EnglishTaskModel";
 import { environment } from "src/environments/environment";
 import { TaskTrainModel } from "../models/task-train.model";
 

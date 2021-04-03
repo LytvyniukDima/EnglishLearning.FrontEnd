@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { EnglishTaskInfoModel } from '../models/EnglishTaskInfoModel';
 import { Router } from '@angular/router';
+import { EnglishTaskInfoModel } from 'src/app/tasks-core/models/EnglishTaskInfoModel';
 
 @Component({
   selector: 'app-tasks-list-card',
