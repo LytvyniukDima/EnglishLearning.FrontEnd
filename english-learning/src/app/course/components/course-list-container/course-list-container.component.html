@@ -1,14 +1,16 @@
-<p>course-list-container works!</p>
-<div *ngIf="courseItems$ | async as items">
-    <div *ngFor="let item of items">
-        <ng-container [ngSwitch]="item.type">
-            <ng-container *ngSwitchCase="'Task'">
-                <app-task-course-item-container [courseItem]="getTaskItem(item)"></app-task-course-item-container>    
-            </ng-container>
+<div class="container">
+    <div *ngIf="courseItems$ | async as items" class="items-container">
+        <div *ngFor="let item of items">
+            <ng-container [ngSwitch]="item.type">
+                <div *ngSwitchCase="'Task'" class="course-item">
+                    <app-task-course-item-container [courseItem]="getTaskItem(item)"></app-task-course-item-container>
+                </div>
 
-            <ng-container *ngSwitchCase="'Dictionary'">
-                <app-dictionary-course-item-container [courseItem]="getDictionaryItem(item)"></app-dictionary-course-item-container>
+                <div *ngSwitchCase="'Dictionary'" class="course-item">
+                    <app-dictionary-course-item-container [courseItem]="getDictionaryItem(item)">
+                    </app-dictionary-course-item-container>
+                </div>
             </ng-container>
-        </ng-container>
+        </div>
     </div>
 </div>

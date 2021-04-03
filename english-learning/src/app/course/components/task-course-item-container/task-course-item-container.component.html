@@ -1,1 +1,46 @@
-<div>{{courseItem.grammarPart}}</div>
+<div class="row">
+    <div class="col-12">
+        <div class="accordion" [id]="getAccordionId()">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse"
+                            [attr.data-target]="getTargetId()">
+                            <h5>{{courseItem.grammarPart}}</h5>
+                            <div>
+                                Result
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 25%;"
+                                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </button>
+                    </h2>
+                </div>
+
+                <div [id]="getId()" class="collapse" [attr.data-parent]="getTargetAccordionId()">
+                    <div class="card-body">
+                        <div class="row">
+                            <div>
+                                <h5>Completed Tasks:</h5>
+                            </div>
+                            <div>
+                                {{ courseItem.completedInfo?.taskCount }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div>
+                                <h5>Avg result:</h5>
+                            </div>
+                            <div>
+                                {{ courseItem.completedInfo?.correctnessPercentage }}
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-info">Train</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -14,4 +14,23 @@ export class TaskCourseItemContainerComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getAccordionId(): string {
+    const id = this.getId();
+    return `accordion-${id}`;
+  }
+
+  getTargetAccordionId(): string {
+    return `#${this.getAccordionId()}`;
+  }
+
+  getId(): string {
+    // const id = this.courseItem.grammarPart.replaceAll(' ', '');
+    const id = this.courseItem.grammarPart.split(' ').join('');
+    return `item-${id}`;
+  }
+
+  getTargetId(): string {
+    const id = this.getId();
+    return `#${id}`;
+  }
 }
