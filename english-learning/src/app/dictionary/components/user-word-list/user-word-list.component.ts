@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { WordListItemModel } from '../../models/word-list-item.model';
+import { WordListItemModel } from '../../../dictionary-core/models/word-list-item.model';
 
 @Component({
   selector: 'app-user-word-list',

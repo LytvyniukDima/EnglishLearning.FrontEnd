@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AddWordListItemModel } from '../../models/add-word-list-item.model';
-import { WordSearchModel } from '../../models/word-search.model';
+import { AddWordListItemModel } from '../../../dictionary-core/models/add-word-list-item.model';
+import { WordSearchModel } from '../../../dictionary-core/models/word-search.model';
 import { DictionaryApiService } from '../../services/dictionary-api.service';
 
 @Component({

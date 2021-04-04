@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { WordListItemModel } from '../../models/word-list-item.model';
+import { WordListItemModel } from '../../../dictionary-core/models/word-list-item.model';
 import { DictionaryApiService } from '../../services/dictionary-api.service';
 
 @Component({

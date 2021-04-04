@@ -4,17 +4,18 @@ import { WordContainerComponent } from './components/word-container/word-contain
 import { DictionaryRoutingModule } from './dictionary-routing.module';
 import { WordDetailsContainerComponent } from './components/word-details-container/word-details-container.component';
 import { WordListComponent } from './components/word-list/word-list.component';
-import { WordDetailsComponent } from './components/word-details/word-details.component';
 import { UserWordListComponent } from './components/user-word-list/user-word-list.component';
 import { UserWordListContainerComponent } from './components/user-word-list-container/user-word-list-container.component';
+import { DictionaryCoreModule } from '../dictionary-core/dictionary-core.module';
 
 
 
 @NgModule({
-  declarations: [WordContainerComponent, WordDetailsContainerComponent, WordListComponent, WordDetailsComponent, UserWordListComponent, UserWordListContainerComponent],
+  declarations: [WordContainerComponent, WordDetailsContainerComponent, WordListComponent, UserWordListComponent, UserWordListContainerComponent],
   imports: [
     CommonModule,
-    DictionaryRoutingModule
+    DictionaryRoutingModule,
+    DictionaryCoreModule
   ]
 })
 export class DictionaryModule { }
