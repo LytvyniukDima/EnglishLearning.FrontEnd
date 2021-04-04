@@ -20,6 +20,7 @@ export class CourseApiService {
     private readonly completeBasePath: string;
     private readonly completeTaskPath: string;
     private readonly completeWordsPath: string;
+    private readonly topicWordsBasePath: string;
 
     constructor(private httpClient: HttpClient) {
         this.apiBaseUrl = environment['ApiBaseUrl'];
@@ -29,6 +30,7 @@ export class CourseApiService {
         this.completeBasePath = `${this.apiBaseUrl}/api/course/completed`;
         this.completeTaskPath = `${this.completeBasePath}/task`;
         this.completeWordsPath = `${this.completeBasePath}/words`;
+        this.topicWordsBasePath = `${this.apiBaseUrl}/api/course/dictionary/words`;
     }
 
     getItems(): Observable<CourseItemModel[]> {
@@ -51,5 +53,10 @@ export class CourseApiService {
 
     completeWords(learnedWords: AddLearnedWordsCommandModel): Observable<any> {
         return this.httpClient.post(this.completeWordsPath, learnedWords);
+    }
+
+    getTopicWords(topic: string): Observable<string[]> {
+        const url = `${this.topicWordsBasePath}/${topic}`;
+        return this.httpClient.get<string[]>(url);
     }
 }

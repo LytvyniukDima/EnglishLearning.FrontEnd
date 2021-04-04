@@ -1,1 +1,5 @@
-<p>{{topic}}</p>
+<div class="container">
+    <ng-container *ngIf="words$ | async as words">
+        {{words}}
+    </ng-container>
+</div>
