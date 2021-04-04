@@ -8,11 +8,12 @@ import { DictionaryCourseItemContainerComponent } from './components/dictionary-
 import { TaskTrainContainerComponent } from './components/task-train-container/task-train-container.component';
 import { DictionaryTrainContainerComponent } from './components/dictionary-train-container/dictionary-train-container.component';
 import { TasksCoreModule } from '../tasks-core/tasks-core.module';
+import { TopicListContainerComponent } from './components/topic-list-container/topic-list-container.component';
 
 
 
 @NgModule({
-  declarations: [ProtoCourseComponent, CourseListContainerComponent, TaskCourseItemContainerComponent, DictionaryCourseItemContainerComponent, TaskTrainContainerComponent, DictionaryTrainContainerComponent],
+  declarations: [ProtoCourseComponent, CourseListContainerComponent, TaskCourseItemContainerComponent, DictionaryCourseItemContainerComponent, TaskTrainContainerComponent, DictionaryTrainContainerComponent, TopicListContainerComponent],
   imports: [
     CommonModule,
     CourseRoutingModule,

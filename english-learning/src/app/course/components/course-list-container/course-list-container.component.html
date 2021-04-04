@@ -13,7 +13,8 @@
                 <div *ngSwitchCase="'Dictionary'" class="course-item">
                     <app-dictionary-course-item-container
                         [courseItem]="getDictionaryItem(item)"
-                        (trainTopic)="onTopicTrain($event)">
+                        (trainTopic)="onTopicTrain($event)"
+                        (wordList)="onWordList($event)">
                     </app-dictionary-course-item-container>
                 </div>
             </ng-container>

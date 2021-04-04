@@ -16,3 +16,7 @@
     color: #22b24c;
     box-shadow: 0 0 0 0;
 }
+
+.button-container {
+    margin-bottom: 5px;
+}

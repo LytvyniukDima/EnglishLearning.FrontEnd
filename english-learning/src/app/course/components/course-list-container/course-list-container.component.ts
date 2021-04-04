@@ -38,4 +38,8 @@ export class CourseListContainerComponent implements OnInit {
   onTopicTrain(topic: string): void {
     this.router.navigate([`/course/train/dictionary/${topic}`]);
   }
+
+  onWordList(topic: string): void {
+    this.router.navigate([`/course/dictionary/list/${topic}`]);
+  }
 }

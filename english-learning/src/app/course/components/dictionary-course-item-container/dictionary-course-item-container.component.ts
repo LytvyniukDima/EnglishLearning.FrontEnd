@@ -8,7 +8,9 @@ import { DictionaryCourseItemModel } from '../../models/dictionary-course-item.m
 })
 export class DictionaryCourseItemContainerComponent implements OnInit {
   @Input() courseItem: DictionaryCourseItemModel;
+  
   @Output() trainTopic = new EventEmitter<string>();
+  @Output() wordList = new EventEmitter<string>();
 
   constructor() { }
 
@@ -59,5 +61,9 @@ export class DictionaryCourseItemContainerComponent implements OnInit {
 
   onTrainTopic(): void {
     this.trainTopic.emit(this.courseItem.topic);
+  }
+
+  onWordList(): void {
+    this.wordList.emit(this.courseItem.topic);
   }
 }
