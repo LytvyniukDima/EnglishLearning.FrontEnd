@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { EnglishTaskResult } from 'src/app/tasks-core/models/EnglishTaskResult';
 import { CompletedDictionaryTaskModel } from '../../models/completed-dictionary-task.model';
 import { DictionaryTaskModel } from '../../models/dictionary-task.model';
+import { WordDetailsModel } from '../../models/word-details.model';
+import { DictionaryApiService } from '../../service/dictionary-api.service';
 
 @Component({
   selector: 'app-dictionary-text-task-container',
@@ -13,13 +15,18 @@ export class DictionaryTextTaskContainerComponent implements OnInit {
 
   @Output() completedTask = new EventEmitter<CompletedDictionaryTaskModel>();
 
+  wordDetails: WordDetailsModel[];
   userResults: boolean[];
   resultModel = new EnglishTaskResult();
 
-  constructor() { }
+  constructor(private apiService: DictionaryApiService) { }
 
   ngOnInit(): void {
     this.userResults = new Array(this.task.words.length);
+    this.apiService.getAllDetails(this.task.words)
+      .subscribe(details => {
+        this.wordDetails = details;
+      });
   }
 
   onItemChanged(isCorrect: boolean, index: number): void {
