@@ -1,1 +1,8 @@
-<p>{{ task.grammarPart }}</p>
+<div class="container">
+    <ol>
+        <li *ngFor="let sent of task.sents; let i = index">
+          <app-task-audio-item [sent]="sent">
+          </app-task-audio-item>
+        </li>
+      </ol>
+</div>

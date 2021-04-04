@@ -8,6 +8,7 @@ import { TaskSlashItemComponent } from './task-slash-item/task-slash-item.compon
 import { TaskCorrectOptionComponent } from './task-correct-option/task-correct-option.component';
 import { TaskCorrectOptionItemComponent } from './task-correct-option-item/task-correct-option-item.component';
 import { TaskAudioComponent } from './task-audio/task-audio.component';
+import { TaskAudioItemComponent } from './task-audio-item/task-audio-item.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { TaskAudioComponent } from './task-audio/task-audio.component';
     TaskCorrectOptionComponent, 
     TaskCorrectOptionItemComponent,
     TaskAudioComponent,
+    TaskAudioItemComponent,
   ],
   imports: [
     CommonModule
