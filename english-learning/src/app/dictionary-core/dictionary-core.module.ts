@@ -6,6 +6,7 @@ import { DictionaryTaskComponent } from './components/dictionary-task/dictionary
 import { DictionaryAudioTaskContainerComponent } from './components/dictionary-audio-task-container/dictionary-audio-task-container.component';
 import { DictionaryTextTaskContainerComponent } from './components/dictionary-text-task-container/dictionary-text-task-container.component';
 import { DictionaryAudioTaskItemComponent } from './components/dictionary-audio-task-item/dictionary-audio-task-item.component';
+import { DictionaryTextTaskItemComponent } from './components/dictionary-text-task-item/dictionary-text-task-item.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { DictionaryAudioTaskItemComponent } from './components/dictionary-audio-
     DictionaryTaskComponent,
     DictionaryAudioTaskContainerComponent,
     DictionaryTextTaskContainerComponent,
-    DictionaryAudioTaskItemComponent
+    DictionaryAudioTaskItemComponent,
+    DictionaryTextTaskItemComponent
   ],
   imports: [
     CommonModule
