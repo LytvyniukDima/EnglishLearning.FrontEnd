@@ -3,12 +3,16 @@ import { CommonModule } from '@angular/common';
 import { WordDetailsComponent } from './components/word-details/word-details.component';
 import { WordListComponent } from './components/word-list/word-list.component';
 import { DictionaryTaskComponent } from './components/dictionary-task/dictionary-task.component';
+import { DictionaryAudioTaskContainerComponent } from './components/dictionary-audio-task-container/dictionary-audio-task-container.component';
+import { DictionaryTextTaskContainerComponent } from './components/dictionary-text-task-container/dictionary-text-task-container.component';
 
 @NgModule({
   declarations: [
     WordDetailsComponent,
     WordListComponent,
-    DictionaryTaskComponent
+    DictionaryTaskComponent,
+    DictionaryAudioTaskContainerComponent,
+    DictionaryTextTaskContainerComponent
   ],
   imports: [
     CommonModule
