@@ -2,6 +2,8 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
+import { AddLearnedWordsCommandModel } from "../models/add-learned-words-command.model";
+import { CompleteTaskCommandModel } from "../models/complete-task-command.model";
 import { CourseItemModel } from "../models/course-item.model";
 import { DictionaryTrainModel } from "../models/dictionary-train.model";
 import { TaskTrainModel } from "../models/task-train.model";
@@ -15,12 +17,18 @@ export class CourseApiService {
     private readonly courseItemPath: string;
     private readonly taskTrainBasePath: string;
     private readonly dictionaryTrainBasePath: string;
+    private readonly completeBasePath: string;
+    private readonly completeTaskPath: string;
+    private readonly completeWordsPath: string;
 
     constructor(private httpClient: HttpClient) {
         this.apiBaseUrl = environment['ApiBaseUrl'];
         this.courseItemPath = this.apiBaseUrl.concat('/api/course/item');
         this.taskTrainBasePath = this.apiBaseUrl.concat('/api/course/train/task');
         this.dictionaryTrainBasePath = this.apiBaseUrl.concat('/api/course/train/dictionary');
+        this.completeBasePath = `${this.apiBaseUrl}/api/course/completed`;
+        this.completeTaskPath = `${this.completeBasePath}/task`;
+        this.completeWordsPath = `${this.completeBasePath}/words`;
     }
 
     getItems(): Observable<CourseItemModel[]> {
@@ -35,5 +43,13 @@ export class CourseApiService {
     getDictionaryTrainModel(topic: string): Observable<DictionaryTrainModel> {
         const url = `${this.dictionaryTrainBasePath}/${topic}`;
         return this.httpClient.get<DictionaryTrainModel>(url);
+    }
+
+    completeTask(completeModel: CompleteTaskCommandModel): Observable<any> {
+        return this.httpClient.post(this.completeTaskPath, completeModel);
+    }
+
+    completeWords(learnedWords: AddLearnedWordsCommandModel): Observable<any> {
+        return this.httpClient.post(this.completeWordsPath, learnedWords);
     }
 }
