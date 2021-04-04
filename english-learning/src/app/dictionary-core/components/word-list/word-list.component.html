@@ -1,5 +1,5 @@
 <ul class="">
     <li *ngFor="let word of words">
-      {{word}}
+      <button type="button" class="btn btn-link" (click)="onWordClick(word)">{{word}}</button>
     </li>
 </ul>

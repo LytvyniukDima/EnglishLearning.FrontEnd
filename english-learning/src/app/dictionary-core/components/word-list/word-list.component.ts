@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-word-list',
@@ -8,9 +9,13 @@ import { Component, Input, OnInit } from '@angular/core';
 export class WordListComponent implements OnInit {
   @Input() words: string[];
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
+  onWordClick(word: string): void {
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+      this.router.navigate([`/dictionary/details/${word}`]));
+  }
 }
