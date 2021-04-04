@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { CompletedDictionaryTaskModel } from 'src/app/dictionary-core/models/completed-dictionary-task.model';
 import { DictionaryTaskModel } from 'src/app/dictionary-core/models/dictionary-task.model';
+import { AddLearnedWordsCommandModel } from '../../models/add-learned-words-command.model';
 import { CourseApiService } from '../../services/course-api.service';
 
 @Component({
@@ -17,7 +19,8 @@ export class DictionaryTrainContainerComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private apiService: CourseApiService) { }
+    private apiService: CourseApiService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.topic = this.route.snapshot.paramMap.get('topic');
@@ -33,5 +36,17 @@ export class DictionaryTrainContainerComponent implements OnInit {
           return model;
         })
       );
+  }
+
+  onCompletedTask(completed: CompletedDictionaryTaskModel): void {
+    const learnedWordsModel: AddLearnedWordsCommandModel = {
+      topic: completed.topic,
+      words: completed.learnedWords,
+      taskType: completed.taskType
+    };
+
+    this.apiService.completeWords(learnedWordsModel).subscribe(_ => {
+      return this.router.navigate(['/course/list']);
+    })
   }
 }

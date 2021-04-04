@@ -1,8 +1,8 @@
 <ng-container *ngIf="task.taskType === 'Audio'">
-    <app-dictionary-audio-task-container [task]="task">
+    <app-dictionary-audio-task-container [task]="task" (completedTask)="onCompletedAudioTask($event)">
     </app-dictionary-audio-task-container>
 </ng-container>
 <ng-container *ngIf="task.taskType === 'Text'">
-    <app-dictionary-text-task-container [task]="task">
+    <app-dictionary-text-task-container [task]="task" (completedTask)="onCompletedTextTask($event)">
     </app-dictionary-text-task-container>
 </ng-container>

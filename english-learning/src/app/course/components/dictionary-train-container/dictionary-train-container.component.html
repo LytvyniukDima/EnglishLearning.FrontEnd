@@ -1,4 +1,4 @@
 <ng-container *ngIf="task$ | async as task">
-    <app-dictionary-task [task]="task">
+    <app-dictionary-task [task]="task" (completedTask)="onCompletedTask($event)">
     </app-dictionary-task>
 </ng-container>
