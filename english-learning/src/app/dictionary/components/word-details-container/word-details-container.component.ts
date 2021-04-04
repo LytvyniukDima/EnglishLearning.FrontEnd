@@ -2,7 +2,7 @@ import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AddWordListItemModel } from '../../../dictionary-core/models/add-word-list-item.model';
 import { WordSearchModel } from '../../../dictionary-core/models/word-search.model';
-import { DictionaryApiService } from '../../services/dictionary-api.service';
+import { DictionaryApiService } from '../../../dictionary-core/service/dictionary-api.service';
 
 @Component({
   selector: 'app-word-details-container',

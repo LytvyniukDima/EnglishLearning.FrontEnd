@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { WordListItemModel } from '../../../dictionary-core/models/word-list-item.model';
-import { DictionaryApiService } from '../../services/dictionary-api.service';
+import { DictionaryApiService } from '../../../dictionary-core/service/dictionary-api.service';
 
 @Component({
   selector: 'app-user-word-list-container',
