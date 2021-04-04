@@ -9,6 +9,7 @@ import { TaskTrainContainerComponent } from './components/task-train-container/t
 import { DictionaryTrainContainerComponent } from './components/dictionary-train-container/dictionary-train-container.component';
 import { TasksCoreModule } from '../tasks-core/tasks-core.module';
 import { TopicListContainerComponent } from './components/topic-list-container/topic-list-container.component';
+import { DictionaryCoreModule } from '../dictionary-core/dictionary-core.module';
 
 
 
@@ -17,7 +18,8 @@ import { TopicListContainerComponent } from './components/topic-list-container/t
   imports: [
     CommonModule,
     CourseRoutingModule,
-    TasksCoreModule
+    TasksCoreModule,
+    DictionaryCoreModule
   ]
 })
 export class CourseModule { }
