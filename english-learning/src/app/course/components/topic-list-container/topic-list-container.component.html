@@ -1,5 +1,8 @@
-<div class="container">
-    <ng-container *ngIf="words$ | async as words">
-        {{words}}
-    </ng-container>
+<div class="container word-container">
+        <ng-container *ngIf="words$ | async as words">
+            <div class="row">
+                <h2>{{topic}}</h2>
+            </div>
+            <app-word-list [words]="words"></app-word-list>
+        </ng-container>
 </div>
