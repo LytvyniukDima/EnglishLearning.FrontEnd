@@ -57,4 +57,19 @@ export class TaskTrainContainerComponent implements OnInit {
       this.router.navigate(['/course/list'])
     });
   }
+
+  onCompletedAudioTask(completed: CompletedEnglishTaskCreationModel): void {
+    const taskCompleteModel: CompleteTaskCommandModel = {
+      grammarPart: completed.grammarPart,
+      itemsCount: completed.correctAnswers + completed.incorrectAnswers,
+      correctAnswers: completed.correctAnswers,
+      taskType: this.trainModel.taskType
+    };
+
+    const completeTask$ = this.apiService.completeTask(taskCompleteModel);
+    const statistic$ = this.statisticService.createCompletedEnglishTask(completed);
+    forkJoin([completeTask$, statistic$]).subscribe(_ => {
+      this.router.navigate(['/course/list'])
+    });
+  }
 }

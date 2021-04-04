@@ -1,1 +1,16 @@
-<p>{{sent.id}}</p>
+<div class="task-container">
+    <div class="row audio-container">
+        <audio controls [src]="audioUrl">
+            Your browser does not support the
+            <code>audio</code> element.
+        </audio>
+    </div>
+    <div class="row">
+        <div class="md-form col-9">
+            <input type="text" id="form1" class="form-control" (change)="onInputChange($event)">
+        </div>
+    </div>
+    <div *ngIf="isIncorrectAnswer" class="incorrect-text">
+        <p>Incorrect answer</p>
+    </div>
+</div>

@@ -1,8 +1,7 @@
 <ng-container *ngIf="trainModel">
-    {{ trainModel.taskType }}
     <ng-container *ngIf="trainModel.taskType === 'Audio'">
         <ng-container *ngIf="audioTask$ | async as audioTask">
-            <app-task-audio [task]="audioTask">
+            <app-task-audio [task]="audioTask" (completedTask)="onCompletedAudioTask($event)">
             </app-task-audio>
         </ng-container>
     </ng-container>

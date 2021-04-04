@@ -1,8 +1,39 @@
 <div class="container">
-    <ol>
-        <li *ngFor="let sent of task.sents; let i = index">
-          <app-task-audio-item [sent]="sent">
-          </app-task-audio-item>
-        </li>
-      </ol>
+  <ol>
+    <li *ngFor="let sent of task.sents; let i = index">
+      <app-task-audio-item [sent]="sent" (isCorrect)="onItemChanged($event, i)">
+      </app-task-audio-item>
+    </li>
+  </ol>
+
+  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" id="finishButton"
+    (click)="onFinish()">
+    Finish
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{resultModel.headerMessage}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Correct: {{resultModel.correct}}. Incorrect: {{resultModel.incorrect}}.
+          <div *ngFor="let message of resultModel.additionalMessages">
+            {{message}}
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-success" data-dismiss="modal"
+            (click)="onCompleted()">Continue</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
