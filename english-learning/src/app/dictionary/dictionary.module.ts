@@ -7,11 +7,12 @@ import { WordListComponent } from './components/word-list/word-list.component';
 import { UserWordListComponent } from './components/user-word-list/user-word-list.component';
 import { UserWordListContainerComponent } from './components/user-word-list-container/user-word-list-container.component';
 import { DictionaryCoreModule } from '../dictionary-core/dictionary-core.module';
+import { WordComponent } from './components/word/word.component';
 
 
 
 @NgModule({
-  declarations: [WordContainerComponent, WordDetailsContainerComponent, WordListComponent, UserWordListComponent, UserWordListContainerComponent],
+  declarations: [WordContainerComponent, WordDetailsContainerComponent, WordListComponent, UserWordListComponent, UserWordListContainerComponent, WordComponent],
   imports: [
     CommonModule,
     DictionaryRoutingModule,
